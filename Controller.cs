@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Password_Manager;
 
+// Controller - комментарий просто для лабы 
 public class Controller
 {
     private View view;
