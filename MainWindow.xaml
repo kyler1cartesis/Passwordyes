@@ -3,18 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Password_Manager.MVVM.ViewModel"
         xmlns:local="clr-namespace:Password_Manager"
         mc:Ignorable="d"
-        Title="Password Manager" 
+        Title="Password Storm" 
         Height="600" Width="900"
-        AllowsTransparency="True"
+        AllowsTransparency="False"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
+        WindowStyle="SingleBorderWindow"
         Background="Transparent"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        BorderBrush="#413f54"
+        BorderThickness="2" Icon="D:\kopos\GitHub\Passwordyes\GuiSources\Images\whirlwind.png">
 
-    <Border Background="MediumSpringGreen"
-            CornerRadius="15">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
+    
+    
+
+    <Border Background="#413f54"
+            CornerRadius="0">
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -27,26 +37,35 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Password Shtorm"
+            <TextBlock Text="Password Storm"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Margin="20,0,0,0"
                        Foreground="FloralWhite"
                        FontSize="22"/>
 
-
-            <StackPanel Grid.Row="1">
+            <Rectangle Grid.Column="0"
+               Grid.Row="1"  
+               Stroke="#5F5AA2"
+               Fill="Transparent"
+               StrokeThickness="3"/>
+            
+            <StackPanel Grid.Row="1"
+                        Margin="0,30,0,0">
 
                 <RadioButton Content="Главная"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
                 <RadioButton Content="Базы данных"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding DataBasesViewCommand}"/>
                 <RadioButton Content="Настройки"
                              Height="50"
                              Foreground="White"
@@ -55,6 +74,8 @@
 
             </StackPanel>
 
+           
+
             <TextBox Width="200"
                      Height="70"
                      VerticalContentAlignment="Center"
@@ -62,6 +83,11 @@
                      Margin="5"
                      Grid.Column="1"
                      Style="{StaticResource ModernTextBox}"/>
+
+            <ContentControl Margin="10"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Content="{Binding CurrentView}"/>
 
         </Grid>
         
