@@ -6,23 +6,65 @@
         xmlns:local="clr-namespace:Password_Manager"
         mc:Ignorable="d"
         Title="Password Manager" 
-        Height="450" Width="800"
+        Height="600" Width="900"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="Transparent">
-    <Grid>
-        <Border Background="Azure" CornerRadius="20"/>
+        Background="Transparent"
+        ResizeMode="NoResize">
+
+    <Border Background="MediumSpringGreen"
+            CornerRadius="15">
 
         <Grid>
-            
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="228"/>
-                <ColumnDefinition Width="644"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Password Shtorm"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="20,0,0,0"
+                       Foreground="FloralWhite"
+                       FontSize="22"/>
+
+
+            <StackPanel Grid.Row="1">
+
+                <RadioButton Content="Главная"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Базы данных"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Настройки"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+            </StackPanel>
+
+            <TextBox Width="200"
+                     Height="70"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="5"
+                     Grid.Column="1"
+                     Style="{StaticResource ModernTextBox}"/>
+
         </Grid>
-
-
-    </Grid>
+        
+    </Border>
+    
 </Window>

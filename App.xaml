@@ -13,7 +13,8 @@
                 <ResourceDictionary Source="GuiSources/Styles/Button.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/Text.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/Image.xaml"/>
-                <ResourceDictionary Source="Utilities/DataTemplate.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/TextBox.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
             
