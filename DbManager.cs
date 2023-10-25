@@ -7,15 +7,15 @@ namespace Password_Manager;
 
 public static class DbManager
 {
-    public List<DbContext> GetDbList () {
+    public static List<DbContext> GetDbList () {
         throw new System.NotImplementedException();
     }
 
-    internal DbContext CreateDb () {
+    internal static DbContext CreateDb () {
         throw new System.NotImplementedException();
     }
 
-    internal bool ValidateDb () {
+    internal static bool ValidateDb () {
         throw new System.NotImplementedException();
     }
 }

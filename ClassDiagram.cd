@@ -36,13 +36,6 @@
       <FileName>Controller.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Password_Manager.View">
-    <Position X="6" Y="1.25" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAUAAAAAFAAAAABAAIAgA=</HashCode>
-      <FileName>View.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Password_Manager.DbContext">
     <Position X="12.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
@@ -90,6 +83,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ClipBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Password_Manager.View">
+    <Position X="6" Y="1.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAUAAAAAFAAAAABAAIAgA=</HashCode>
+      <FileName>View.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

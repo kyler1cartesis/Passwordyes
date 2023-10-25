@@ -4,6 +4,20 @@
              xmlns:local="clr-namespace:Password_Manager"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="GuiSources/Styles/Page.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/Button.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/Text.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/Image.xaml"/>
+                <ResourceDictionary Source="Utilities/DataTemplate.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+            
+        </ResourceDictionary>
          
     </Application.Resources>
 </Application>
