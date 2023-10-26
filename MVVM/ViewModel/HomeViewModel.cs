@@ -8,5 +8,6 @@ namespace Password_Manager.MVVM.ViewModel
 {
     class HomeViewModel
     {
+
     }
 }
