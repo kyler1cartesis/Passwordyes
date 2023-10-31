@@ -10,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Password_Manager.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для AddDB.xaml
+    /// Логика взаимодействия для SettingsView.xaml
     /// </summary>
-    public partial class AddDB : Window
+    public partial class SettingsView : UserControl
     {
-        public AddDB(Window mainWindow)
+        public SettingsView()
         {
             InitializeComponent();
-            Owner = mainWindow;
-            this.Owner.IsEnabled = false;
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            this.Owner.IsEnabled = true;
         }
     }
 }

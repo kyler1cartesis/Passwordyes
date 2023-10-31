@@ -39,25 +39,8 @@
                                    FontSize="28"
                                    Margin="20,10,10,0"/>
                     </StackPanel>
-
-                    <Image Width="150"
-                           Height="150"
-                           Source="D:\kopos\GitHub\Passwordyes\GuiSources\Images\db.png" Margin="264,72,-14,-22"/>
                 </Grid>
-                
-            </Border>
 
-            <Border Width="200"
-                    Height="200"
-                    CornerRadius="10"
-                    Margin="70,0,0,0">
-                
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                        <GradientStop Color="MediumPurple" Offset="0.0"/>
-                        <GradientStop Color="DarkViolet" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
             </Border>
         </StackPanel>
     </StackPanel>

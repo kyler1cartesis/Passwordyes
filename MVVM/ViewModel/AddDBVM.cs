@@ -10,15 +10,19 @@ namespace Password_Manager.MVVM.ViewModel
 {
     public class AddDBVM
     {
-        public ICommand AddUserCommand { get; set; }
+		//Команда добавления БД в коллекцию
+		public ICommand AddDBCommand { get; set; }
 
-        public string Name { get; set; }
-        public DateTime CreateData { get; set; }
+		//Поле с именем новой БД
+		public string Name { get; set; }
+
+		//Поле с Мастер паролем новой БД
+		public DateTime CreateData { get; set; }
 
 
 		public AddDBVM()
 		{
-			AddUserCommand = new RelayCommand(AddUser, CanAddUser);
+			AddDBCommand = new RelayCommand(AddUser, CanAddUser);
 		}
 
 		private bool CanAddUser(object obj)

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Password_Manager.MVVM.View" xmlns:viewmodel="clr-namespace:Password_Manager.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="Add Data Base" Height="450" Width="400">
+        Title="Add Data Base" Height="450" Width="400"
+        Closed="Window_Closed">
 
     <Window.DataContext>
         <viewmodel:AddDBVM/>
@@ -30,7 +31,7 @@
         <TextBox  Height="30" Width="200" Text="{Binding CreateData}" Margin="25,125" VerticalAlignment="Top" HorizontalAlignment="left" BorderThickness="1" BorderBrush="#E0E0E0" />
 
 
-        <Button Height="30" Command="{Binding AddUserCommand}" Content="Add" Width="70"  VerticalContentAlignment="Center" Padding="5" Margin="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="1" BorderBrush="#E0E0E0" />
+        <Button Height="30" Command="{Binding AddDBCommand}" Content="Add" Width="70"  VerticalContentAlignment="Center" Padding="5" Margin="25" VerticalAlignment="Bottom" HorizontalAlignment="Right" BorderThickness="1" BorderBrush="#E0E0E0" />
 
     </Grid>
 </Window>

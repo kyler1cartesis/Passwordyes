@@ -15,14 +15,19 @@ namespace Password_Manager.MVVM.ViewModel
 {
     class DataBasesViewModel : ObservableObject
     {
+        //Добавление новой БД в список
         public static void AddDBD(DBDescription dBDescription)
         {
             DBDescriptions.Add(dBDescription);
         }
+
+        //Коллекция БД
         public static ObservableCollection<DBDescription> DBDescriptions { get; set; } = new ObservableCollection<DBDescription>();
 
+        //Выбранная БД на данный момент времени
         public DBDescription SelectedDBD { get; set; }
 
+        //Команда отображения формы ввода данных новой БД
         public ICommand ShowWindowCommand { get; set; }
 
         private bool CanShowWindow(object obj)
@@ -33,19 +38,13 @@ namespace Password_Manager.MVVM.ViewModel
         private void ShowWindow(object obj)
         {
             var mainWindow = obj as Window;
-
-            AddDB addDBWin = new AddDB();
-            addDBWin.Owner = mainWindow;
+            AddDB addDBWin = new AddDB(mainWindow);
             addDBWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             addDBWin.Show();
-
-
         }
 
-        public DataBasesViewModel()
+        private void GetDBDs()
         {
-            ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow);
-
             DBDescriptions.Add(new DBDescription
             {
                 DataBaseName = "Test DataBase №1",
@@ -97,6 +96,15 @@ namespace Password_Manager.MVVM.ViewModel
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now
             });
+        }
+
+        public DataBasesViewModel()
+        {
+            ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow);
+
+            DBDescriptions = new ObservableCollection<DBDescription>();
+
+            GetDBDs();
         }
     }
 }

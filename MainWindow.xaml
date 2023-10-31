@@ -16,16 +16,14 @@
         BorderBrush="#413f54"
         BorderThickness="2" Icon="D:\kopos\GitHub\Passwordyes\GuiSources\Images\whirlwind.png">
 
+
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-    
-    
-    
+
 
     <Border Background="#413f54"
             CornerRadius="0">
-
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -37,6 +35,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
+            <!--Название приложения-->  
             <TextBlock Text="Password Storm"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
@@ -49,10 +48,12 @@
                Stroke="#5F5AA2"
                Fill="Transparent"
                StrokeThickness="3"/>
-            
+
+            <!--Кнопки главного меню-->
             <StackPanel Grid.Row="1"
                         Margin="0,30,0,0">
-
+                <!--Команды привязаны к своим ViewModel
+                    Стиль из файла MenuButtonTheme-->
                 <RadioButton Content="Главная"
                              Height="50"
                              Foreground="White"
@@ -70,20 +71,12 @@
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding SettingsViewCommand}"/>
 
             </StackPanel>
 
-           
-
-            <TextBox Width="200"
-                     Height="70"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Left"
-                     Margin="5"
-                     Grid.Column="1"
-                     Style="{StaticResource ModernTextBox}"/>
-
+            <!--Место для отображения основаных данных-->
             <ContentControl Margin="10"
                             Grid.Column="1"
                             Grid.Row="1"

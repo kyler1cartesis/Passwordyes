@@ -9,12 +9,25 @@ namespace Password_Manager.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
+        //Команда смены страницы на главную
         public RelayCommand HomeViewCommand { get; set; }
+
+        //Команда смены страницы на список БД
         public RelayCommand DataBasesViewCommand { get; set; }
 
+        //Команда смены страницы на настройки
+        public RelayCommand SettingsViewCommand { get; set; }
+
+        //ViewModel главной страницы 
         public HomeViewModel HomeVM { get; set; }
+
+        //ViewModel страницы списка БД
         public DataBasesViewModel DataBasesVM { get; set; }
 
+        //ViewModel страницы настроек
+        public SettingsViewModel SettingsVM { get; set; }
+
+        //Поле хранения текущей страницы
         private object _currentView;
 
         public object CurrentView
@@ -30,10 +43,12 @@ namespace Password_Manager.MVVM.ViewModel
             }
         }
 
+
         public MainViewModel()
         {
             HomeVM = new HomeViewModel();
             DataBasesVM = new DataBasesViewModel();
+            SettingsVM = new SettingsViewModel();
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(obj => 
@@ -45,6 +60,12 @@ namespace Password_Manager.MVVM.ViewModel
             DataBasesViewCommand = new RelayCommand(obj =>
             {
                 CurrentView = DataBasesVM;
+
+            });
+
+            SettingsViewCommand = new RelayCommand(obj =>
+            {
+                CurrentView = SettingsVM;
 
             });
         }

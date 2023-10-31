@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Password_Manager.MVVM.Model;
+using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.View
 {
@@ -31,9 +32,16 @@ namespace Password_Manager.MVVM.View
             
         }
 
-        private void UserList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ListView list = sender as ListView;
+            ListView list = UserList;
+            DBDescription desc = list.SelectedItem as DBDescription;
+            DataBasesViewModel.DBDescriptions.Remove(desc);
+        }
+
+        private void Button_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            ListView list = UserList;
             DBDescription desc = list.SelectedItem as DBDescription;
             MessageBox.Show(desc.DataBaseName);
         }
