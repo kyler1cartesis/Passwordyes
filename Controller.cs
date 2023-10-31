@@ -4,10 +4,6 @@ using System.Linq;
 using System.Text;
 
 namespace Password_Manager;
-
-// Controller - комментарий просто для лабы
-// Create test branch
-// Changes in new branch
 public class Controller
 {
     private View view;
