@@ -12,5 +12,15 @@ namespace Password_Manager.MVVM.Model
         public string Status { get; set; }
         public DateTime DataBaseLastOpenDate { get; set; }
         public DateTime DataBaseCreateDate { get; set; }
+
+        public DBDescription(string dataBaseName, DateTime dataBaseCreateDate)
+        {
+            DataBaseName = dataBaseName;
+            DataBaseCreateDate = dataBaseCreateDate;
+        }
+
+        public DBDescription()
+        {
+        }
     }
 }

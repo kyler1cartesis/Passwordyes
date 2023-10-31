@@ -3,14 +3,7 @@
 
 
     <Style x:Key="BtnStyle"
-           TargetType="RadioButton">
-
-        <Setter Property="HorizontalAlignment" 
-                Value="Center"/>
-        <Setter Property="VerticalAlignment" 
-                Value="Center"/>
-        <Setter Property="Margin" 
-                Value="0,5,0,0"/>
+           TargetType="Button">
 
         <Setter Property="Template">
             <Setter.Value>
@@ -24,10 +17,7 @@
 
                         <Border.Background>
 
-                            <SolidColorBrush x:Name="BorderBackground"
-                                             Color="Purple">
-
-                            </SolidColorBrush>
+                            <ImageBrush ImageSource="D:\kopos\GitHub\Passwordyes\GuiSources\Images\enter.png"/>
 
                         </Border.Background>
 

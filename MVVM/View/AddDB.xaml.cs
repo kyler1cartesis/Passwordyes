@@ -10,17 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Password_Manager;
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace Password_Manager.MVVM.View
 {
-    
-    public MainWindow () {
-        InitializeComponent();
+    /// <summary>
+    /// Логика взаимодействия для AddDB.xaml
+    /// </summary>
+    public partial class AddDB : Window
+    {
+        public AddDB()
+        {
+            InitializeComponent();
+        }
     }
 }

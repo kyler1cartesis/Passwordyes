@@ -4,23 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModel="clr-namespace:Password_Manager.MVVM.ViewModel"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Name="mainwindow">
 
     <UserControl.DataContext>
         <viewModel:DataBasesViewModel/>
     </UserControl.DataContext>
-    
-    <ListView ItemsSource="{Binding DBDescriptions}"
-              Background="Transparent"
-              BorderThickness="0"
-              ItemContainerStyle="{StaticResource DataBaseCard}"
-              VerticalAlignment="Top">
 
-        <ListView.ItemsPanel>
-            <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal"></StackPanel>
-            </ItemsPanelTemplate>
-        </ListView.ItemsPanel>
-    </ListView>
+    <Grid Background="#413f54">
+        <Grid Background="#413f54"
+              Grid.Row="1" 
+              Margin="5,5,5,5" >
+            <Button Height="30" 
+                    CommandParameter="{x:Reference Name= mainwindow}" 
+                    Command="{Binding ShowWindowCommand}"
+                    Width="100"
+                    VerticalContentAlignment="Center" 
+                    Padding="5" 
+                    Margin="20" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right" 
+                    BorderThickness="1" 
+                    BorderBrush="#413f54"/>
+            <ListView Name="UserList" 
+                      ItemsSource="{Binding DBDescriptions}" 
+                      BorderBrush="#413f54" 
+                      Margin="5,70,5,5" 
+                      Padding="0"
+                      Background="#413f54"
+                      Foreground="Cornsilk"
+                      SelectedItem="{Binding SelectedDBD}"
+                      MouseDoubleClick="UserList_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding DataBaseName}" 
+                                        Header="Name"
+                                        Width="auto"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding DataBaseCreateDate}" 
+                                        Header="Create Data"
+                                        Width="auto"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+    </Grid>
 </UserControl>

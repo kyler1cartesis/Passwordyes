@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Password_Manager.MVVM.Model;
 
 namespace Password_Manager.MVVM.View
 {
@@ -23,6 +24,18 @@ namespace Password_Manager.MVVM.View
         public DataBasesView()
         {
             InitializeComponent();
+        }
+
+        private void UserList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void UserList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListView list = sender as ListView;
+            DBDescription desc = list.SelectedItem as DBDescription;
+            MessageBox.Show(desc.DataBaseName);
         }
     }
 }
