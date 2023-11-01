@@ -17,7 +17,7 @@ namespace Password_Manager.MVVM.ViewModel
 		public string Name { get; set; }
 
 		//Поле с Мастер паролем новой БД
-		public DateTime CreateData { get; set; }
+		public string MasterPassword { get; set; }
 
 
 		public AddDBVM()
@@ -33,7 +33,7 @@ namespace Password_Manager.MVVM.ViewModel
 		private void AddUser(object obj)
 		{
 
-			DataBasesViewModel.AddDBD(new Model.DBDescription(Name, CreateData)); ;
+			DataBasesViewModel.AddDBD(new Model.DBDescription(Name, DateTime.Now)); ;
 
 		}
 	}

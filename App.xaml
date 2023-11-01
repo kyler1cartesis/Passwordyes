@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="GuiSources/Styles/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/TextBox.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/DataBaseCard.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/FormField.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 

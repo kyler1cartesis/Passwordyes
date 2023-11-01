@@ -88,7 +88,7 @@
                       Foreground="Cornsilk"
                       SelectedItem="{Binding SelectedDBD}"
                       ItemContainerStyle="{StaticResource DataBaseCard}"
-                      BorderBrush="#416f99"
+                      BorderBrush="Transparent"
                       BorderThickness="5" Grid.ColumnSpan="2"
                       Grid.Row="2">
             <ListView.ItemsPanel>
