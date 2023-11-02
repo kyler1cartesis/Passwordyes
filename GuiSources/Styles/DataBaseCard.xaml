@@ -32,7 +32,7 @@
                             <StackPanel Orientation="Vertical"
                                         Margin="10,0,0,0">
 
-                                <Image Source="D:\kopos\GitHub\Passwordyes\GuiSources\Images\db (2).png"
+                                <Image Source="pack://siteoforigin:,,,/GuiSources/Images/db (2).png"
                                        Margin="0,5,0,0"
                                        Width="30"
                                        Height="30"

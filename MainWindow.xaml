@@ -14,7 +14,7 @@
         Background="Transparent"
         ResizeMode="NoResize"
         BorderBrush="#413f54"
-        BorderThickness="2" Icon="D:\kopos\GitHub\Passwordyes\GuiSources\Images\whirlwind.png">
+        BorderThickness="2" Icon="pack://siteoforigin:,,,/GuiSources/Images/whirlwind.ico">
 
 
     <Window.DataContext>
