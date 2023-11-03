@@ -55,7 +55,8 @@
                     Focusable="False"
                     Content="Создать"/>
             <Button Height="30" 
-                    MouseDoubleClick="Button_MouseDoubleClick_1"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" 
+                    Command="{Binding ShowSignInDbWindowCommand}"
                     Width="90"
                     VerticalContentAlignment="Center" 
                     Padding="5" 
@@ -67,7 +68,7 @@
                     Focusable="False"
                     Content="Войти"/>
             <Button Height="30" 
-                    MouseDoubleClick="Button_MouseDoubleClick"
+                    MouseDoubleClick="RemoveDB"
                     Width="90"
                     VerticalContentAlignment="Center" 
                     Padding="5" 

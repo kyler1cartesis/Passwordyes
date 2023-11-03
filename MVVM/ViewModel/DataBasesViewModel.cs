@@ -29,6 +29,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         //Команда отображения формы ввода данных новой БД
         public ICommand ShowWindowCommand { get; set; }
+        public ICommand ShowSignInDbWindowCommand { get; set; }
 
         private bool CanShowWindow(object obj)
         {
@@ -38,9 +39,20 @@ namespace Password_Manager.MVVM.ViewModel
         private void ShowWindow(object obj)
         {
             var mainWindow = obj as Window;
-            AddDB addDBWin = new AddDB(mainWindow);
+            AddDBWindow addDBWin = new AddDBWindow(mainWindow);
             addDBWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             addDBWin.Show();
+        }
+
+        private void ShowSignInDBWindow(object obj)
+        {
+            var mainWindow = obj as Window;
+            SignInDBVM signInDBVM = new SignInDBVM();
+            signInDBVM.DbToSignIn = SelectedDBD;
+            SignInDataBaseWindow signInDBWindow = new SignInDataBaseWindow(mainWindow);
+            signInDBWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            signInDBWindow.DataContext = signInDBVM;
+            signInDBWindow.Show();
         }
 
         private void GetDBDs()
@@ -101,6 +113,8 @@ namespace Password_Manager.MVVM.ViewModel
         public DataBasesViewModel()
         {
             ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow);
+
+            ShowSignInDbWindowCommand = new RelayCommand(ShowSignInDBWindow, CanShowWindow);
 
             DBDescriptions = new ObservableCollection<DBDescription>();
 

@@ -32,14 +32,14 @@ namespace Password_Manager.MVVM.View
             
         }
 
-        private void Button_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void RemoveDB(object sender, MouseButtonEventArgs e)
         {
             ListView list = UserList;
             DBDescription desc = list.SelectedItem as DBDescription;
             DataBasesViewModel.DBDescriptions.Remove(desc);
         }
 
-        private void Button_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        private void SignInDB(object sender, MouseButtonEventArgs e)
         {
             ListView list = UserList;
             DBDescription desc = list.SelectedItem as DBDescription;

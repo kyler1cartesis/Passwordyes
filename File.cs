@@ -9,6 +9,10 @@ namespace Password_Manager
     {
         private global::System.Int32 path;
 
+        private string _name; // Добавил временно, нужно для реализцаии интерфейса
+
+        public string Name { get { return _name; } set { _name = value; } }
+
         public void GetPath()
         {
             throw new System.NotImplementedException();

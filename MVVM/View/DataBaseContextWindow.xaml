@@ -1,0 +1,77 @@
+﻿<Window x:Class="Password_Manager.MVVM.View.DataBaseContextViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Password_Manager.MVVM.View"
+        xmlns:viewmodel="clr-namespace:Password_Manager.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="Password Storm" 
+        Height="600" Width="900"
+        AllowsTransparency="False"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        BorderBrush="#413f54"
+        BorderThickness="2" Icon="pack://siteoforigin:,,,/GuiSources/Images/whirlwind.ico">
+
+    <Window.DataContext>
+        <viewmodel:DataBaseContextVM/>
+    </Window.DataContext>
+    
+    <Border Background="#413f54"
+            CornerRadius="0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Название приложения-->
+            <TextBlock Text="{Binding DbName}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="20,0,0,0"
+                       Foreground="FloralWhite"
+                       FontSize="22"/>
+
+            <Rectangle Grid.Column="0"
+               Grid.Row="1"  
+               Stroke="#5F5AA2"
+               Fill="Transparent"
+               StrokeThickness="3"/>
+
+            <ListView Name="UserList" 
+                      ItemsSource="{Binding CurrentSubEntries}" 
+                      Margin="5,5,5,5" 
+                      Padding="0"
+                      Background="#413f54"
+                      Foreground="Cornsilk"
+                      SelectedItem="{Binding SelectedDBD}"
+                      ItemContainerStyle="{StaticResource FolderCard}"
+                      BorderBrush="Transparent"
+                      BorderThickness="5" Grid.ColumnSpan="2"
+                      Grid.Row="2">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Vertical"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+
+            <!--Место для отображения основаных данных-->
+            <ContentControl Margin="10"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Content="{Binding CurrentView}"/>
+
+        </Grid>
+
+    </Border>
+</Window>

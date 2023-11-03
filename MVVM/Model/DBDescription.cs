@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Password_Manager.MVVM.Model
 {
-    class DBDescription
+    public class DBDescription
     {
         public string DataBaseName { get; set; }
         public string Status { get; set; }

@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="GuiSources/Styles/TextBox.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/DataBaseCard.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/FormField.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/FolderCard.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 
