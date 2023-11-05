@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Password_Manager.Core;
 
-namespace Password_Manager.MVVM.ViewModel
+namespace Password_Manager.MVVM.ViewModel;
+
+public class AddDBVM
 {
-    public class AddDBVM
-    {
 		//Команда добавления БД в коллекцию
 		public ICommand AddDBCommand { get; set; }
 
@@ -37,4 +37,3 @@ namespace Password_Manager.MVVM.ViewModel
 
 		}
 	}
-}

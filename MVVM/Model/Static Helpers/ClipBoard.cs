@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Text;
 
-namespace Password_Manager;
-
-// Это ветвь koposov_branch
+namespace Password_Manager.MVVM.Model
+{
+    public static class ClipBoard
+    {
+    }
+}

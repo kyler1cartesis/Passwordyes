@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Password_Manager
+namespace Password_Manager.MVVM.Model
 {
     public class File
     {
-        private global::System.Int32 path;
+        private int path;
 
         private string _name; // Добавил временно, нужно для реализцаии интерфейса
 
@@ -15,7 +15,7 @@ namespace Password_Manager
 
         public void GetPath()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

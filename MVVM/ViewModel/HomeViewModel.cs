@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Password_Manager.MVVM.ViewModel
-{
-    class HomeViewModel
-    {
+namespace Password_Manager.MVVM.ViewModel;
 
-    }
+class HomeViewModel
+{
+
 }
