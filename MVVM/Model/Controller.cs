@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Password_Manager.MVVM.Model;
 public class Controller
@@ -9,7 +6,6 @@ public class Controller
     private View view;
     private MainWindow mainWindow;
     private AppDbContext appDbContext;
-    readonly private List<System.Net.NetworkCredential> AuthorizationEntries;
 
     public void OnOpenDbList()
     {
