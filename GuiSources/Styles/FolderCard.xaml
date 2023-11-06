@@ -42,7 +42,13 @@
                                 <Label Content="{Binding Name}"
                                        Foreground="White"
                                        FontSize="14"
-                                       Margin="0,0,0,0"/>
+                                       Margin="0,0,0,0">
+                                    <Label.InputBindings>
+                                        <MouseBinding 
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.SelectFolder}" 
+                                            Gesture="LeftDoubleClick" />
+                                    </Label.InputBindings>
+                                </Label>
 
                             </StackPanel>
 
