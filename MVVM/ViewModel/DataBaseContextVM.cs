@@ -4,14 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Password_Manager.MVVM.Model;
 
 namespace Password_Manager.MVVM.ViewModel
 {
     public class DataBaseContextVM
     {
         private DbContext _context;
-
-        public string DbName { get; set; }
 
         public string CurrentFolderName
         {
@@ -26,6 +25,8 @@ namespace Password_Manager.MVVM.ViewModel
         public File SelectedFolder { get; set; } = new File();
 
         public DbContext Context { get { return _context; } }
+
+        public string DbName { get; set; }
 
         public DataBaseContextVM()
         {

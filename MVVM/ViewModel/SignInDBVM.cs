@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
+using Password_Manager.MVVM.View;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    class SignInDBVM
+    class SignInDBVM : ObservableObject
     {
 		//Команда добавления БД в коллекцию
 		public ICommand SignInDataBaseCommand { get; set; }
@@ -33,9 +35,12 @@ namespace Password_Manager.MVVM.ViewModel
 		private void Enter(object obj)
 		{
 
-			System.Windows.MessageBox.Show(DbToSignIn.DataBaseName);
-
-
-        }
+			var dataBaseContextWindow = obj as Window;
+			DataBaseContextWindow dbContextBWin = new DataBaseContextWindow();
+			dbContextBWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			dbContextBWin.DataContext = DbToSignIn;
+			dbContextBWin.Show();
+			dataBaseContextWindow.Owner.Close();
+		}
 	}
 }
