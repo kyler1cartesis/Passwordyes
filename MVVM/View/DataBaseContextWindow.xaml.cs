@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Password_Manager.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для DataBaseContextViewWindow.xaml
+    /// Логика взаимодействия для DataBaseContextWindow.xaml
     /// </summary>
-    public partial class DataBaseContextViewWindow : Window
+    public partial class DataBaseContextWindow : Window
     {
-        public DataBaseContextViewWindow()
+        public DataBaseContextWindow()
         {
             InitializeComponent();
         }
