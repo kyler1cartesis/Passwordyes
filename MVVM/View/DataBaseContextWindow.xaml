@@ -31,39 +31,59 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <!--Название приложения-->
             <TextBlock Text="{Binding DbName}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Margin="20,0,0,0"
                        Foreground="FloralWhite"
                        FontSize="22"/>
-
+            
             <Rectangle Grid.Column="0"
                Grid.Row="1"  
                Stroke="#5F5AA2"
                Fill="Transparent"
                StrokeThickness="3"/>
+            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Height="30" 
+                        Command="{Binding GoToUpFolder}"
+                        Width="90"
+                        VerticalContentAlignment="Center" 
+                        Padding="5" 
+                        Margin="0,5,10,0" 
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Left" 
+                        BorderThickness="1" 
+                        BorderBrush="#413f54"
+                        Focusable="False"
+                        Content="Назад"
+                        Grid.Row="0"/>
+                <ListView Name="UserList" 
+                          ItemsSource="{Binding CurrentSubFiles}" 
+                          Margin="5,5,5,5" 
+                          Padding="0"
+                          Background="#413f54"
+                          Foreground="Cornsilk"
+                          SelectedItem="{Binding SelectedFolder}"
+                          ItemContainerStyle="{StaticResource FolderCard}"
+                          BorderBrush="Transparent"
+                          BorderThickness="5"
+                          Grid.Row="1">
 
-            <ListView Name="UserList" 
-                      ItemsSource="{Binding CurrentSubFiles}" 
-                      Margin="5,5,5,5" 
-                      Padding="0"
-                      Background="#413f54"
-                      Foreground="Cornsilk"
-                      SelectedItem="{Binding SelectedFolder}"
-                      ItemContainerStyle="{StaticResource FolderCard}"
-                      BorderBrush="Transparent"
-                      BorderThickness="5"
-                      Grid.Row="1">
-                
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical"></WrapPanel>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                
-            </ListView>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+
+            </Grid>
+            
+             
 
             <!--Место для отображения основаных данных-->
             <ContentControl Margin="10"

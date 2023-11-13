@@ -57,6 +57,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void GetDBDs()
         {
+
             DBDescriptions.Add(new DBDescription
             {
                 DataBaseName = "Test DataBase №1",
