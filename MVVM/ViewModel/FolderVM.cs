@@ -11,6 +11,7 @@ namespace Password_Manager
     {
         private FolderVM? _parent;
         public ObservableCollection<File> SubFiles { get; set; } = new ObservableCollection<File>();
+        public string ImagePath { get; } = "pack://siteoforigin:,,,/GuiSources/Images/folder.png";
 
         public FolderVM? Parent { get { return _parent; } }
 

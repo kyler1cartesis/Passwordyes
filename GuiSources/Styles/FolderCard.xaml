@@ -33,7 +33,7 @@
                             <StackPanel Orientation="Vertical"
                                         Margin="10,0,0,0">
 
-                                <Image Source="pack://siteoforigin:,,,/GuiSources/Images/folder.png"
+                                <Image Source="{Binding ImagePath}"
                                        Margin="0,5,0,0"
                                        Width="30"
                                        Height="30"
@@ -45,7 +45,7 @@
                                        Margin="0,0,0,0">
                                     <Label.InputBindings>
                                         <MouseBinding 
-                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.SelectFolder}" 
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.SelectFile}" 
                                             Gesture="LeftDoubleClick" />
                                     </Label.InputBindings>
                                 </Label>

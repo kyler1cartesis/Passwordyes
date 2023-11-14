@@ -23,7 +23,7 @@ namespace Password_Manager.MVVM.ViewModel
             }
         }
 
-        public ICommand SelectFolder { get; set; }
+        public ICommand SelectFile { get; set; }
         public ICommand GoToUpFolder { get; set; }
         public ObservableCollection<File> CurrentSubFiles { get; set; } = new ObservableCollection<File>();
         public File CurrentFolder { get; set; }
@@ -41,16 +41,19 @@ namespace Password_Manager.MVVM.ViewModel
             FolderVM f4 = new(f2);
             FolderVM f5 = new(f2);
             FolderVM f6 = new(f3);
+            EntryVM en1 = new(f2);
             f1.Name = "f1";
             f2.Name = "f2";
             f3.Name = "f3";
             f4.Name = "f4";
             f5.Name = "f5";
             f6.Name = "f6";
+            en1.Name = "en1";
 
             f1.SubFiles.Add(f2);
             f1.SubFiles.Add(f3);
             f2.SubFiles.Add(f4);
+            f2.SubFiles.Add(en1);
             f2.SubFiles.Add(f5);
             f3.SubFiles.Add(f6);
 
@@ -63,25 +66,36 @@ namespace Password_Manager.MVVM.ViewModel
             DbContext context = new DbContext();
             _context = context;
 
-            SelectFolder = new RelayCommand(ShowSubEntries, CanShowSubEntries);
+            SelectFile = new RelayCommand(Select, CanSelect);
             GoToUpFolder = new RelayCommand(ClimbUp, CanClimbUp);
         }
 
-        private bool CanShowSubEntries(object obj)
+        private bool CanSelect(object obj)
         {
             return true;
         }
 
-        private void ShowSubEntries(object obj)
+        private void Select(object obj)
         {
-            FolderVM selected = SelectedFolder as FolderVM;
+            if(SelectedFolder is FolderVM)
+            {
+                FolderVM selected = SelectedFolder as FolderVM;
+                ShowSubFiles(selected);
+            }
+            if(SelectedFolder is EntryVM)
+            {
+
+            }
+        }
+
+        private void ShowSubFiles(FolderVM selected)
+        {
             CurrentSubFiles.Clear();
-            foreach(FolderVM f in selected.SubFiles)
+            foreach (File f in selected.SubFiles)
             {
                 CurrentSubFiles.Add(f);
             }
             CurrentFolder = selected;
-            Debug.WriteLine(selected.SubFiles.Count);
         }
 
         private bool CanClimbUp(object obj)
@@ -95,11 +109,9 @@ namespace Password_Manager.MVVM.ViewModel
             CurrentSubFiles.Clear();
             FolderVM parent = (CurrentFolder as FolderVM).Parent;
 
-            Debug.WriteLine("Try to get subfiles " + parent.SubFiles.Count);
-            foreach (FolderVM f in parent.SubFiles)
+            foreach (File f in parent.SubFiles)
             {
                 CurrentSubFiles.Add(f);
-                Debug.WriteLine(f.Name);
             }
             CurrentFolder = parent;
         }
