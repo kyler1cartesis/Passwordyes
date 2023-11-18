@@ -35,6 +35,10 @@
             <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
                 <view:SettingsView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:CreateEntryVM}">
+                <view:CreateEntryForm/>
+            </DataTemplate>
 
         </ResourceDictionary>
          

@@ -89,8 +89,7 @@
             <ContentControl Margin="10"
                             Grid.Column="1"
                             Grid.Row="1"
-                            Content=""/>
-
+                            Content="{Binding CurrentView}"/>
         </Grid>
 
     </Border>

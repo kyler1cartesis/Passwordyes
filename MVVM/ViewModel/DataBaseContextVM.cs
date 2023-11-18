@@ -33,8 +33,27 @@ namespace Password_Manager.MVVM.ViewModel
 
         public string DbName { get; set; }
 
+        public CreateEntryVM CreateEntryForm  { get; set; }
+
+        private object _currentView;
+
+        public object CurrentView
+        {
+            get
+            {
+                return _currentView;
+            }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged();
+            }
+        }
+
         public DataBaseContextVM()
         {
+            CreateEntryForm = new CreateEntryVM();
+
             FolderVM f1 = new(null);
             FolderVM f2 = new(f1);
             FolderVM f3 = new(f1);
@@ -84,7 +103,7 @@ namespace Password_Manager.MVVM.ViewModel
             }
             if(SelectedFolder is EntryVM)
             {
-
+                CurrentView = CreateEntryForm;
             }
         }
 

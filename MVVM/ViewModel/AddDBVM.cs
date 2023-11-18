@@ -8,7 +8,7 @@ using Password_Manager.Core;
 
 namespace Password_Manager.MVVM.ViewModel;
 
-public class AddDBVM
+class AddDBVM : ObservableObject
 {
 		//Команда добавления БД в коллекцию
 		public ICommand AddDBCommand { get; set; }
