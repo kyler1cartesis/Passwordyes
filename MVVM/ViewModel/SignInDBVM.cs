@@ -35,16 +35,16 @@ namespace Password_Manager.MVVM.ViewModel
 		private void Enter(object obj)
 		{
 
-			var dataBaseContextWindow = obj as Window;
-			DataBaseContextWindow dbContextWin = new DataBaseContextWindow();
+			var signInDataBaseContextWindow = obj as Window;
 
 			DataBaseContextVM dbContextVM = new DataBaseContextVM();
 			dbContextVM.DbName = DbToSignIn.DataBaseName;
+			DataBaseContextWindow dbContextWin = new DataBaseContextWindow(dbContextVM);
 
-			dbContextWin.DataContext = dbContextVM;
+			//dbContextWin.DataContext = dbContextVM;
 			dbContextWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 			dbContextWin.Show();
-			dataBaseContextWindow.Owner.Close();
+			signInDataBaseContextWindow.Owner.Close();
 		}
 	}
 }

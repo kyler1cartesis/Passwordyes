@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.View
 {
@@ -20,9 +21,10 @@ namespace Password_Manager.MVVM.View
     /// </summary>
     public partial class CreateEntryForm : UserControl
     {
-        public CreateEntryForm()
+        public CreateEntryForm(CreateEntryVM createEntry)
         {
             InitializeComponent();
+            this.DataContext = createEntry;
         }
     }
 }

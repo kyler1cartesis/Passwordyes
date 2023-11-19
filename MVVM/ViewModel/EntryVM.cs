@@ -12,9 +12,9 @@ namespace Password_Manager.MVVM.ViewModel
         private FolderVM? _parent;
         public string ImagePath { get; } = "pack://siteoforigin:,,,/GuiSources/Images/notes.png";
         public FolderVM? Parent { get { return _parent; } }
-        public string Description { get; }
-        public string Url { get; }
-        public string CreateData { get; }
+        public string Description { get; set; }
+        public string Url { get; set; }
+        public string CreateData { get; set; }
 
         public EntryVM(FolderVM? parent)
         {

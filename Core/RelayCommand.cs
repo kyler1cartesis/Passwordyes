@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Password_Manager.Core
 {
-    class RelayCommand : ICommand
+    public class RelayCommand : ICommand
     {
         private Action<object> _execute;
         private Func<object, bool> _canExecute;

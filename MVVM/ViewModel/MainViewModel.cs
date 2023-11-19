@@ -39,7 +39,7 @@ namespace Password_Manager.MVVM.ViewModel
             set 
             { 
                 _currentView = value; 
-                OnPropertyChanged(); 
+                OnPropertyChanged("CurrentView"); 
             }
         }
 

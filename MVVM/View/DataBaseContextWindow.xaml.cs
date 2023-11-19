@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.View
 {
@@ -19,9 +20,10 @@ namespace Password_Manager.MVVM.View
     /// </summary>
     public partial class DataBaseContextWindow : Window
     {
-        public DataBaseContextWindow()
+        public DataBaseContextWindow(DataBaseContextVM dataBaseContextWindow)
         {
             InitializeComponent();
+            this.DataContext = dataBaseContextWindow;
         }
     }
 }

@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
+using Password_Manager.MVVM.View;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    class DataBaseContextVM : ObservableObject
+    public class DataBaseContextVM : ObservableObject
     {
         private DbContext _context;
 
@@ -46,7 +47,7 @@ namespace Password_Manager.MVVM.ViewModel
             set
             {
                 _currentView = value;
-                OnPropertyChanged();
+                OnPropertyChanged("CurrentView");
             }
         }
 
@@ -61,6 +62,7 @@ namespace Password_Manager.MVVM.ViewModel
             FolderVM f5 = new(f2);
             FolderVM f6 = new(f3);
             EntryVM en1 = new(f2);
+            EntryVM en2 = new(f4);
             f1.Name = "f1";
             f2.Name = "f2";
             f3.Name = "f3";
@@ -68,6 +70,11 @@ namespace Password_Manager.MVVM.ViewModel
             f5.Name = "f5";
             f6.Name = "f6";
             en1.Name = "en1";
+            en1.Description = "test entry 1";
+            en1.Url = "https://test1";
+            en2.Name = "en2";
+            en2.Description = "test entry 2";
+            en2.Url = "https://test2";
 
             f1.SubFiles.Add(f2);
             f1.SubFiles.Add(f3);
@@ -75,6 +82,7 @@ namespace Password_Manager.MVVM.ViewModel
             f2.SubFiles.Add(en1);
             f2.SubFiles.Add(f5);
             f3.SubFiles.Add(f6);
+            f4.SubFiles.Add(en2);
 
             foreach (FolderVM f in f1.SubFiles)
             {
@@ -103,7 +111,16 @@ namespace Password_Manager.MVVM.ViewModel
             }
             if(SelectedFolder is EntryVM)
             {
-                CurrentView = CreateEntryForm;
+                EntryVM? SelectedEntry = SelectedFolder as EntryVM;
+                Debug.WriteLine(CreateEntryForm.Name);
+
+
+                CreateEntryForm.Name = SelectedEntry?.Name;
+                CreateEntryForm.Name = SelectedEntry?.Name;
+                CreateEntryForm.Password = "******";
+                CreateEntryForm.Description = SelectedEntry?.Description;
+                CreateEntryForm.URL = SelectedEntry?.Url;
+                CurrentView = new CreateEntryForm(CreateEntryForm);
             }
         }
 

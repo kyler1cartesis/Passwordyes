@@ -27,7 +27,6 @@
         <TextBox  Height="35" 
                   Width="250" 
                   Margin="10,50,0,0" 
-                  
                   Text="{Binding Name}"
                   VerticalAlignment="Top" 
                   HorizontalAlignment="Center" 
@@ -85,23 +84,13 @@
                   Style="{StaticResource ModernFormField}" Visibility="Visible"/>
 
 
-        <Button Height="30" 
-                Command="{Binding AddDBCommand}" 
+        <Button Height="30"  
                 Content="Add" 
                 Width="140"  
                 VerticalContentAlignment="Center" 
                 Padding="5" Margin="25" 
                 VerticalAlignment="Bottom" 
                 HorizontalAlignment="Right" 
-                BorderThickness="1" 
-                BorderBrush="#E0E0E0" />
-        <Button Height="30" 
-                Content="Cancel" 
-                Width="140"  
-                VerticalContentAlignment="Center" 
-                Padding="5" Margin="25" 
-                VerticalAlignment="Bottom" 
-                HorizontalAlignment="Left" 
                 BorderThickness="1" 
                 BorderBrush="#E0E0E0" />
 
