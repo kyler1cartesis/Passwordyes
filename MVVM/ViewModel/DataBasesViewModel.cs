@@ -18,6 +18,9 @@ namespace Password_Manager.MVVM.ViewModel
         //Добавление новой БД в список
         public static void AddDBD(DBDescription dBDescription)
         {
+            //ModelAPI.AddNewDB(dBDescription);
+            //UpdateDBDs();
+
             DBDescriptions.Add(dBDescription);
         }
 
@@ -34,6 +37,11 @@ namespace Password_Manager.MVVM.ViewModel
         private bool CanShowWindow(object obj)
         {
             return true;
+        }
+
+        private bool CanShowSignInDBWindow(object obj)
+        {
+            return SelectedDBD != null;
         }
 
         private void ShowWindow(object obj)
@@ -55,8 +63,10 @@ namespace Password_Manager.MVVM.ViewModel
             signInDBWindow.Show();
         }
 
-        private void GetDBDs()
+        private static void UpdateDBDs()
         {
+
+            //DBDescriptions = ModelAPI.GetDBDescriptions();
 
             DBDescriptions.Add(new DBDescription
             {
@@ -71,7 +81,8 @@ namespace Password_Manager.MVVM.ViewModel
                 DataBaseName = "Test DataBase №2",
                 Status = "Open",
                 DataBaseLastOpenDate = DateTime.Now,
-                DataBaseCreateDate = DateTime.Now
+                DataBaseCreateDate = DateTime.Now,
+                Level = CodeLevel.HIGH
             });
 
             DBDescriptions.Add(new DBDescription
@@ -86,14 +97,16 @@ namespace Password_Manager.MVVM.ViewModel
                 DataBaseName = "Test DataBase №2",
                 Status = "Open",
                 DataBaseLastOpenDate = DateTime.Now,
-                DataBaseCreateDate = DateTime.Now
+                DataBaseCreateDate = DateTime.Now,
+                Level = CodeLevel.MID
             });
             DBDescriptions.Add(new DBDescription
             {
                 DataBaseName = "Test DataBase №2",
                 Status = "Open",
                 DataBaseLastOpenDate = DateTime.Now,
-                DataBaseCreateDate = DateTime.Now
+                DataBaseCreateDate = DateTime.Now,
+                Level = CodeLevel.HIGH
             });
             DBDescriptions.Add(new DBDescription
             {
@@ -115,11 +128,11 @@ namespace Password_Manager.MVVM.ViewModel
         {
             ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow);
 
-            ShowSignInDbWindowCommand = new RelayCommand(ShowSignInDBWindow, CanShowWindow);
+            ShowSignInDbWindowCommand = new RelayCommand(ShowSignInDBWindow, CanShowSignInDBWindow);
 
             DBDescriptions = new ObservableCollection<DBDescription>();
 
-            GetDBDs();
+            UpdateDBDs();
         }
     }
 }

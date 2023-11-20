@@ -25,5 +25,7 @@ namespace Password_Manager.MVVM.View
             InitializeComponent();
             this.DataContext = dataBaseContextWindow;
         }
+
+
     }
 }

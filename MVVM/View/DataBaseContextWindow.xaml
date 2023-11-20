@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:Password_Manager.MVVM.View"
         xmlns:viewmodel="clr-namespace:Password_Manager.MVVM.ViewModel"
         mc:Ignorable="d"
+        x:Name="DBContextWindow"
         Title="Password Storm" 
         Height="600" Width="900"
         AllowsTransparency="False"
@@ -59,6 +60,17 @@
                         Padding="5" Margin="10,10,10,20"
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Right" 
+                        BorderThickness="1" 
+                        BorderBrush="#E0E0E0" />
+                <Button Height="30"  
+                        Content="Exit" 
+                        Command="{Binding ExitDB}"
+                        CommandParameter="{Binding ElementName=DBContextWindow}"
+                        Width="100"  
+                        VerticalContentAlignment="Center" 
+                        Padding="5" Margin="330,10,10,20"
+                        VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Left" 
                         BorderThickness="1" 
                         BorderBrush="#E0E0E0" />
             </StackPanel>

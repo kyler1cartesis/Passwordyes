@@ -18,6 +18,7 @@ namespace Password_Manager.MVVM.ViewModel
         //Команда смены страницы на настройки
         public RelayCommand SettingsViewCommand { get; set; }
 
+
         //ViewModel главной страницы 
         public HomeViewModel HomeVM { get; set; }
 
@@ -26,6 +27,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         //ViewModel страницы настроек
         public SettingsViewModel SettingsVM { get; set; }
+
 
         //Поле хранения текущей страницы
         private object _currentView;

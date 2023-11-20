@@ -29,22 +29,30 @@ namespace Password_Manager.MVVM.ViewModel
 
 		private bool CanEnter(object obj)
 		{
-			return true;
+            return DbToSignIn != null;
 		}
 
 		private void Enter(object obj)
 		{
+			//bool isValidate = ModelAPI.ValidatePassword(DbToSignIn, MasterPassword);
 
-			var signInDataBaseContextWindow = obj as Window;
+			if (true)
+			{
+				var signInDataBaseContextWindow = obj as Window;
 
-			DataBaseContextVM dbContextVM = new DataBaseContextVM();
-			dbContextVM.DbName = DbToSignIn.DataBaseName;
-			DataBaseContextWindow dbContextWin = new DataBaseContextWindow(dbContextVM);
+				DataBaseContextVM dbContextVM = new DataBaseContextVM();
+				dbContextVM.DbName = DbToSignIn.DataBaseName;
+				DataBaseContextWindow dbContextWin = new DataBaseContextWindow(dbContextVM);
 
-			//dbContextWin.DataContext = dbContextVM;
-			dbContextWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-			dbContextWin.Show();
-			signInDataBaseContextWindow.Owner.Close();
+
+				dbContextWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+				dbContextWin.Show();
+				signInDataBaseContextWindow.Owner.Close();
+			}
+			else
+			{
+
+			}
 		}
 	}
 }

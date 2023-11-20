@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
@@ -28,6 +29,10 @@ namespace Password_Manager.MVVM.ViewModel
         public ICommand GoToUpFolder { get; set; }
         public ICommand NewEntry { get; set; }
         public ICommand NewFolder { get; set; }
+        public ICommand ExitDB { get; set; }
+
+
+
         private ObservableCollection<File> _currentSubFiles;
         public ObservableCollection<File> CurrentSubFiles
         {
@@ -49,6 +54,7 @@ namespace Password_Manager.MVVM.ViewModel
             }
             set
             {
+                ClosePage();
                 _currentFolder = value;
                 OnPropertyChanged("CurrentFolder");
             } 
@@ -125,6 +131,7 @@ namespace Password_Manager.MVVM.ViewModel
             GoToUpFolder = new RelayCommand(ClimbUp, CanClimbUp);
             NewEntry = new RelayCommand(ShowCreateEntryForm, CanShowCreateEntryForm);
             NewFolder = new RelayCommand(ShowCreateFolderForm, CanShowCreateFolderForm);
+            ExitDB = new RelayCommand(Exit, CanExit);
         }
 
         private bool CanSelect(object obj)
@@ -205,6 +212,19 @@ namespace Password_Manager.MVVM.ViewModel
             AddFolderVM createForm = new AddFolderVM();
             createForm.DBContext = this;
             CurrentView = new AddFolderView(createForm);
+        }
+
+        private bool CanExit(object obj)
+        {
+            return true;
+        }
+
+        private void Exit(object obj)
+        {
+            Window window = obj as Window;
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            window?.Close();
         }
 
         public void ClosePage()

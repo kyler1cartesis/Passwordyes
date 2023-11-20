@@ -58,7 +58,12 @@
                             </StackPanel>
                             
                             
+                            
                         </Border>
+                        <Image Source="{Binding CodeLevelImagePath}"
+                               Width="40"
+                               Height="40"
+                               Margin="350,0,0,0"/>
                         
                         
                     </Grid>
