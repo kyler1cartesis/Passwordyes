@@ -37,6 +37,30 @@
                        Margin="20,0,0,0"
                        Foreground="FloralWhite"
                        FontSize="22"/>
+
+            <StackPanel Grid.Column="1"
+                        Grid.Row="0"
+                        Orientation="Horizontal">
+                <Button Height="30"  
+                        Command="{Binding NewEntry}"
+                        Content="New Entry" 
+                        Width="100"  
+                        VerticalContentAlignment="Center" 
+                        Padding="5" Margin="10,10,10,20"
+                        VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Right" 
+                        BorderThickness="1" 
+                        BorderBrush="#E0E0E0" />
+                <Button Height="30"  
+                        Content="New Folder" 
+                        Width="100"  
+                        VerticalContentAlignment="Center" 
+                        Padding="5" Margin="10,10,10,20"
+                        VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Right" 
+                        BorderThickness="1" 
+                        BorderBrush="#E0E0E0" />
+            </StackPanel>
             
             <Rectangle Grid.Column="0"
                Grid.Row="1"  

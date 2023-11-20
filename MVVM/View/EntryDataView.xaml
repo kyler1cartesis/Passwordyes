@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="450">
 
     <UserControl.DataContext>
-        <viewmodel:CreateEntryVM/>
+        <viewmodel:EntryDataVM/>
     </UserControl.DataContext>
 
     <Grid>
@@ -33,7 +33,8 @@
                   BorderThickness="1" 
                   BorderBrush="#E0E0E0"
                   Style="{StaticResource ModernFormField}"
-                  FontSize="17"/>
+                  FontSize="17"
+                  IsReadOnly="True"/>
 
         <Label Content="Password" 
                Margin="100,100" 
@@ -49,7 +50,8 @@
                   BorderThickness="1" 
                   BorderBrush="#E0E0E0" 
                   FontSize="17"
-                  Style="{StaticResource ModernFormField}"/>
+                  Style="{StaticResource ModernFormField}"
+                  IsReadOnly="True"/>
 
         <Label Content="Description" 
                Margin="100,175" 
@@ -65,7 +67,8 @@
                   BorderThickness="1" 
                   BorderBrush="#E0E0E0" 
                   FontSize="17"
-                  Style="{StaticResource ModernFormField}"/>
+                  Style="{StaticResource ModernFormField}"
+                  IsReadOnly="True"/>
 
         <Label Content="URL" 
                Margin="100,291,0,0" 
@@ -81,11 +84,21 @@
                   BorderThickness="1" 
                   BorderBrush="#E0E0E0" 
                   FontSize="17"
-                  Style="{StaticResource ModernFormField}" Visibility="Visible"/>
+                  Style="{StaticResource ModernFormField}" Visibility="Visible"
+                  IsReadOnly="True"/>
 
 
         <Button Height="30"  
-                Content="Add" 
+                Content="Delete" 
+                Width="140"  
+                VerticalContentAlignment="Center" 
+                Padding="5" Margin="25" 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Left" 
+                BorderThickness="1" 
+                BorderBrush="#E0E0E0" />
+        <Button Height="30"
+                Content="Change" 
                 Width="140"  
                 VerticalContentAlignment="Center" 
                 Padding="5" Margin="25" 

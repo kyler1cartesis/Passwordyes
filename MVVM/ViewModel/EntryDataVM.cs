@@ -7,7 +7,7 @@ using Password_Manager.Core;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    public class CreateEntryVM : ObservableObject
+    public class EntryDataVM : ObservableObject
     {
 		private string _name;
 		public string Name
@@ -26,7 +26,7 @@ namespace Password_Manager.MVVM.ViewModel
 		public string Description { get; set; }
 		public string URL { get; set; }
 
-		public CreateEntryVM()
+		public EntryDataVM()
 		{
 		}
 	}

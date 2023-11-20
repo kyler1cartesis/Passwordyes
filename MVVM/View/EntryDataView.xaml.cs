@@ -21,7 +21,7 @@ namespace Password_Manager.MVVM.View
     /// </summary>
     public partial class CreateEntryForm : UserControl
     {
-        public CreateEntryForm(CreateEntryVM createEntry)
+        public CreateEntryForm(EntryDataVM createEntry)
         {
             InitializeComponent();
             this.DataContext = createEntry;

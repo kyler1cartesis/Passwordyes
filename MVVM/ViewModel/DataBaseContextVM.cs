@@ -26,7 +26,20 @@ namespace Password_Manager.MVVM.ViewModel
 
         public ICommand SelectFile { get; set; }
         public ICommand GoToUpFolder { get; set; }
-        public ObservableCollection<File> CurrentSubFiles { get; set; } = new ObservableCollection<File>();
+        public ICommand NewEntry { get; set; }
+        private ObservableCollection<File> _currentSubFiles;
+        public ObservableCollection<File> CurrentSubFiles
+        {
+            get
+            {
+                return _currentSubFiles;
+            }
+            set
+            {
+                _currentSubFiles = value;
+                OnPropertyChanged("CurrentSubFiles");
+            }
+        }
         public File CurrentFolder { get; set; }
         public File SelectedFolder { get; set; }
 
@@ -34,7 +47,8 @@ namespace Password_Manager.MVVM.ViewModel
 
         public string DbName { get; set; }
 
-        public CreateEntryVM CreateEntryForm  { get; set; }
+        public EntryDataVM EntryData  { get; set; }
+        public AddEntryVM AddEntry { get; set; }
 
         private object _currentView;
 
@@ -53,7 +67,8 @@ namespace Password_Manager.MVVM.ViewModel
 
         public DataBaseContextVM()
         {
-            CreateEntryForm = new CreateEntryVM();
+            EntryData = new EntryDataVM();
+            CurrentSubFiles = new ObservableCollection<File>();
 
             FolderVM f1 = new(null);
             FolderVM f2 = new(f1);
@@ -84,10 +99,11 @@ namespace Password_Manager.MVVM.ViewModel
             f3.SubFiles.Add(f6);
             f4.SubFiles.Add(en2);
 
-            foreach (FolderVM f in f1.SubFiles)
+            /*foreach (FolderVM f in f1.SubFiles)
             {
                 CurrentSubFiles.Add(f);
-            }
+            }*/
+            CurrentSubFiles = f1.SubFiles;
             CurrentFolder = f1;
 
             DbContext context = new DbContext();
@@ -95,6 +111,7 @@ namespace Password_Manager.MVVM.ViewModel
 
             SelectFile = new RelayCommand(Select, CanSelect);
             GoToUpFolder = new RelayCommand(ClimbUp, CanClimbUp);
+            NewEntry = new RelayCommand(ShowCreateEntryForm, CanShowCreateEntryForm);
         }
 
         private bool CanSelect(object obj)
@@ -112,25 +129,26 @@ namespace Password_Manager.MVVM.ViewModel
             if(SelectedFolder is EntryVM)
             {
                 EntryVM? SelectedEntry = SelectedFolder as EntryVM;
-                Debug.WriteLine(CreateEntryForm.Name);
+                Debug.WriteLine(EntryData.Name);
 
 
-                CreateEntryForm.Name = SelectedEntry?.Name;
-                CreateEntryForm.Name = SelectedEntry?.Name;
-                CreateEntryForm.Password = "******";
-                CreateEntryForm.Description = SelectedEntry?.Description;
-                CreateEntryForm.URL = SelectedEntry?.Url;
-                CurrentView = new CreateEntryForm(CreateEntryForm);
+                EntryData.Name = SelectedEntry?.Name;
+                EntryData.Name = SelectedEntry?.Name;
+                EntryData.Password = "******";
+                EntryData.Description = SelectedEntry?.Description;
+                EntryData.URL = SelectedEntry?.Url;
+                CurrentView = new CreateEntryForm(EntryData);
             }
         }
 
         private void ShowSubFiles(FolderVM selected)
         {
-            CurrentSubFiles.Clear();
+            /*CurrentSubFiles.Clear();
             foreach (File f in selected.SubFiles)
             {
                 CurrentSubFiles.Add(f);
-            }
+            }*/
+            CurrentSubFiles = selected.SubFiles;
             CurrentFolder = selected;
         }
 
@@ -142,14 +160,27 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ClimbUp(object obj)
         {
-            CurrentSubFiles.Clear();
+            //CurrentSubFiles.Clear();
             FolderVM parent = (CurrentFolder as FolderVM).Parent;
 
-            foreach (File f in parent.SubFiles)
+            /*foreach (File f in parent.SubFiles)
             {
                 CurrentSubFiles.Add(f);
-            }
+            }*/
+            CurrentSubFiles = parent.SubFiles;
             CurrentFolder = parent;
+        }
+
+        private bool CanShowCreateEntryForm(object obj)
+        {
+            return true;
+        }
+
+        private void ShowCreateEntryForm(object obj)
+        {
+            AddEntryVM createForm = new AddEntryVM();
+            createForm.DBContext = this;
+            CurrentView = new AddEntryView(createForm);
         }
     }
 }
