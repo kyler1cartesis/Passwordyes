@@ -38,5 +38,10 @@ namespace Password_Manager.MVVM.Model
         {
             throw new NotImplementedException();
         }
+
+        public static void RemoveDB(DBDescription selectedDBD)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

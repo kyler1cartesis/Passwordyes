@@ -57,6 +57,34 @@
                   FontSize="17"
                   Style="{StaticResource ModernFormField}"/>
 
+        <RadioButton GroupName="CodeLevel"
+                     Command="{Binding SetCodeLevelCommand}"
+                     CommandParameter="{Binding ElementName=low}"
+                     Margin="-40,200,0,0"
+                     HorizontalAlignment="Center"
+                     x:Name="low"
+                     Background="LightGreen">
+
+        </RadioButton>
+        <RadioButton GroupName="CodeLevel"
+                     Command="{Binding SetCodeLevelCommand}"
+                     CommandParameter="{Binding ElementName=mid}"
+                     Margin="0,200,0,0"
+                     HorizontalAlignment="Center"
+                     x:Name="mid"
+                     Background="Yellow">
+
+        </RadioButton>
+        <RadioButton GroupName="CodeLevel"
+                     Command="{Binding SetCodeLevelCommand}"
+                     CommandParameter="{Binding ElementName=high}"
+                     Margin="40,200,0,0"
+                     HorizontalAlignment="Center"
+                     x:Name="high"
+                     Background="Red">
+
+        </RadioButton>
+
         <Button Height="30" 
                 Command="{Binding AddDBCommand}" 
                 Click="CloseForm"
@@ -78,6 +106,5 @@
                 HorizontalAlignment="Left" 
                 BorderThickness="1" 
                 BorderBrush="#E0E0E0" />
-
     </Grid>
 </Window>

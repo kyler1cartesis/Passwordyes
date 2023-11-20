@@ -39,10 +39,11 @@ namespace Password_Manager.MVVM.Model
         public DateTime DataBaseCreateDate { get; set; }
         public CodeLevel Level { get; set; }
 
-        public DBDescription(string dataBaseName, DateTime dataBaseCreateDate)
+        public DBDescription(string dataBaseName, DateTime dataBaseCreateDate, CodeLevel level)
         {
             DataBaseName = dataBaseName;
             DataBaseCreateDate = dataBaseCreateDate;
+            Level = level;
         }
 
         public DBDescription()

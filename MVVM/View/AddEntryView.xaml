@@ -22,7 +22,7 @@
         <Label Content="Name"
            Margin="100, 25" 
            VerticalAlignment="Top" 
-           HorizontalAlignment="left"
+           HorizontalAlignment="center"
            Foreground="Wheat"/>
         <TextBox  Height="35" 
               Width="250" 
@@ -38,7 +38,7 @@
         <Label Content="Password" 
            Margin="100,100" 
            VerticalAlignment="Top" 
-           HorizontalAlignment="left"
+           HorizontalAlignment="center"
            Foreground="Wheat"/>
         <TextBox  Height="35" 
               Width="250" 
@@ -54,7 +54,7 @@
         <Label Content="Description" 
            Margin="100,175" 
            VerticalAlignment="Top" 
-           HorizontalAlignment="left"
+           HorizontalAlignment="center"
            Foreground="Wheat"/>
         <TextBox  Height="85" 
               Width="250" 
@@ -68,16 +68,16 @@
               Style="{StaticResource ModernFormField}"/>
 
         <Label Content="URL" 
-           Margin="100,291,0,0" 
+           Margin="0,291,0,0" 
            VerticalAlignment="Top" 
-           HorizontalAlignment="Left"
+           HorizontalAlignment="center"
            Foreground="Wheat"/>
         <TextBox  Height="34" 
               Width="250" 
               Text="{Binding URL, Mode=OneWayToSource}"
-              Margin="105,316,0,0" 
+              Margin="0,316,0,0" 
               VerticalAlignment="Top" 
-              HorizontalAlignment="Left" 
+              HorizontalAlignment="center" 
               BorderThickness="1" 
               BorderBrush="#E0E0E0" 
               FontSize="17"

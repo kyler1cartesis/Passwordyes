@@ -22,7 +22,7 @@
         <Label Content="Name"
                 Margin="100, 25" 
                 VerticalAlignment="Top" 
-                HorizontalAlignment="left"
+                HorizontalAlignment="center"
                 Foreground="Wheat"/>
         <TextBox  Height="35" 
                 Width="250" 

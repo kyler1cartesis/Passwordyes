@@ -68,7 +68,7 @@
                     Focusable="False"
                     Content="Войти"/>
             <Button Height="30" 
-                    MouseDoubleClick="RemoveDB"
+                    Command="{Binding DeleteDBCommand}"
                     Width="90"
                     VerticalContentAlignment="Center" 
                     Padding="5" 

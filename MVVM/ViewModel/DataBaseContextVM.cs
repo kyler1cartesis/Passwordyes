@@ -17,14 +17,6 @@ namespace Password_Manager.MVVM.ViewModel
     {
         private DbContext _context;
 
-        /*public string CurrentFolderName
-        {
-            get
-            {
-                return CurrentFolder.Name;
-            }
-        }*/
-
         public ICommand SelectFile { get; set; }
         public ICommand GoToUpFolder { get; set; }
         public ICommand NewEntry { get; set; }
@@ -163,11 +155,6 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ShowSubFiles(FolderVM selected)
         {
-            /*CurrentSubFiles.Clear();
-            foreach (File f in selected.SubFiles)
-            {
-                CurrentSubFiles.Add(f);
-            }*/
             CurrentSubFiles = selected.SubFiles;
             CurrentFolder = selected;
         }
@@ -180,13 +167,8 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ClimbUp(object obj)
         {
-            //CurrentSubFiles.Clear();
             FolderVM parent = (CurrentFolder as FolderVM).Parent;
 
-            /*foreach (File f in parent.SubFiles)
-            {
-                CurrentSubFiles.Add(f);
-            }*/
             CurrentSubFiles = parent.SubFiles;
             CurrentFolder = parent;
         }

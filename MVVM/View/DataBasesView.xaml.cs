@@ -32,12 +32,12 @@ namespace Password_Manager.MVVM.View
             
         }
 
-        private void RemoveDB(object sender, MouseButtonEventArgs e)
+        /*private void RemoveDB(object sender, MouseButtonEventArgs e)
         {
             ListView list = UserList;
             DBDescription desc = list.SelectedItem as DBDescription;
             DataBasesViewModel.DBDescriptions.Remove(desc);
-        }
+        }*/
 
         private void SignInDB(object sender, MouseButtonEventArgs e)
         {

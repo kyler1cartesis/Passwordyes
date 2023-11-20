@@ -33,6 +33,7 @@ namespace Password_Manager.MVVM.ViewModel
         //Команда отображения формы ввода данных новой БД
         public ICommand ShowWindowCommand { get; set; }
         public ICommand ShowSignInDbWindowCommand { get; set; }
+        public ICommand DeleteDBCommand { get; set; }
 
         private bool CanShowWindow(object obj)
         {
@@ -42,6 +43,18 @@ namespace Password_Manager.MVVM.ViewModel
         private bool CanShowSignInDBWindow(object obj)
         {
             return SelectedDBD != null;
+        }
+
+        private bool CanDeleteDB(object obj)
+        {
+            return SelectedDBD != null;
+        }
+
+        private void DeleteDB(object obj)
+        {
+            //ModelAPI.RemoveDB(SelectedDBD);
+            //UpdateDBDs();
+            DBDescriptions.Remove(SelectedDBD);
         }
 
         private void ShowWindow(object obj)
@@ -129,6 +142,8 @@ namespace Password_Manager.MVVM.ViewModel
             ShowWindowCommand = new RelayCommand(ShowWindow, CanShowWindow);
 
             ShowSignInDbWindowCommand = new RelayCommand(ShowSignInDBWindow, CanShowSignInDBWindow);
+
+            DeleteDBCommand = new RelayCommand(DeleteDB, CanDeleteDB);
 
             DBDescriptions = new ObservableCollection<DBDescription>();
 
