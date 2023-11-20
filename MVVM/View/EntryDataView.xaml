@@ -90,6 +90,7 @@
 
         <Button Height="30"  
                 Content="Delete" 
+                Command="{Binding DeleteEntryCommand}"
                 Width="140"  
                 VerticalContentAlignment="Center" 
                 Padding="5" Margin="25" 

@@ -16,17 +16,18 @@ namespace Password_Manager.MVVM.ViewModel
     {
         private DbContext _context;
 
-        public string CurrentFolderName
+        /*public string CurrentFolderName
         {
             get
             {
                 return CurrentFolder.Name;
             }
-        }
+        }*/
 
         public ICommand SelectFile { get; set; }
         public ICommand GoToUpFolder { get; set; }
         public ICommand NewEntry { get; set; }
+        public ICommand NewFolder { get; set; }
         private ObservableCollection<File> _currentSubFiles;
         public ObservableCollection<File> CurrentSubFiles
         {
@@ -40,7 +41,18 @@ namespace Password_Manager.MVVM.ViewModel
                 OnPropertyChanged("CurrentSubFiles");
             }
         }
-        public File CurrentFolder { get; set; }
+        private File _currentFolder;
+        public File CurrentFolder {
+            get
+            {
+                return _currentFolder;
+            }
+            set
+            {
+                _currentFolder = value;
+                OnPropertyChanged("CurrentFolder");
+            } 
+        }
         public File SelectedFolder { get; set; }
 
         public DbContext Context { get { return _context; } }
@@ -112,6 +124,7 @@ namespace Password_Manager.MVVM.ViewModel
             SelectFile = new RelayCommand(Select, CanSelect);
             GoToUpFolder = new RelayCommand(ClimbUp, CanClimbUp);
             NewEntry = new RelayCommand(ShowCreateEntryForm, CanShowCreateEntryForm);
+            NewFolder = new RelayCommand(ShowCreateFolderForm, CanShowCreateFolderForm);
         }
 
         private bool CanSelect(object obj)
@@ -131,12 +144,12 @@ namespace Password_Manager.MVVM.ViewModel
                 EntryVM? SelectedEntry = SelectedFolder as EntryVM;
                 Debug.WriteLine(EntryData.Name);
 
-
-                EntryData.Name = SelectedEntry?.Name;
                 EntryData.Name = SelectedEntry?.Name;
                 EntryData.Password = "******";
                 EntryData.Description = SelectedEntry?.Description;
                 EntryData.URL = SelectedEntry?.Url;
+                EntryData.DBContext = this;
+
                 CurrentView = new CreateEntryForm(EntryData);
             }
         }
@@ -181,6 +194,22 @@ namespace Password_Manager.MVVM.ViewModel
             AddEntryVM createForm = new AddEntryVM();
             createForm.DBContext = this;
             CurrentView = new AddEntryView(createForm);
+        }
+        private bool CanShowCreateFolderForm(object obj)
+        {
+            return true;
+        }
+
+        private void ShowCreateFolderForm(object obj)
+        {
+            AddFolderVM createForm = new AddFolderVM();
+            createForm.DBContext = this;
+            CurrentView = new AddFolderView(createForm);
+        }
+
+        public void ClosePage()
+        {
+            CurrentView = null;
         }
     }
 }

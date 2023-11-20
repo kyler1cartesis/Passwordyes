@@ -53,6 +53,7 @@
                         BorderBrush="#E0E0E0" />
                 <Button Height="30"  
                         Content="New Folder" 
+                        Command="{Binding NewFolder}"
                         Width="100"  
                         VerticalContentAlignment="Center" 
                         Padding="5" Margin="10,10,10,20"
@@ -86,6 +87,18 @@
                         Focusable="False"
                         Content="Назад"
                         Grid.Row="0"/>
+                <Label Content="{Binding CurrentFolder.Name}"
+                       Width="90"
+                       Height="30"
+                       Padding="5" 
+                       Margin="0,0,10,5"
+                       Opacity="50"
+                       VerticalContentAlignment="Top"
+                       HorizontalAlignment="Right"
+                       Foreground="White"
+                       FontSize="14">
+                    
+                </Label>
                 <ListView Name="UserList" 
                           ItemsSource="{Binding CurrentSubFiles}" 
                           Margin="5,5,5,5" 
