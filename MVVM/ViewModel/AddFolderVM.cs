@@ -12,7 +12,7 @@ namespace Password_Manager.MVVM.ViewModel
     public class AddFolderVM : FilesEditForm
     {
         public ICommand CreateFolderCommand { get; set; }
-        public AddFolderVM() 
+        public AddFolderVM() : base()
         {
             CreateFolderCommand = new RelayCommand(CreateFolder, CanCreateFolder);
         }

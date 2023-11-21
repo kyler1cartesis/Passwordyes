@@ -18,7 +18,7 @@ namespace Password_Manager.MVVM.ViewModel
         public string URL { get; set; }
         public string OldName {  get; set; }
 
-        public ChangeEntryVM()
+        public ChangeEntryVM() : base()
         {
             ChangeEntryCommand = new RelayCommand(ChangeEntry, CanChangeEntry);
         }

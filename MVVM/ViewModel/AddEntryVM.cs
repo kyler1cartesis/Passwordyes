@@ -17,7 +17,7 @@ namespace Password_Manager.MVVM.ViewModel
         public string Description { get; set; }
         public string URL { get; set; }
 
-        public AddEntryVM()
+        public AddEntryVM() : base()
         {
             CreateEntryCommand = new RelayCommand(CreateEntry, CanCreateEntry);
         }

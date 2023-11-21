@@ -20,8 +20,8 @@ namespace Password_Manager.MVVM.ViewModel
 		public string Description { get; set; }
 		public string URL { get; set; }
 
-		public EntryDataVM()
-		{
+		public EntryDataVM() : base()
+        {
 			DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
             ChangeEntry = new RelayCommand(ShowChangeEntryForm, CanShowChangeEntryForm);
         }
