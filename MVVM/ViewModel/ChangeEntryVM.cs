@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Password_Manager.Core;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
-using Password_Manager.MVVM.Model;
 
 namespace Password_Manager.MVVM.ViewModel
 {
@@ -42,8 +41,11 @@ namespace Password_Manager.MVVM.ViewModel
             entry.Description = Description;
             entry.Url = URL;
 
-            var subFiles = DBContext.CurrentSubFiles.Where(file => file.Name != OldName);
-            var subFilesWithoutCurrentEntry = new ObservableCollection<File>(subFiles)
+            var subFiles = DBContext.CurrentSubFiles.Where((file) =>
+            {
+                return file is not EntryVM || file.Name != OldName;
+            });
+            var subFilesWithoutCurrentEntry = new ObservableCollection<FileVM>(subFiles)
             {
                 entry
             };

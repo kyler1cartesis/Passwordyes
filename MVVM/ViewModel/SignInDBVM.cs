@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Password_Manager.Core;
-using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
 
 namespace Password_Manager.MVVM.ViewModel
@@ -17,7 +16,7 @@ namespace Password_Manager.MVVM.ViewModel
 		public ICommand SignInDataBaseCommand { get; set; }
 
 		//Поле с именем новой БД
-		public DBDescription DbToSignIn { get; set; }
+		public DBDescriptionVM DbToSignIn { get; set; }
 
 		public string MasterPassword { get; set; }
 

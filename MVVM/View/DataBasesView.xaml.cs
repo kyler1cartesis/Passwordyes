@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.View
@@ -42,7 +41,7 @@ namespace Password_Manager.MVVM.View
         private void SignInDB(object sender, MouseButtonEventArgs e)
         {
             ListView list = UserList;
-            DBDescription desc = list.SelectedItem as DBDescription;
+            DBDescriptionVM desc = list.SelectedItem as DBDescriptionVM;
             MessageBox.Show(desc.DataBaseName);
         }
     }

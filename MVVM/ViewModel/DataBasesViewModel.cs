@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Password_Manager.Core;
-using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
 
 namespace Password_Manager.MVVM.ViewModel
@@ -16,7 +15,7 @@ namespace Password_Manager.MVVM.ViewModel
     class DataBasesViewModel : ObservableObject
     {
         //Добавление новой БД в список
-        public static void AddDBD(DBDescription dBDescription)
+        public static void AddDBD(DBDescriptionVM dBDescription)
         {
             //ModelAPI.AddNewDB(dBDescription);
             //UpdateDBDs();
@@ -25,10 +24,10 @@ namespace Password_Manager.MVVM.ViewModel
         }
 
         //Коллекция БД
-        public static ObservableCollection<DBDescription> DBDescriptions { get; set; } = new ObservableCollection<DBDescription>();
+        public static ObservableCollection<DBDescriptionVM> DBDescriptions { get; set; } = new ObservableCollection<DBDescriptionVM>();
 
         //Выбранная БД на данный момент времени
-        public DBDescription SelectedDBD { get; set; }
+        public DBDescriptionVM SelectedDBD { get; set; }
 
         //Команда отображения формы ввода данных новой БД
         public ICommand ShowWindowCommand { get; set; }
@@ -81,7 +80,7 @@ namespace Password_Manager.MVVM.ViewModel
 
             //DBDescriptions = ModelAPI.GetDBDescriptions();
 
-            DBDescriptions.Add(new DBDescription
+            DBDescriptions.Add(new DBDescriptionVM
             {
                 DataBaseName = "Test DataBase №1",
                 Status = "Open",
@@ -89,7 +88,7 @@ namespace Password_Manager.MVVM.ViewModel
                 DataBaseCreateDate = DateTime.Now
             });
 
-            DBDescriptions.Add(new DBDescription
+            DBDescriptions.Add(new DBDescriptionVM
             {
                 DataBaseName = "Test DataBase №2",
                 Status = "Open",
@@ -98,14 +97,14 @@ namespace Password_Manager.MVVM.ViewModel
                 Level = CodeLevel.HIGH
             });
 
-            DBDescriptions.Add(new DBDescription
+            DBDescriptions.Add(new DBDescriptionVM
             {
                 DataBaseName = "Test DataBase №2",
                 Status = "Open",
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now
             });
-            DBDescriptions.Add(new DBDescription
+            DBDescriptions.Add(new DBDescriptionVM
             {
                 DataBaseName = "Test DataBase №2",
                 Status = "Open",
@@ -113,7 +112,7 @@ namespace Password_Manager.MVVM.ViewModel
                 DataBaseCreateDate = DateTime.Now,
                 Level = CodeLevel.MID
             });
-            DBDescriptions.Add(new DBDescription
+            DBDescriptions.Add(new DBDescriptionVM
             {
                 DataBaseName = "Test DataBase №2",
                 Status = "Open",
@@ -121,14 +120,14 @@ namespace Password_Manager.MVVM.ViewModel
                 DataBaseCreateDate = DateTime.Now,
                 Level = CodeLevel.HIGH
             });
-            DBDescriptions.Add(new DBDescription
+            DBDescriptions.Add(new DBDescriptionVM
             {
                 DataBaseName = "Test DataBase №2",
                 Status = "Open",
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now
             });
-            DBDescriptions.Add(new DBDescription
+            DBDescriptions.Add(new DBDescriptionVM
             {
                 DataBaseName = "Test DataBase №2",
                 Status = "Open",
@@ -145,7 +144,7 @@ namespace Password_Manager.MVVM.ViewModel
 
             DeleteDBCommand = new RelayCommand(DeleteDB, CanDeleteDB);
 
-            DBDescriptions = new ObservableCollection<DBDescription>();
+            DBDescriptions = new ObservableCollection<DBDescriptionVM>();
 
             UpdateDBDs();
         }

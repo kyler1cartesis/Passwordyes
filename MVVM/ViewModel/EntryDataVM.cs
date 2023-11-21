@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Password_Manager.Core;
-using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
 
 namespace Password_Manager.MVVM.ViewModel
@@ -33,8 +32,11 @@ namespace Password_Manager.MVVM.ViewModel
 
 		private void DeleteEntry(object obj)
 		{
-			var subFiles = DBContext.CurrentSubFiles.Where(file => file.Name != Name);
-			var subFilesWithoutCurrentEntry = new ObservableCollection<File>(subFiles);
+            var subFiles = DBContext.CurrentSubFiles.Where((file) =>
+            {
+                return file is not EntryVM || file.Name != Name;
+            });
+			var subFilesWithoutCurrentEntry = new ObservableCollection<FileVM>(subFiles);
 			DBContext.CurrentSubFiles = subFilesWithoutCurrentEntry;
 			(DBContext.CurrentFolder as FolderVM).SubFiles = subFilesWithoutCurrentEntry;
 

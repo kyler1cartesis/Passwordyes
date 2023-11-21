@@ -4,27 +4,22 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.Model
 {
     public class ModelAPI
     {
-        public static ObservableCollection<DBDescription> GetDBDescriptions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void CreateNewDB(DBDescription dBDescription)
+        public static ObservableCollection<DBDescriptionVM> GetDBDescriptions()
         {
             throw new NotImplementedException();
         }
 
         public static void CreateNewDB(string Name, string MasterPassword)
-        {
-            throw new NotImplementedException();
+        {            throw new NotImplementedException();
         }
 
-        public static bool ValidatePassword(DBDescription DbToSignIn, string MasterPassword)
+        public static bool ValidatePassword(DBDescriptionVM DbToSignIn, string MasterPassword)
         {
             throw new NotImplementedException();
         }
@@ -39,7 +34,7 @@ namespace Password_Manager.MVVM.Model
             throw new NotImplementedException();
         }
 
-        public static void RemoveDB(DBDescription selectedDBD)
+        public static void RemoveDB(DBDescriptionVM selectedDBD)
         {
             throw new NotImplementedException();
         }

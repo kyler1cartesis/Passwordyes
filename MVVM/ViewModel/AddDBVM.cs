@@ -41,7 +41,7 @@ class AddDBVM : ObservableObject
 	private void AddUser(object obj)
 	{
 		//ModelAPI.CreateNewDB(Name, MasterPassword);
-		DataBasesViewModel.AddDBD(new Model.DBDescription(Name, DateTime.Now, Level)); ;
+		DataBasesViewModel.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level)); ;
 
 	}
 

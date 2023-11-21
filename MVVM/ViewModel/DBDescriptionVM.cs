@@ -9,9 +9,9 @@ public enum CodeLevel
     LOW, MID, HIGH
 }
 
-namespace Password_Manager.MVVM.Model
+namespace Password_Manager.MVVM.ViewModel
 {
-    public class DBDescription
+    public class DBDescriptionVM
     {
         readonly static string LowLevelImagePath = "pack://siteoforigin:,,,/GuiSources/Images/lowCode.png";
         readonly static string MidLevelImagePath = "pack://siteoforigin:,,,/GuiSources/Images/midCode.png";
@@ -39,14 +39,14 @@ namespace Password_Manager.MVVM.Model
         public DateTime DataBaseCreateDate { get; set; }
         public CodeLevel Level { get; set; }
 
-        public DBDescription(string dataBaseName, DateTime dataBaseCreateDate, CodeLevel level)
+        public DBDescriptionVM(string dataBaseName, DateTime dataBaseCreateDate, CodeLevel level)
         {
             DataBaseName = dataBaseName;
             DataBaseCreateDate = dataBaseCreateDate;
             Level = level;
         }
 
-        public DBDescription()
+        public DBDescriptionVM()
         {
         }
     }

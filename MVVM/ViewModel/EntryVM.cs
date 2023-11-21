@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Password_Manager.MVVM.Model;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    public class EntryVM : File
+    public class EntryVM : FileVM
     {
         private FolderVM? _parent;
         public string ImagePath { get; } = "pack://siteoforigin:,,,/GuiSources/Images/notes.png";

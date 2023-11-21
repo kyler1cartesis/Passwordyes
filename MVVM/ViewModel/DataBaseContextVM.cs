@@ -25,8 +25,8 @@ namespace Password_Manager.MVVM.ViewModel
 
 
 
-        private ObservableCollection<File> _currentSubFiles;
-        public ObservableCollection<File> CurrentSubFiles
+        private ObservableCollection<FileVM> _currentSubFiles;
+        public ObservableCollection<FileVM> CurrentSubFiles
         {
             get
             {
@@ -38,8 +38,8 @@ namespace Password_Manager.MVVM.ViewModel
                 OnPropertyChanged("CurrentSubFiles");
             }
         }
-        private File _currentFolder;
-        public File CurrentFolder {
+        private FileVM _currentFolder;
+        public FileVM CurrentFolder {
             get
             {
                 return _currentFolder;
@@ -51,7 +51,7 @@ namespace Password_Manager.MVVM.ViewModel
                 OnPropertyChanged("CurrentFolder");
             } 
         }
-        public File SelectedFolder { get; set; }
+        public FileVM SelectedFolder { get; set; }
 
         public DbContext Context { get { return _context; } }
 
@@ -78,7 +78,7 @@ namespace Password_Manager.MVVM.ViewModel
         public DataBaseContextVM()
         {
             EntryData = new EntryDataVM();
-            CurrentSubFiles = new ObservableCollection<File>();
+            CurrentSubFiles = new ObservableCollection<FileVM>();
 
             FolderVM f1 = new(null);
             FolderVM f2 = new(f1);
@@ -109,10 +109,6 @@ namespace Password_Manager.MVVM.ViewModel
             f3.SubFiles.Add(f6);
             f4.SubFiles.Add(en2);
 
-            /*foreach (FolderVM f in f1.SubFiles)
-            {
-                CurrentSubFiles.Add(f);
-            }*/
             CurrentSubFiles = f1.SubFiles;
             CurrentFolder = f1;
 

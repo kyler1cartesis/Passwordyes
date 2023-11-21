@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
-using Password_Manager.MVVM.Model;
+using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager
 {
-    public class FolderVM : File
+    public class FolderVM : FileVM
     {
         private FolderVM? _parent;
-        public ObservableCollection<File> SubFiles { get; set; } = new ObservableCollection<File>();
+        public ObservableCollection<FileVM> SubFiles { get; set; } = new ObservableCollection<FileVM>();
         public string ImagePath { get; } = "pack://siteoforigin:,,,/GuiSources/Images/folder.png";
 
         public FolderVM? Parent { get { return _parent; } }
