@@ -16,7 +16,8 @@ namespace Password_Manager.MVVM.Model
         }
 
         public static void CreateNewDB(string Name, string MasterPassword)
-        {            throw new NotImplementedException();
+        {            
+            throw new NotImplementedException();
         }
 
         public static bool ValidatePassword(DBDescriptionVM DbToSignIn, string MasterPassword)

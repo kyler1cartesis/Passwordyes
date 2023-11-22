@@ -42,7 +42,7 @@ namespace Password_Manager.MVVM.View
         {
             ListView list = UserList;
             DBDescriptionVM desc = list.SelectedItem as DBDescriptionVM;
-            MessageBox.Show(desc.DataBaseName);
+            MessageBox.Show(desc.Name);
         }
     }
 }

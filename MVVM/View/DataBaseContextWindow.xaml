@@ -117,7 +117,7 @@
                           Padding="0"
                           Background="#413f54"
                           Foreground="Cornsilk"
-                          SelectedItem="{Binding SelectedFolder}"
+                          SelectedItem="{Binding SelectedFile}"
                           ItemContainerStyle="{StaticResource FolderCard}"
                           BorderBrush="Transparent"
                           BorderThickness="5"

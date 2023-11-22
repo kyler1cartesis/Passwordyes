@@ -7,11 +7,10 @@ namespace Password_Manager.MVVM.ViewModel
 {
     public class FileVM
     {
-        private int path;
-
         private string _name;
 
         public string Name { get { return _name; } set { _name = value; } }
+        public DateTime CreateDate { get; set; }
 
     }
 }

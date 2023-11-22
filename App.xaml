@@ -21,7 +21,10 @@
                 <ResourceDictionary Source="GuiSources/Styles/DataBaseCard.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/FormField.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/FolderCard.xaml"/>
-
+                <ResourceDictionary Source="GuiSources/Styles/AddDBButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/DeleteDBButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/EnterDBButton.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">

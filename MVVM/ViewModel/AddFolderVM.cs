@@ -24,7 +24,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void CreateFolder(object obj)
         {
-            FolderVM currentFolder = DBContext.CurrentFolder as FolderVM;
+            FolderVM currentFolder = DBContext.CurrentFile as FolderVM;
             FolderVM folder = new FolderVM(currentFolder);
 
             folder.Name = Name;

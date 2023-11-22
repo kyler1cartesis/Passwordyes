@@ -27,18 +27,18 @@ class AddDBVM : ObservableObject
 
 	public AddDBVM()
 	{
-		AddDBCommand = new RelayCommand(AddUser, CanAddUser);
+		AddDBCommand = new RelayCommand(AddDB, CanAddDB);
 		SetCodeLevelCommand = new RelayCommand(SetCodeLevel);
 	}
 
-	private bool CanAddUser(object obj)
+	private bool CanAddDB(object obj)
 	{
 		//bool isValidateName = ModelAPI.Validate_DB_Name(Name);
 		//bool isValidatePassword = ModelAPI.Validate_DB_MPassword(MasterPassword);
 		return true;
 	}
 
-	private void AddUser(object obj)
+	private void AddDB(object obj)
 	{
 		//ModelAPI.CreateNewDB(Name, MasterPassword);
 		DataBasesViewModel.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level)); ;

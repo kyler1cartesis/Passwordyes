@@ -13,7 +13,6 @@ namespace Password_Manager.MVVM.ViewModel
         public FolderVM? Parent { get { return _parent; } }
         public string Description { get; set; }
         public string Url { get; set; }
-        public string CreateData { get; set; }
 
         public EntryVM(FolderVM? parent)
         {

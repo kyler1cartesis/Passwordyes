@@ -38,7 +38,7 @@ namespace Password_Manager.MVVM.ViewModel
             });
 			var subFilesWithoutCurrentEntry = new ObservableCollection<FileVM>(subFiles);
 			DBContext.CurrentSubFiles = subFilesWithoutCurrentEntry;
-			(DBContext.CurrentFolder as FolderVM).SubFiles = subFilesWithoutCurrentEntry;
+			(DBContext.CurrentFile as FolderVM).SubFiles = subFilesWithoutCurrentEntry;
 
 			DBContext.ClosePage();
 		}

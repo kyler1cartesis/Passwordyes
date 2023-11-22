@@ -19,10 +19,5 @@ namespace Password_Manager
         {
             _parent = parent;
         }
-
-        public void getEntries()
-        {
-            
-        }
     }
 }

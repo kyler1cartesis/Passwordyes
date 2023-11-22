@@ -38,27 +38,24 @@ namespace Password_Manager.MVVM.ViewModel
                 OnPropertyChanged("CurrentSubFiles");
             }
         }
-        private FileVM _currentFolder;
-        public FileVM CurrentFolder {
+        private FileVM _currentFile;
+        public FileVM CurrentFile {
             get
             {
-                return _currentFolder;
+                return _currentFile;
             }
             set
             {
                 ClosePage();
-                _currentFolder = value;
+                _currentFile = value;
                 OnPropertyChanged("CurrentFolder");
             } 
         }
-        public FileVM SelectedFolder { get; set; }
-
-        public DbContext Context { get { return _context; } }
+        public FileVM SelectedFile { get; set; }
 
         public string DbName { get; set; }
 
         public EntryDataVM EntryData  { get; set; }
-        public AddEntryVM AddEntry { get; set; }
 
         private object _currentView;
 
@@ -110,7 +107,7 @@ namespace Password_Manager.MVVM.ViewModel
             f4.SubFiles.Add(en2);
 
             CurrentSubFiles = f1.SubFiles;
-            CurrentFolder = f1;
+            CurrentFile = f1;
 
             DbContext context = new DbContext();
             _context = context;
@@ -129,14 +126,14 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void Select(object obj)
         {
-            if(SelectedFolder is FolderVM)
+            if(SelectedFile is FolderVM)
             {
-                FolderVM selected = SelectedFolder as FolderVM;
+                FolderVM selected = SelectedFile as FolderVM;
                 ShowSubFiles(selected);
             }
-            if(SelectedFolder is EntryVM)
+            if(SelectedFile is EntryVM)
             {
-                EntryVM? SelectedEntry = SelectedFolder as EntryVM;
+                EntryVM? SelectedEntry = SelectedFile as EntryVM;
                 Debug.WriteLine(EntryData.Name);
 
                 EntryData.Name = SelectedEntry?.Name;
@@ -152,21 +149,21 @@ namespace Password_Manager.MVVM.ViewModel
         private void ShowSubFiles(FolderVM selected)
         {
             CurrentSubFiles = selected.SubFiles;
-            CurrentFolder = selected;
+            CurrentFile = selected;
         }
 
         private bool CanClimbUp(object obj)
         {
-            FolderVM? parent = (CurrentFolder as FolderVM).Parent;
+            FolderVM? parent = (CurrentFile as FolderVM).Parent;
             return parent != null;
         }
 
         private void ClimbUp(object obj)
         {
-            FolderVM parent = (CurrentFolder as FolderVM).Parent;
+            FolderVM parent = (CurrentFile as FolderVM).Parent;
 
             CurrentSubFiles = parent.SubFiles;
-            CurrentFolder = parent;
+            CurrentFile = parent;
         }
 
         private bool CanShowCreateEntryForm(object obj)

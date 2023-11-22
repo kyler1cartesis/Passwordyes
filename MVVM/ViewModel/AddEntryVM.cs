@@ -34,7 +34,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void CreateEntry(object obj)
         {
-            FolderVM currentFolder = DBContext.CurrentFolder as FolderVM;
+            FolderVM currentFolder = DBContext.CurrentFile as FolderVM;
 
             EntryVM entry = new EntryVM(currentFolder);
 
