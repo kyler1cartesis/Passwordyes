@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Password_Manager.Core;
+using Password_Manager.MVVM.View;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    class MainViewModel : ObservableObject
+    public class MainViewModel : ObservableObject
     {
         //Команда смены страницы на главную
         public RelayCommand HomeViewCommand { get; set; }
@@ -61,8 +62,10 @@ namespace Password_Manager.MVVM.ViewModel
 
             DataBasesViewCommand = new RelayCommand(obj =>
             {
-                CurrentView = DataBasesVM;
-
+                //CurrentView = DataBasesVM;
+                var dbView = new DataBasesView();
+                CurrentView = dbView;
+                dbView.DataContext = DataBasesVM;
             });
 
             SettingsViewCommand = new RelayCommand(obj =>

@@ -2,21 +2,34 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Xml.Linq;
 using Password_Manager.Core;
 using Password_Manager.MVVM.View;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    class DataBasesViewModel : ObservableObject
+    public class DataBasesViewModel : ObservableObject
     {
-
+        ObservableCollection<DBDescriptionVM> _dBDescriptions;
         //Коллекция БД
-        public static ObservableCollection<DBDescriptionVM> DBDescriptions { get; set; } = new ObservableCollection<DBDescriptionVM>();
+        public ObservableCollection<DBDescriptionVM> DBDescriptions 
+        { 
+            get 
+            {
+                return _dBDescriptions;
+            } 
+            set 
+            {
+                _dBDescriptions = value;
+                OnPropertyChanged("DBDescriptions");
+            }
+        }
 
         //Выбранная БД на данный момент времени
         public DBDescriptionVM SelectedDB { get; set; }
@@ -51,9 +64,12 @@ namespace Password_Manager.MVVM.ViewModel
         private void ShowAddDBWindow(object obj)
         {
             var mainWindow = obj as Window;
-            AddDBWindow addDBWin = new AddDBWindow(mainWindow);
-            addDBWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            addDBWin.Show();
+            AddDBVM addDBVM = new AddDBVM();
+            AddDBView addDBView = new AddDBView(addDBVM);
+            MainViewModel mainVM = mainWindow.DataContext as MainViewModel;
+            mainVM.CurrentView = addDBView;
+            //addDBWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            //addDBWin.Show();
         }
 
         private void ShowSignInDBWindow(object obj)
@@ -68,19 +84,19 @@ namespace Password_Manager.MVVM.ViewModel
         }
 
         //Добавление новой БД в список
-        public static void AddDBD(DBDescriptionVM dBDescription)
+        public void AddDBD(DBDescriptionVM dBDescription)
         {
             //ModelAPI.AddNewDB(dBDescription);
             //UpdateDBDs();
-
-            DBDescriptions.Add(dBDescription);
+            var dbdescs = DBDescriptions;
+            dbdescs.Add(dBDescription);
+            DBDescriptions = dbdescs;
         }
 
-        private static void UpdateDBDs()
+        private void UpdateDBDs()
         {
 
             //DBDescriptions = ModelAPI.GetDBDescriptions();
-
             DBDescriptions.Add(new DBDescriptionVM
             {
                 Name = "Test DataBase №1",

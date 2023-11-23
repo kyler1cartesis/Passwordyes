@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Password_Manager.MVVM.ViewModel;
 
-class HomeViewModel
+public class HomeViewModel
 {
 
 }

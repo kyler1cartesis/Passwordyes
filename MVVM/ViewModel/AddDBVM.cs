@@ -4,18 +4,22 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Xml.Linq;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
+using Password_Manager.MVVM.View;
 
 namespace Password_Manager.MVVM.ViewModel;
 
-class AddDBVM : ObservableObject
+public class AddDBVM : ObservableObject
 {
 	//Команда добавления БД в коллекцию
 	public ICommand AddDBCommand { get; set; }
-	public ICommand SetCodeLevelCommand { get; set; }
+    public ICommand CloseFormCommand { get; set; }
+    public ICommand SetCodeLevelCommand { get; set; }
 
 	//Поле с именем новой БД
 	public string Name { get; set; }
@@ -29,6 +33,7 @@ class AddDBVM : ObservableObject
 	{
 		AddDBCommand = new RelayCommand(AddDB, CanAddDB);
 		SetCodeLevelCommand = new RelayCommand(SetCodeLevel);
+		CloseFormCommand = new RelayCommand(Close);
 	}
 
 	private bool CanAddDB(object obj)
@@ -40,12 +45,21 @@ class AddDBVM : ObservableObject
 
 	private void AddDB(object obj)
 	{
-		//ModelAPI.CreateNewDB(Name, MasterPassword);
-		DataBasesViewModel.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level)); ;
+        //ModelAPI.CreateNewDB(Name, MasterPassword);
+        var mainWindow = obj as Window;
+        MainViewModel mainVM = mainWindow.DataContext as MainViewModel;
+        mainVM.DataBasesViewCommand.Execute(null);
+		mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level));
+    }
 
-	}
+    private void Close(object obj)
+    {
+        var mainWindow = obj as Window;
+        MainViewModel mainVM = mainWindow.DataContext as MainViewModel;
+        mainVM.DataBasesViewCommand.Execute(null);
+    }
 
-	private void SetCodeLevel(object obj)
+    private void SetCodeLevel(object obj)
 	{
 		RadioButton? button = obj as RadioButton;
         if (button != null)
