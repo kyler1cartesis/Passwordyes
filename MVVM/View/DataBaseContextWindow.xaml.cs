@@ -20,10 +20,9 @@ namespace Password_Manager.MVVM.View
     /// </summary>
     public partial class DataBaseContextWindow : Window
     {
-        public DataBaseContextWindow(DataBaseContextVM dataBaseContextWindow)
+        public DataBaseContextWindow()
         {
             InitializeComponent();
-            this.DataContext = dataBaseContextWindow;
         }
 
 

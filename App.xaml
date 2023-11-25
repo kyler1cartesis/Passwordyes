@@ -24,6 +24,7 @@
                 <ResourceDictionary Source="GuiSources/Styles/AddDBButton.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/DeleteDBButton.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/EnterDBButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/ButtonWithImage.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
 

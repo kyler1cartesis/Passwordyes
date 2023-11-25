@@ -44,5 +44,6 @@ namespace Password_Manager.MVVM.View
             DBDescriptionVM desc = list.SelectedItem as DBDescriptionVM;
             MessageBox.Show(desc.Name);
         }
+
     }
 }

@@ -36,10 +36,11 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Style.Setters>
                                         <Setter Property="Background" Value="#353340"/>
+                                        <Setter Property="Opacity" Value="1"/>
                                     </Style.Setters>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}"  Value="False">
-                                            <Setter Property="Opacity" Value="0"/>
+                                            <Setter Property="Opacity" Value="0.5"/>
                                         </DataTrigger>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="#5F5AA2"/>

@@ -48,7 +48,7 @@ namespace Password_Manager.MVVM.ViewModel
             {
                 ClosePage();
                 _currentFile = value;
-                OnPropertyChanged("CurrentFolder");
+                OnPropertyChanged("CurrentFile");
             } 
         }
         public FileVM SelectedFile { get; set; }

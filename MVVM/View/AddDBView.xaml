@@ -4,53 +4,106 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:viewmodel="clr-namespace:Password_Manager.MVVM.ViewModel"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Password_Manager.MVVM.View"
+             xmlns:local="clr-namespace:Password_Manager.MVVM.View.ViewUtilities"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="500">
+             d:DesignHeight="550" d:DesignWidth="600">
     
     <UserControl.DataContext>
         <viewmodel:AddDBVM/>
     </UserControl.DataContext>
 
     <Grid>
-        <Border Background="#4E5166"
-             CornerRadius="15">
-            <Border BorderBrush="Black"
-                 BorderThickness="5"
-                 CornerRadius="10"/>
-        </Border>
-        <Label Content="Name"
-            Margin="100, 25" 
-            VerticalAlignment="Top" 
-            HorizontalAlignment="left"
-            Foreground="Wheat"/>
-        <TextBox  Height="35" 
-               Width="250" 
-               Margin="25,50" 
-               
-               Text="{Binding Name}"
-               VerticalAlignment="Top" 
-               HorizontalAlignment="Center" 
-               BorderThickness="1" 
-               BorderBrush="#E0E0E0"
-               Style="{StaticResource ModernFormField}"
-               FontSize="17"/>
+        <Border Background="#413f54"
+                CornerRadius="15">
+            <Border Background="#4E5166"
+                    CornerRadius="25"
+                    Width="340"
+                    Height="470">
 
-        <Label Content="Password" 
-            Margin="100,100" 
-            VerticalAlignment="Top" 
-            HorizontalAlignment="left"
-            Foreground="Wheat"/>
-        <TextBox  Height="35" 
-               Width="250" 
-               Text="{Binding MasterPassword}"
-               Margin="25,125" 
-               VerticalAlignment="Top" 
-               HorizontalAlignment="Center" 
-               BorderThickness="1" 
-               BorderBrush="#E0E0E0" 
-               FontSize="17"
-               Style="{StaticResource ModernFormField}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Width="280"
+                                Margin="0,20,0,0"
+                                Grid.Row="0">
+                        <Label Content="Имя"
+                               Margin="0,0,0,0" 
+                               VerticalAlignment="Top" 
+                               HorizontalAlignment="left"
+                               Foreground="Wheat"/>
+                        <TextBox Height="35" 
+                                 Width="270" 
+                                 Margin="0,0,0,0" 
+                                 Text="{Binding Name}"
+                                 VerticalAlignment="Top" 
+                                 HorizontalAlignment="Center" 
+                                 BorderThickness="1" 
+                                 BorderBrush="#E0E0E0"
+                                 Style="{StaticResource ModernFormField}"
+                                 FontSize="17"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,0,0,0"
+                                Grid.Row="1"
+                                Width="280">
+                        <Label Content="Мастер Пароль" 
+                               VerticalAlignment="Top" 
+                               HorizontalAlignment="left"
+                               Foreground="Wheat"/>
+                        <TextBox Height="35" 
+                                 Width="270" 
+                                 Text="{Binding MasterPassword}"
+                                 VerticalAlignment="Top" 
+                                 HorizontalAlignment="Center" 
+                                 BorderThickness="1" 
+                                 BorderBrush="#E0E0E0" 
+                                 FontSize="17"
+                                 Style="{StaticResource ModernFormField}"/>
+                    </StackPanel>
+
+                    <Grid VerticalAlignment="Bottom"
+                          Grid.Row="2"
+                          Width="300"
+                          Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Height="35" 
+                                Command="{Binding AddDBCommand}" 
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                Content="Add" 
+                                Grid.Column="1"
+                                Width="110"  
+                                VerticalContentAlignment="Center" 
+                                Padding="5" Margin="0,0,5,0" 
+                                VerticalAlignment="Bottom" 
+                                HorizontalAlignment="Right" 
+                                BorderThickness="1" 
+                                BorderBrush="#E0E0E0" 
+                                Style="{StaticResource ButtonWithImage}"
+                                local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/confirm.png"/>
+                        <Button Height="35"
+                                Command="{Binding CloseFormCommand}" 
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                Content="Cancel"
+                                Grid.Column="0"
+                                Width="110"  
+                                VerticalContentAlignment="Center" 
+                                Padding="5" Margin="5,0,0,0" 
+                                VerticalAlignment="Bottom" 
+                                HorizontalAlignment="Left" 
+                                BorderThickness="1" 
+                                BorderBrush="#E0E0E0" 
+                                Style="{StaticResource ButtonWithImage}"
+                                local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/cancel.png"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+       
 
         <RadioButton GroupName="CodeLevel"
                   Command="{Binding SetCodeLevelCommand}"
@@ -79,28 +132,5 @@
                   Background="Red">
 
         </RadioButton>
-
-        <Button Height="30" 
-             Command="{Binding AddDBCommand}" 
-             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-             Content="Add" 
-             Width="140"  
-             VerticalContentAlignment="Center" 
-             Padding="5" Margin="25" 
-             VerticalAlignment="Bottom" 
-             HorizontalAlignment="Right" 
-             BorderThickness="1" 
-             BorderBrush="#E0E0E0" />
-        <Button Height="30" 
-                Command="{Binding CloseFormCommand}" 
-                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-             Content="Cancel" 
-             Width="140"  
-             VerticalContentAlignment="Center" 
-             Padding="5" Margin="25" 
-             VerticalAlignment="Bottom" 
-             HorizontalAlignment="Left" 
-             BorderThickness="1" 
-             BorderBrush="#E0E0E0" />
     </Grid>
 </UserControl>

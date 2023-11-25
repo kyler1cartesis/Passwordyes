@@ -94,10 +94,12 @@
                       ItemContainerStyle="{StaticResource DataBaseCard}"
                       BorderBrush="Transparent"
                       BorderThickness="5" Grid.ColumnSpan="2"
-                      Grid.Row="2">
+                      Grid.Row="2"
+                          IsSynchronizedWithCurrentItem="True">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical"></WrapPanel>
+                    <WrapPanel Orientation="Vertical">
+                    </WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>

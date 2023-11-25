@@ -99,7 +99,7 @@
                         Focusable="False"
                         Content="Назад"
                         Grid.Row="0"/>
-                <Label Content="{Binding CurrentFolder.Name}"
+                <Label Content="{Binding CurrentFile.Name}"
                        Width="90"
                        Height="30"
                        Padding="5" 

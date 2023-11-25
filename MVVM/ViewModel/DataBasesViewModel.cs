@@ -32,8 +32,19 @@ namespace Password_Manager.MVVM.ViewModel
         }
 
         //Выбранная БД на данный момент времени
-        public DBDescriptionVM SelectedDB { get; set; }
-
+        private DBDescriptionVM _selectedBD;
+        public DBDescriptionVM SelectedDB
+        {
+            get
+            {
+                return _selectedBD;
+            }
+            set
+            {
+                _selectedBD = value;
+                OnPropertyChanged("SelectedDB");
+            }
+        }
         //Команда отображения формы ввода данных новой БД
         public ICommand ShowAddDbWindowCommand { get; set; }
         public ICommand ShowSignInDbWindowCommand { get; set; }
