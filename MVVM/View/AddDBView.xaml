@@ -13,8 +13,14 @@
     </UserControl.DataContext>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Border Background="#413f54"
-                CornerRadius="15">
+                CornerRadius="15"
+                Grid.Row="1">
+            
             <Border Background="#4E5166"
                     CornerRadius="25"
                     Width="340"
@@ -22,20 +28,31 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="100"/>
-                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="90"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    <TextBlock FontSize="20"
+                               Text="Создание новой базы данных"
+                               Grid.Row="0"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center">
+
+                    </TextBlock>
                     <StackPanel Width="280"
-                                Margin="0,20,0,0"
-                                Grid.Row="0">
-                        <Label Content="Имя"
+                                Margin="0,0,0,0"
+                                Grid.Row="1">
+                        <Label Content="Название"
                                Margin="0,0,0,0" 
                                VerticalAlignment="Top" 
                                HorizontalAlignment="left"
                                Foreground="Wheat"/>
                         <TextBox Height="35" 
-                                 Width="270" 
+                                 Width="260" 
                                  Margin="0,0,0,0" 
                                  Text="{Binding Name}"
                                  VerticalAlignment="Top" 
@@ -46,14 +63,14 @@
                                  FontSize="17"/>
                     </StackPanel>
                     <StackPanel Margin="0,0,0,0"
-                                Grid.Row="1"
+                                Grid.Row="2"
                                 Width="280">
                         <Label Content="Мастер Пароль" 
                                VerticalAlignment="Top" 
                                HorizontalAlignment="left"
                                Foreground="Wheat"/>
                         <TextBox Height="35" 
-                                 Width="270" 
+                                 Width="260" 
                                  Text="{Binding MasterPassword}"
                                  VerticalAlignment="Top" 
                                  HorizontalAlignment="Center" 
@@ -62,9 +79,74 @@
                                  FontSize="17"
                                  Style="{StaticResource ModernFormField}"/>
                     </StackPanel>
+                    <StackPanel Margin="0,0,0,0"
+                                Grid.Row="3"
+                                Width="280">
+                        <Label Content="Подтвердите Пароль" 
+                               VerticalAlignment="Top" 
+                               HorizontalAlignment="left"
+                               Foreground="Wheat"/>
+                        <TextBox Height="35" 
+                                 Width="260" 
+                                 Text=""
+                                 VerticalAlignment="Top" 
+                                 HorizontalAlignment="Center" 
+                                 BorderThickness="1" 
+                                 BorderBrush="#E0E0E0" 
+                                 FontSize="17"
+                                 Style="{StaticResource ModernFormField}"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="4"
+                          Width="280"
+                          HorizontalAlignment="Center">
+                        <Grid>
+                            <Label Content="Уровень Шифрования" 
+                                   VerticalAlignment="Top" 
+                                   HorizontalAlignment="Center"
+                                   Foreground="Wheat"
+                                   Grid.Row="0"/>
+                            <RadioButton Grid.Row="1" GroupName="CodeLevel"
+                                     Command="{Binding SetCodeLevelCommand}"
+                                     CommandParameter="{Binding ElementName=low}"
+                                     Style="{StaticResource RadioButtonWithImage}"
+                                     Margin="-100,0,0,0"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     x:Name="low"
+                                     Width="40" Height="40"
+                                     local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/lowCode.png">
+
+                            </RadioButton>
+                            <RadioButton Grid.Row="1" GroupName="CodeLevel"
+                                     Command="{Binding SetCodeLevelCommand}"
+                                     CommandParameter="{Binding ElementName=mid}"
+                                     Style="{StaticResource RadioButtonWithImage}"
+                                     Margin="0,0,0,0"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     x:Name="mid"
+                                     Width="40" Height="40"
+                                     local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/midCode.png">
+
+                            </RadioButton>
+                            <RadioButton Grid.Row="1" GroupName="CodeLevel"
+                                     Command="{Binding SetCodeLevelCommand}"
+                                     CommandParameter="{Binding ElementName=high}"
+                                     Style="{StaticResource RadioButtonWithImage}"
+                                     Margin="100,0,0,0"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"
+                                     x:Name="high"
+                                     Width="40" Height="40"
+                                     local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/highCode.png">
+
+                            </RadioButton>
+                        </Grid>
+                    </Grid>
 
                     <Grid VerticalAlignment="Bottom"
-                          Grid.Row="2"
+                          Grid.Row="5"
                           Width="300"
                           Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
@@ -103,34 +185,5 @@
                 </Grid>
             </Border>
         </Border>
-       
-
-        <RadioButton GroupName="CodeLevel"
-                  Command="{Binding SetCodeLevelCommand}"
-                  CommandParameter="{Binding ElementName=low}"
-                  Margin="-40,200,0,0"
-                  HorizontalAlignment="Center"
-                  x:Name="low"
-                  Background="LightGreen">
-
-        </RadioButton>
-        <RadioButton GroupName="CodeLevel"
-                  Command="{Binding SetCodeLevelCommand}"
-                  CommandParameter="{Binding ElementName=mid}"
-                  Margin="0,200,0,0"
-                  HorizontalAlignment="Center"
-                  x:Name="mid"
-                  Background="Yellow">
-
-        </RadioButton>
-        <RadioButton GroupName="CodeLevel"
-                  Command="{Binding SetCodeLevelCommand}"
-                  CommandParameter="{Binding ElementName=high}"
-                  Margin="40,200,0,0"
-                  HorizontalAlignment="Center"
-                  x:Name="high"
-                  Background="Red">
-
-        </RadioButton>
     </Grid>
 </UserControl>

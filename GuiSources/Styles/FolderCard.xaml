@@ -43,19 +43,16 @@
                                        Foreground="White"
                                        FontSize="14"
                                        Margin="0,0,0,0">
-                                    <Label.InputBindings>
-                                        <MouseBinding 
-                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.SelectFile}" 
-                                            Gesture="LeftDoubleClick" />
-                                    </Label.InputBindings>
                                 </Label>
 
                             </StackPanel>
 
-
                         </Border>
-
-
+                        <Grid.InputBindings>
+                            <MouseBinding 
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.SelectFile}" 
+                                Gesture="LeftDoubleClick" />
+                        </Grid.InputBindings>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
