@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Password_Manager.Core;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using Password_Manager.MVVM.Model;
 
 namespace Password_Manager.MVVM.ViewModel
 {
@@ -24,6 +25,10 @@ namespace Password_Manager.MVVM.ViewModel
 
         private bool CanChangeEntry(object obj)
         {
+            //ModelAPI.ValidateEntryPassword(Password);
+            //ModelAPI.ValidateEntryDescription(Description);
+            //ModelAPI.ValidateFileName(Name);
+            //ModelAPI.VaildateEntruURL(URL);
             if ((Password == null) || (Description == null) || (URL == null) || (Name == null))
             {
                 return false;
@@ -34,6 +39,9 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ChangeEntry(object obj)
         {
+            //ModelAPI.ChangeEntry(OldName, Name, Description, URL, Password);
+            //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
+
             FolderVM currentFolder = DBContext.CurrentFile as FolderVM;
             EntryVM entry = new EntryVM(currentFolder);
 

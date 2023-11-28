@@ -19,9 +19,9 @@ namespace Password_Manager.MVVM.View
     /// <summary>
     /// Логика взаимодействия для CreateEntryForm.xaml
     /// </summary>
-    public partial class CreateEntryForm : UserControl
+    public partial class EntryDataView : UserControl
     {
-        public CreateEntryForm(EntryDataVM createEntry)
+        public EntryDataView(EntryDataVM createEntry)
         {
             InitializeComponent();
             this.DataContext = createEntry;

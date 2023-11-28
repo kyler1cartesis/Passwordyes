@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Password_Manager.Core;
+using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
 
 namespace Password_Manager.MVVM.ViewModel
 {
     class SignInDBVM : ObservableObject
     {
+		private MainViewModel _mainVM;
 		//Команда добавления БД в коллекцию
 		public ICommand SignInDataBaseCommand { get; set; }
 
@@ -33,11 +35,13 @@ namespace Password_Manager.MVVM.ViewModel
 
 		private void Enter(object obj)
 		{
-			//bool isValidate = ModelAPI.ValidatePassword(DbToSignIn, MasterPassword);
+			//bool isValidate = ModelAPI.VerifyPassword(DbToSignIn, MasterPassword);
 
 			if (true)
 			{
-				var signInDataBaseContextWindow = obj as Window;
+				//ModelAPI.SignInBD(DbToSignIn);
+
+                var signInDataBaseContextWindow = obj as Window;
 
 				DataBaseContextVM dbContextVM = new DataBaseContextVM();
 				dbContextVM.DbName = DbToSignIn.Name;

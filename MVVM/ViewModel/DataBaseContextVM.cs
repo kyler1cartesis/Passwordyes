@@ -15,8 +15,6 @@ namespace Password_Manager.MVVM.ViewModel
 {
     public class DataBaseContextVM : ObservableObject
     {
-        private DbContext _context;
-
         public ICommand SelectFile { get; set; }
         public ICommand GoToUpFolder { get; set; }
         public ICommand NewEntry { get; set; }
@@ -75,6 +73,7 @@ namespace Password_Manager.MVVM.ViewModel
         public DataBaseContextVM()
         {
             EntryData = new EntryDataVM();
+            //CurrentFile = ModelAPI.GetRootFolder();
             CurrentSubFiles = new ObservableCollection<FileVM>();
 
             FolderVM f1 = new(null);
@@ -109,9 +108,6 @@ namespace Password_Manager.MVVM.ViewModel
             CurrentSubFiles = f1.SubFiles;
             CurrentFile = f1;
 
-            DbContext context = new DbContext();
-            _context = context;
-
             SelectFile = new RelayCommand(Select, CanSelect);
             GoToUpFolder = new RelayCommand(ClimbUp, CanClimbUp);
             NewEntry = new RelayCommand(ShowCreateEntryForm, CanShowCreateEntryForm);
@@ -129,25 +125,25 @@ namespace Password_Manager.MVVM.ViewModel
             if(SelectedFile is FolderVM)
             {
                 FolderVM selected = SelectedFile as FolderVM;
-                ShowSubFiles(selected);
+                GoIntoTheFolder(selected);
             }
             if(SelectedFile is EntryVM)
             {
                 EntryVM? SelectedEntry = SelectedFile as EntryVM;
-                Debug.WriteLine(EntryData.Name);
-
+               
                 EntryData.Name = SelectedEntry?.Name;
                 EntryData.Password = "******";
                 EntryData.Description = SelectedEntry?.Description;
                 EntryData.URL = SelectedEntry?.Url;
                 EntryData.DBContext = this;
 
-                CurrentView = new CreateEntryForm(EntryData);
+                CurrentView = new EntryDataView(EntryData);
             }
         }
 
-        private void ShowSubFiles(FolderVM selected)
+        private void GoIntoTheFolder(FolderVM selected)
         {
+            //ModelAPI.GoIntoTheFolder(selected.Name);
             CurrentSubFiles = selected.SubFiles;
             CurrentFile = selected;
         }
@@ -160,6 +156,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ClimbUp(object obj)
         {
+            //ModelAPI.ClimbUp();
             FolderVM parent = (CurrentFile as FolderVM).Parent;
 
             CurrentSubFiles = parent.SubFiles;
@@ -196,6 +193,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void Exit(object obj)
         {
+            //ModelAPI.Exit();
             Window window = obj as Window;
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

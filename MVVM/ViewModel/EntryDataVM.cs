@@ -5,9 +5,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Password_Manager.Core;
+using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
+using Password_Manager.MVVM.View.ViewUtilities;
 
 namespace Password_Manager.MVVM.ViewModel
 {
@@ -32,6 +35,15 @@ namespace Password_Manager.MVVM.ViewModel
 
 		private void DeleteEntry(object obj)
 		{
+            var answer = MessageBoxManager.ShowMessageBox("Вы уверены, что хотите удалить запись: " + Name + " ?",
+                                             "удаление БД",
+                                             MessageBoxImage.Question);
+
+            if (answer == MessageBoxResult.No) return;
+
+            //ModelAPI.RemoveFileByName(Name);
+            //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
+
             var subFiles = DBContext.CurrentSubFiles.Where((file) =>
             {
                 return file is not EntryVM || file.Name != Name;

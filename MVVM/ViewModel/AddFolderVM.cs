@@ -24,6 +24,9 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void CreateFolder(object obj)
         {
+            //ModelAPI.CreatNewFolder(Name);
+            //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
+
             FolderVM currentFolder = DBContext.CurrentFile as FolderVM;
             FolderVM folder = new FolderVM(currentFolder);
 

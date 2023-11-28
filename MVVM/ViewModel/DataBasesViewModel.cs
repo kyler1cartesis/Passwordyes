@@ -106,13 +106,6 @@ namespace Password_Manager.MVVM.ViewModel
             _mainVM.CurrentView = addDBView;
         }
 
-        private IUnityContainer RegisterControl<T>(T control) where T : IPasswordSupplier
-        {
-            IUnityContainer container = new UnityContainer();
-            container.RegisterInstance<IPasswordSupplier>(control);
-            return container;
-        }
-
         private void ShowSignInDBWindow(object obj)
         {
             var mainWindow = obj as Window;
@@ -122,6 +115,13 @@ namespace Password_Manager.MVVM.ViewModel
             signInDBWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             signInDBWindow.DataContext = signInDBVM;
             signInDBWindow.Show();
+        }
+
+        private IUnityContainer RegisterControl<T>(T control) where T : IPasswordSupplier
+        {
+            IUnityContainer container = new UnityContainer();
+            container.RegisterInstance<IPasswordSupplier>(control);
+            return container;
         }
 
 

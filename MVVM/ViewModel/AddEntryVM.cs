@@ -13,7 +13,7 @@ namespace Password_Manager.MVVM.ViewModel
     public class AddEntryVM : FilesEditForm
     {
         public ICommand CreateEntryCommand { get; set; }
-        public string Password { get; set; }
+        public Tuple<string, string> Password { get; set; }
         public string Description { get; set; }
         public string URL { get; set; }
 
@@ -24,6 +24,10 @@ namespace Password_Manager.MVVM.ViewModel
 
         private bool CanCreateEntry(object obj)
         {
+            //ModelAPI.ValidateEntryPassword(Password);
+            //ModelAPI.ValidateEntryDescription(Description);
+            //ModelAPI.ValidateFileName(Name);
+            //ModelAPI.VaildateEntruURL(URL);
             if ((Password == null) || (Description == null) || (URL == null) || (Name == null))
             {
                 return false;
@@ -34,6 +38,9 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void CreateEntry(object obj)
         {
+            //ModelAPI.CreateNewEntry(Name, Description, URL, Password.Item1
+            //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
+
             FolderVM currentFolder = DBContext.CurrentFile as FolderVM;
 
             EntryVM entry = new EntryVM(currentFolder);

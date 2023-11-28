@@ -66,20 +66,27 @@ public class AddDBVM : ObservableObject
 	private bool CanAddDB(object obj)
 	{
 		//bool isValidateName = ModelAPI.Validate_DB_Name(Name);
-		//bool isValidatePassword = ModelAPI.Validate_DB_MPassword(MasterPassword);
 		return true;
 	}
 
 	private void AddDB(object obj)
 	{
         //ModelAPI.CreateNewDB(Name, MasterPassword);
+        //bool isValidatePassword = ModelAPI.Validate_DB_MPassword(MasterPassword);
+
         _mainVM.DataBasesViewCommand.Execute(null);
 		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level));
     }
 
     private void Close(object obj)
     {
-        _mainVM.DataBasesViewCommand.Execute(null);
+        var answer = MessageBoxManager.ShowMessageBox("Отменить создание базы данных?\n Весь прогресс будет утерян",
+                                             "отмена создания БД",
+                                             MessageBoxImage.Question);
+        if (answer == MessageBoxResult.Yes)
+            _mainVM.DataBasesViewCommand.Execute(null);
+        else
+            return;
     }
 
     private void SetCodeLevel(object obj)
