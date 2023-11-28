@@ -8,9 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="600">
     
-    <UserControl.DataContext>
-        <viewmodel:AddDBVM/>
-    </UserControl.DataContext>
+   
 
     <Grid>
         <Grid.RowDefinitions>
@@ -69,15 +67,25 @@
                                VerticalAlignment="Top" 
                                HorizontalAlignment="left"
                                Foreground="Wheat"/>
-                        <TextBox Height="35" 
-                                 Width="260" 
-                                 Text="{Binding MasterPassword}"
-                                 VerticalAlignment="Top" 
-                                 HorizontalAlignment="Center" 
-                                 BorderThickness="1" 
-                                 BorderBrush="#E0E0E0" 
-                                 FontSize="17"
-                                 Style="{StaticResource ModernFormField}"/>
+                        <Border CornerRadius="10"
+                                Background="#353340"
+                                Width="260"
+                                Height="35">
+
+                            <Grid>
+                                <Rectangle StrokeThickness="1"/>
+
+                                <PasswordBox Margin="1"
+                                             x:Name="firstBox"
+                                             Background="Transparent"
+                                             Foreground="#CECECE"
+                                             BorderThickness="0"
+                                             VerticalContentAlignment="Center"
+                                             HorizontalContentAlignment="Center"
+                                             Padding="5"
+                                             FontSize="17"/>
+                            </Grid>
+                        </Border>
                     </StackPanel>
                     <StackPanel Margin="0,0,0,0"
                                 Grid.Row="3"
@@ -86,15 +94,26 @@
                                VerticalAlignment="Top" 
                                HorizontalAlignment="left"
                                Foreground="Wheat"/>
-                        <TextBox Height="35" 
-                                 Width="260" 
-                                 Text=""
-                                 VerticalAlignment="Top" 
-                                 HorizontalAlignment="Center" 
-                                 BorderThickness="1" 
-                                 BorderBrush="#E0E0E0" 
-                                 FontSize="17"
-                                 Style="{StaticResource ModernFormField}"/>
+                        <!--PASSWORD BOX-->
+                        <Border CornerRadius="10"
+                                Background="#353340"
+                                Width="260"
+                                Height="35">
+
+                            <Grid>
+                                <Rectangle StrokeThickness="1"/>
+
+                                <PasswordBox Margin="1"
+                                             x:Name="secondBox"
+                                             Background="Transparent"
+                                             Foreground="#CECECE"
+                                             BorderThickness="0"
+                                             VerticalContentAlignment="Center"
+                                             HorizontalContentAlignment="Center"
+                                             Padding="5"
+                                             FontSize="17"/>
+                            </Grid>
+                        </Border>
                     </StackPanel>
 
                     <Grid Grid.Row="4"

@@ -78,6 +78,7 @@
 
             <!--Место для отображения основаных данных-->
             <ContentControl Margin="10"
+                            x:Name="viewPage"
                             Grid.Column="1"
                             Grid.Row="1"
                             Content="{Binding CurrentView}"/>

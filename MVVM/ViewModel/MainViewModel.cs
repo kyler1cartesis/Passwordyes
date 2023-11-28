@@ -50,7 +50,10 @@ namespace Password_Manager.MVVM.ViewModel
         public MainViewModel()
         {
             HomeVM = new HomeViewModel();
+
             DataBasesVM = new DataBasesViewModel();
+            DataBasesVM.MainVM = this;
+
             SettingsVM = new SettingsViewModel();
             CurrentView = HomeVM;
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.View
@@ -19,12 +20,16 @@ namespace Password_Manager.MVVM.View
     /// <summary>
     /// Interaction logic for AddDBView.xaml
     /// </summary>
-    public partial class AddDBView : UserControl
+    public partial class AddDBView : UserControl, IPasswordSupplier
     {
-        public AddDBView(AddDBVM addDBVM)
+        public AddDBView()
         {
             InitializeComponent();
-            this.DataContext = addDBVM;
+        }
+
+        public Tuple<string, string> GetPassword()
+        {
+            return new Tuple<string, string>(firstBox.Password, secondBox.Password);
         }
     }
 }

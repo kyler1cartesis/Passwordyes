@@ -10,14 +10,16 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Password_Manager.Core;
+using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
+using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
     public class DataBasesViewModel : ObservableObject
     {
         ObservableCollection<DBDescriptionVM> _dBDescriptions;
-        //Коллекция БД
+       
         public ObservableCollection<DBDescriptionVM> DBDescriptions 
         { 
             get 
@@ -31,7 +33,9 @@ namespace Password_Manager.MVVM.ViewModel
             }
         }
 
-        //Выбранная БД на данный момент времени
+        private MainViewModel _mainVM;
+        public MainViewModel MainVM { set => _mainVM = value; }
+
         private DBDescriptionVM _selectedBD;
         public DBDescriptionVM SelectedDB
         {
@@ -45,10 +49,23 @@ namespace Password_Manager.MVVM.ViewModel
                 OnPropertyChanged("SelectedDB");
             }
         }
-        //Команда отображения формы ввода данных новой БД
+        
         public ICommand ShowAddDbWindowCommand { get; set; }
         public ICommand ShowSignInDbWindowCommand { get; set; }
         public ICommand DeleteDBCommand { get; set; }
+
+        public DataBasesViewModel()
+        {
+            ShowAddDbWindowCommand = new RelayCommand(ShowAddDBWindow, CanShowAddDBWindow);
+
+            ShowSignInDbWindowCommand = new RelayCommand(ShowSignInDBWindow, CanShowSignInDBWindow);
+
+            DeleteDBCommand = new RelayCommand(DeleteDB, CanDeleteDB);
+
+            DBDescriptions = new ObservableCollection<DBDescriptionVM>();
+
+            UpdateDBDs();
+        }
 
         private bool CanShowAddDBWindow(object obj)
         {
@@ -74,13 +91,19 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ShowAddDBWindow(object obj)
         {
-            var mainWindow = obj as Window;
-            AddDBVM addDBVM = new AddDBVM();
-            AddDBView addDBView = new AddDBView(addDBVM);
-            MainViewModel mainVM = mainWindow.DataContext as MainViewModel;
-            mainVM.CurrentView = addDBView;
-            //addDBWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            //addDBWin.Show();
+            AddDBView addDBView = new AddDBView();
+            var container = RegisterControl(addDBView);
+            AddDBVM addDBVM = new AddDBVM(_mainVM, container);
+
+            addDBView.DataContext = addDBVM;
+            _mainVM.CurrentView = addDBView;
+        }
+
+        private IUnityContainer RegisterControl<T>(T control) where T : IPasswordSupplier
+        {
+            IUnityContainer container = new UnityContainer();
+            container.RegisterInstance<IPasswordSupplier>(control);
+            return container;
         }
 
         private void ShowSignInDBWindow(object obj)
@@ -94,7 +117,7 @@ namespace Password_Manager.MVVM.ViewModel
             signInDBWindow.Show();
         }
 
-        //Добавление новой БД в список
+
         public void AddDBD(DBDescriptionVM dBDescription)
         {
             //ModelAPI.AddNewDB(dBDescription);
@@ -162,19 +185,6 @@ namespace Password_Manager.MVVM.ViewModel
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now
             });
-        }
-
-        public DataBasesViewModel()
-        {
-            ShowAddDbWindowCommand = new RelayCommand(ShowAddDBWindow, CanShowAddDBWindow);
-
-            ShowSignInDbWindowCommand = new RelayCommand(ShowSignInDBWindow, CanShowSignInDBWindow);
-
-            DeleteDBCommand = new RelayCommand(DeleteDB, CanDeleteDB);
-
-            DBDescriptions = new ObservableCollection<DBDescriptionVM>();
-
-            UpdateDBDs();
         }
     }
 }
