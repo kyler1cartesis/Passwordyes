@@ -14,6 +14,7 @@ using System.Xml.Linq;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
+using Password_Manager.MVVM.View.ViewUtilities;
 using Unity;
 
 namespace Password_Manager.MVVM.ViewModel;
@@ -26,6 +27,12 @@ public class AddDBVM : ObservableObject
     public ICommand CloseFormCommand { get; set; }
     public ICommand SetCodeLevelCommand { get; set; }
 
+    private string _errorMessage;
+    public string ErrorMessage
+    {
+        get => _errorMessage;
+        set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); }
+    }
 	//Поле с именем новой БД
     private string _name;
 	public string Name
@@ -67,15 +74,12 @@ public class AddDBVM : ObservableObject
 	{
         //ModelAPI.CreateNewDB(Name, MasterPassword);
         _mainVM.DataBasesViewCommand.Execute(null);
-        Debug.WriteLine("Passwords: " + MasterPassword.Item1 + " " + MasterPassword.Item2);
 		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level));
     }
 
     private void Close(object obj)
     {
-        var mainWindow = obj as Window;
-        MainViewModel mainVM = mainWindow.DataContext as MainViewModel;
-        mainVM.DataBasesViewCommand.Execute(null);
+        _mainVM.DataBasesViewCommand.Execute(null);
     }
 
     private void SetCodeLevel(object obj)

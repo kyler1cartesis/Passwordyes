@@ -32,6 +32,7 @@
                         <RowDefinition Height="80"/>
                         <RowDefinition Height="90"/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock FontSize="20"
                                Text="Создание новой базы данных"
@@ -164,8 +165,16 @@
                         </Grid>
                     </Grid>
 
+                    <Label Content="{Binding ErrorMessage, Mode=OneWay}" 
+                           VerticalAlignment="Top" 
+                           HorizontalAlignment="Center"
+                           Foreground="Red"
+                           Grid.Row="5"
+                           FontSize="17"
+                           FontWeight="Bold"/>
+
                     <Grid VerticalAlignment="Bottom"
-                          Grid.Row="5"
+                          Grid.Row="6"
                           Width="300"
                           Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>

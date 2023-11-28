@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
+using Password_Manager.MVVM.View.ViewUtilities;
 using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
@@ -86,7 +87,13 @@ namespace Password_Manager.MVVM.ViewModel
         {
             //ModelAPI.RemoveDB(SelectedDBD);
             //UpdateDBDs();
-            DBDescriptions.Remove(SelectedDB);
+            var answer = MessageBoxManager.ShowMessageBox("Вы уверены, что хотите удалить Базу Данных : " + SelectedDB.Name + " ?\n БД будет удалена без возможности восстановления", 
+                                             "удаление БД", 
+                                             MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes)
+                DBDescriptions.Remove(SelectedDB);
+            else
+                return;
         }
 
         private void ShowAddDBWindow(object obj)
