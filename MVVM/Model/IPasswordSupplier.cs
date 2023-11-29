@@ -8,6 +8,7 @@ namespace Password_Manager.MVVM.Model
 {
     public interface IPasswordSupplier
     {
-        Tuple<string, string> GetPassword();
+        string GetPassword();
+        string GetPasswordConfirm();
     }
 }

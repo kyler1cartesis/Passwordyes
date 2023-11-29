@@ -43,7 +43,7 @@ public class AddDBVM : ObservableObject
 
     //Поле с Мастер паролем новой БД
     private IUnityContainer _container;
-	public Tuple<string, string> MasterPassword
+	public string MasterPassword
     {
         get
         {
@@ -51,7 +51,15 @@ public class AddDBVM : ObservableObject
             return passwordSupplier.GetPassword();
         }
     }
-	public CodeLevel Level { get; set; }
+    public string MasterPasswordConfirm
+    {
+        get
+        {
+            IPasswordSupplier passwordSupplier = _container.Resolve<IPasswordSupplier>();
+            return passwordSupplier.GetPasswordConfirm();
+        }
+    }
+    public CodeLevel Level { get; set; }
 
 
 	public AddDBVM(MainViewModel maiNVM, IUnityContainer container)
@@ -71,8 +79,8 @@ public class AddDBVM : ObservableObject
 
 	private void AddDB(object obj)
 	{
+        //bool isValidatePassword = ModelAPI.Validate_DB_MPassword(MasterPassword, MasterPasswordConfirm);
         //ModelAPI.CreateNewDB(Name, MasterPassword);
-        //bool isValidatePassword = ModelAPI.Validate_DB_MPassword(MasterPassword);
 
         _mainVM.DataBasesViewCommand.Execute(null);
 		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level));
@@ -80,7 +88,7 @@ public class AddDBVM : ObservableObject
 
     private void Close(object obj)
     {
-        var answer = MessageBoxManager.ShowMessageBox("Отменить создание базы данных?\n Весь прогресс будет утерян",
+        var answer = MessageBoxManager.ShowMessageBox("Отменить создание базы данных?",
                                              "отмена создания БД",
                                              MessageBoxImage.Question);
         if (answer == MessageBoxResult.Yes)
@@ -106,7 +114,7 @@ public class AddDBVM : ObservableObject
                     Level = CodeLevel.HIGH;
                     break;
                 default:
-                    throw new Exception("Wrong radion button name");
+                    throw new Exception("Wrong radio button name");
             }
         }
 	}

@@ -57,9 +57,9 @@ namespace Password_Manager.MVVM.ViewModel
 
         public DataBasesViewModel()
         {
-            ShowAddDbWindowCommand = new RelayCommand(ShowAddDBWindow, CanShowAddDBWindow);
+            ShowAddDbWindowCommand = new RelayCommand(ShowAddDBForm, CanShowAddDBWindow);
 
-            ShowSignInDbWindowCommand = new RelayCommand(ShowSignInDBWindow, CanShowSignInDBWindow);
+            ShowSignInDbWindowCommand = new RelayCommand(ShowSignInDBForm, CanShowSignInDBWindow);
 
             DeleteDBCommand = new RelayCommand(DeleteDB, CanDeleteDB);
 
@@ -87,7 +87,7 @@ namespace Password_Manager.MVVM.ViewModel
         {
             //ModelAPI.RemoveDB(SelectedDBD);
             //UpdateDBDs();
-            var answer = MessageBoxManager.ShowMessageBox("Вы уверены, что хотите удалить Базу Данных : " + SelectedDB.Name + " ?\n БД будет удалена без возможности восстановления", 
+            var answer = MessageBoxManager.ShowMessageBox("Вы уверены, что хотите удалить базу данных: " + SelectedDB.Name + " ?\n БД будет удалена без возможности восстановления!", 
                                              "удаление БД", 
                                              MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
@@ -96,7 +96,7 @@ namespace Password_Manager.MVVM.ViewModel
                 return;
         }
 
-        private void ShowAddDBWindow(object obj)
+        private void ShowAddDBForm(object obj)
         {
             AddDBView addDBView = new AddDBView();
             var container = RegisterControl(addDBView);
@@ -106,15 +106,14 @@ namespace Password_Manager.MVVM.ViewModel
             _mainVM.CurrentView = addDBView;
         }
 
-        private void ShowSignInDBWindow(object obj)
+        private void ShowSignInDBForm(object obj)
         {
-            var mainWindow = obj as Window;
-            SignInDBVM signInDBVM = new SignInDBVM();
-            signInDBVM.DbToSignIn = SelectedDB;
-            SignInDataBaseWindow signInDBWindow = new SignInDataBaseWindow(mainWindow);
-            signInDBWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            signInDBWindow.DataContext = signInDBVM;
-            signInDBWindow.Show();
+            SignInDBView signInDBView = new SignInDBView();
+            var container = RegisterControl(signInDBView);
+            SignInDBVM signInDBVM = new SignInDBVM(SelectedDB, _mainVM, container);
+
+            signInDBView.DataContext = signInDBVM;
+            _mainVM.CurrentView = signInDBView;
         }
 
         private IUnityContainer RegisterControl<T>(T control) where T : IPasswordSupplier

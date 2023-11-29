@@ -13,28 +13,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Password_Manager.MVVM.Model;
-using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for AddDBView.xaml
+    /// Interaction logic for SignInDBView.xaml
     /// </summary>
-    public partial class AddDBView : UserControl, IPasswordSupplier
+    public partial class SignInDBView : UserControl, IPasswordSupplier
     {
-        public AddDBView()
+        public SignInDBView()
         {
             InitializeComponent();
         }
 
         public string GetPassword()
         {
-            return firstBox.Password;
+            return passwordBox.Password;
         }
 
         public string GetPasswordConfirm()
         {
-            return secondBox.Password;
+            return passwordBox.Password;
         }
     }
 }

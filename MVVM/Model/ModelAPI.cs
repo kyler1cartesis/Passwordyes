@@ -36,7 +36,7 @@ namespace Password_Manager.MVVM.Model
         }
 
         //Проверяет введённые пользователем пароли на корректность и совпадение
-        public static bool ValidatePassword(Tuple<string, string> masterPassword)
+        public static bool ValidatePassword(string masterPassword, string masterPasswordConfirm)
         {
             throw new NotImplementedException();
         }

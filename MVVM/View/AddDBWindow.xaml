@@ -13,10 +13,6 @@
         Background="Transparent"
         AllowsTransparency="True">
 
-    <Window.DataContext>
-        <viewmodel:AddDBVM/>
-    </Window.DataContext>
-
     <Grid>
         <Border Background="#4E5166"
                 CornerRadius="15">

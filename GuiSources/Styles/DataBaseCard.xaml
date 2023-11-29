@@ -40,15 +40,15 @@
                                         Grid.Row="0"
                                         BorderBrush="Gray">
                                     <Grid>
-                                        <Image Source="pack://siteoforigin:,,,/GuiSources/Images/dbMenuIcon.png"
+                                        <Image Source="pack://siteoforigin:,,,/GuiSources/Images/dbIconV3.png"
                                                Margin="0,5,0,0"
-                                               Width="40"
-                                               Height="40"
+                                               Width="35"
+                                               Height="35"
                                                HorizontalAlignment="Left"/>
                                         <Image Source="{Binding CodeLevelImagePath}"
                                                Width="15"
                                                Height="15"
-                                               Margin="0,30,25,0"
+                                               Margin="0,-25,-15,0"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"/>
                                     </Grid>
@@ -68,7 +68,7 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Label Content="Название: "
-                                                   Foreground="White"
+                                                   Foreground="Gray"
                                                    FontSize="9"
                                                    Margin="0,0,0,0"
                                                    HorizontalAlignment="Left"
@@ -92,13 +92,13 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Label Content="Создано: "
-                                                   Foreground="White"
+                                                   Foreground="Gray"
                                                    FontSize="9"
                                                    Margin="0,0,0,0"
                                                    HorizontalAlignment="Left"
                                                    Grid.Column="0"/>
                                             <Label Content="{Binding DataBaseCreateDate}"
-                                                   Foreground="Gray"
+                                                   Foreground="White"
                                                    FontSize="9"
                                                    Margin="0,0,0,0"
                                                    HorizontalContentAlignment="Center"
@@ -116,13 +116,13 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Label Content="Последний вход: "
-                                                   Foreground="White"
+                                                   Foreground="Gray"
                                                    FontSize="9"
                                                    Margin="0,0,0,0"
                                                    HorizontalAlignment="Left"
                                                    Grid.Column="0"/>
                                             <Label Content="{Binding DataBaseLastOpenDate}"
-                                                   Foreground="Gray"
+                                                   Foreground="White"
                                                    FontSize="9"
                                                    Margin="0,0,0,0"
                                                    HorizontalContentAlignment="Center"

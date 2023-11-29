@@ -15,14 +15,6 @@ namespace Password_Manager.Core
 
         protected void OnPropertyChanged(string propName)
         {
-            if(PropertyChanged == null)
-            {
-                Debug.WriteLine("Prop is null");
-            }
-            else
-            {
-                Debug.WriteLine("Invoke");
-            }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
