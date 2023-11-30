@@ -51,13 +51,13 @@
                                HorizontalAlignment="left"
                                Foreground="Wheat"/>
                         <TextBox Height="35" 
-                                 Width="260" 
+                                 Width="260" Background="#353340"
                                  Margin="0,0,0,0" 
                                  Text="{Binding Name}"
                                  VerticalAlignment="Top" 
                                  HorizontalAlignment="Center" 
                                  BorderThickness="1" 
-                                 BorderBrush="#E0E0E0"
+                                 HorizontalContentAlignment="Center"
                                  Style="{StaticResource ModernFormField}"
                                  FontSize="17"/>
                     </StackPanel>

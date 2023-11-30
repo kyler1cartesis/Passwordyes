@@ -27,6 +27,7 @@
                 <ResourceDictionary Source="GuiSources/Styles/ButtonWithImage.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/RadioButtonWithImage.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/PasswordField.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/ModernTextArea.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
 

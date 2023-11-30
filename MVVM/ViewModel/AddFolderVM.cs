@@ -19,7 +19,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         private bool CanCreateFolder(object obj)
         {
-            return (Name != null);
+            return !string.IsNullOrEmpty(_name);
         }
 
         private void CreateFolder(object obj)

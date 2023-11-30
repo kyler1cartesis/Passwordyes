@@ -2,32 +2,35 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type TextBox}"
-           x:Key="ModernFormField">
-        
+           x:Key="ModernTextArea">
+
         <Setter Property="Template">
-        <Setter.Value>
-            <ControlTemplate TargetType="{x:Type TextBox}">
-                  <Border CornerRadius="10"
-                            Background="{TemplateBinding Background}"
-                            Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border CornerRadius="10"
+                        Background="{TemplateBinding Background}"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}">
 
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
                                      Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
                                      Background="Transparent"
-                                     Foreground="#CECECE"
+                                     Foreground="#CECECE" Cursor="{TemplateBinding Cursor}"
                                      BorderThickness="0"
-                                     VerticalContentAlignment="Center"
-                                     Cursor="{TemplateBinding Cursor}"
+                                     VerticalContentAlignment="Top"
                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                     Padding="5"/>
+                                     Padding="5"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"
+                                     VerticalScrollBarVisibility="Hidden"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>
-            </Setter.Value>
+        </Setter.Value>
         </Setter>
     </Style>
+
 
 </ResourceDictionary>

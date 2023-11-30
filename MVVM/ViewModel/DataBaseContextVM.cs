@@ -94,7 +94,7 @@ namespace Password_Manager.MVVM.ViewModel
             en1.Description = "test entry 1";
             en1.Url = "https://test1";
             en2.Name = "en2";
-            en2.Description = "test entry 2";
+            en2.Description = "test entry 2qweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqwe";
             en2.Url = "https://test2";
 
             f1.SubFiles.Add(f2);
