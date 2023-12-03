@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Password_Manager.Core;
@@ -13,72 +9,64 @@ using Password_Manager.MVVM.View;
 using Password_Manager.MVVM.View.ViewUtilities;
 using Unity;
 
-namespace Password_Manager.MVVM.ViewModel
-{
-    public class EntryDataVM : FilesEditForm
-    {
-        public ICommand DeleteEntryCommand { get; set; }
-        public ICommand ChangeEntry { get; set; }
-        public string Password { get; set; }
-		public string Description { get; set; }
-		public string URL { get; set; }
+namespace Password_Manager.MVVM.ViewModel;
 
-		public EntryDataVM() : base()
-        {
-			DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
-            ChangeEntry = new RelayCommand(ShowChangeEntryForm, CanShowChangeEntryForm);
-        }
+public class EntryDataVM : FilesEditForm {
+    public ICommand DeleteEntryCommand { get; set; }
+    public ICommand ChangeEntry { get; set; }
+    public string Password { get; set; }
+    public string Description { get; set; }
+    public string URL { get; set; }
 
-		private bool CanDeleteEntry(object obj)
-		{
-			return true;
-		}
+    public EntryDataVM () : base() {
+        DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
+        ChangeEntry = new RelayCommand(ShowChangeEntryForm, CanShowChangeEntryForm);
+    }
 
-		private void DeleteEntry(object obj)
-		{
-            var answer = MessageBoxManager.ShowMessageBox("Вы уверены, что хотите удалить запись: " + Name + " ?",
-                                             "удаление БД",
-                                             MessageBoxImage.Question);
+    private bool CanDeleteEntry (object obj) {
+        return true;
+    }
 
-            if (answer == MessageBoxResult.No) return;
+    private void DeleteEntry (object obj) {
+        var answer = MessageBoxManager.ShowMessageBox("Вы уверены, что хотите удалить запись: " + Name + " ?",
+                                         "удаление БД",
+                                         MessageBoxImage.Question);
 
-            //ModelAPI.RemoveFileByName(Name);
-            //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
+        if (answer == MessageBoxResult.No) return;
 
-            var subFiles = DBContext.CurrentSubFiles.Where((file) =>
-            {
-                return file is not EntryVM || file.Name != Name;
-            });
-			var subFilesWithoutCurrentEntry = new ObservableCollection<FileVM>(subFiles);
-			DBContext.CurrentSubFiles = subFilesWithoutCurrentEntry;
-			(DBContext.CurrentFile as FolderVM).SubFiles = subFilesWithoutCurrentEntry;
+        //ModelAPI.RemoveFileByName(Name);
+        //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
 
-			DBContext.ClosePage();
-		}
+        var subFiles = DBContext.CurrentSubFiles.Where((file) => {
+            return file is not EntryVM || file.Name != Name;
+        });
+        var subFilesWithoutCurrentEntry = new ObservableCollection<FileVM>(subFiles);
+        DBContext.CurrentSubFiles = subFilesWithoutCurrentEntry;
+        (DBContext.CurrentFile as FolderVM).SubFiles = subFilesWithoutCurrentEntry;
 
-        private bool CanShowChangeEntryForm(object obj)
-        {
-            return true;
-        }
+        DBContext.ClosePage();
+    }
 
-        private void ShowChangeEntryForm(object obj)
-        {
-            ChangeEntryView changeEntryView = new ChangeEntryView();
-            IUnityContainer container = ControlRegister.RegisterControl(changeEntryView);
+    private bool CanShowChangeEntryForm (object obj) {
+        return true;
+    }
 
-            ChangeEntryVM changeForm = new ChangeEntryVM();
-            changeForm.DBContext = DBContext;
+    private void ShowChangeEntryForm (object obj) {
+        ChangeEntryView changeEntryView = new ChangeEntryView();
+        IUnityContainer container = ControlRegister.RegisterControl(changeEntryView);
 
-            changeForm.EntryData = (EntryDataView)DBContext.CurrentView;
-            changeForm.Name = Name;
-            changeForm.Description = Description;
-            changeForm.URL = URL;
-            changeForm.OldName = Name;
-            changeForm.Container = container;
-            changeEntryView.DataContext = changeForm;
+        ChangeEntryVM changeForm = new ChangeEntryVM();
+        changeForm.DBContext = DBContext;
 
-            DBContext.CurrentView = changeEntryView;
+        changeForm.EntryData = (EntryDataView) DBContext.CurrentView;
+        changeForm.Name = Name;
+        changeForm.Description = Description;
+        changeForm.URL = URL;
+        changeForm.OldName = Name;
+        changeForm.Container = container;
+        changeEntryView.DataContext = changeForm;
 
-        }
+        DBContext.CurrentView = changeEntryView;
+
     }
 }

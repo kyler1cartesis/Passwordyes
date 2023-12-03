@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
-namespace Password_Manager.Core
-{
-    public class ObservableObject : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler? PropertyChanged;
+namespace Password_Manager.Core;
 
-        protected void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
+public class ObservableObject : INotifyPropertyChanged {
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected void OnPropertyChanged (string propName) {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
     }
 }
