@@ -53,7 +53,7 @@
                         <TextBox Height="35" 
                                  Width="260" Background="#353340"
                                  Margin="0,0,0,0" 
-                                 Text="{Binding Name}"
+                                 Text="{Binding Name, Mode=OneWayToSource}"
                                  VerticalAlignment="Top" 
                                  HorizontalAlignment="Center" 
                                  BorderThickness="1" 
