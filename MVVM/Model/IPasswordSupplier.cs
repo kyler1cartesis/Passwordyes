@@ -10,5 +10,6 @@ namespace Password_Manager.MVVM.Model
     {
         string GetPassword();
         string GetPasswordConfirm();
+        void SetPassword(string password);
     }
 }

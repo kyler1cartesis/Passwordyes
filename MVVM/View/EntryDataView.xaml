@@ -63,27 +63,16 @@
                            VerticalAlignment="Top" 
                            HorizontalAlignment="left"
                            Foreground="Wheat"/>
-                        <!--PASSWORD BOX-->
-                        <Border CornerRadius="10"
-                            Background="#474551"
-                            Width="400"
-                            Height="35"
-                             HorizontalAlignment="Left">
-
-                            <Grid>
-                                <Rectangle StrokeThickness="1"/>
-
-                                <PasswordBox Margin="1"
-                                         x:Name="firstBox"
-                                         Background="Transparent"
-                                         Foreground="#CECECE"
-                                         BorderThickness="0"
-                                         VerticalContentAlignment="Center"
-                                         HorizontalContentAlignment="Left"
-                                         Padding="5"
-                                         FontSize="17"/>
-                            </Grid>
-                        </Border>
+                        <TextBox Height="35" 
+                                 Width="400" Background="#474551"
+                                 Margin="0,0,0,0" 
+                                 Text="{Binding Password}"
+                                 VerticalAlignment="Top" 
+                                 HorizontalAlignment="Left" 
+                                 BorderThickness="1" 
+                                 Style="{StaticResource ModernFormField}"
+                                 FontSize="17" IsReadOnly="True" Cursor="Arrow"
+                                 HorizontalContentAlignment="Left"/>
                     </StackPanel>
                     <StackPanel Margin="30,0,0,0"
                             Grid.Row="2"

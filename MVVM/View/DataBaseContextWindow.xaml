@@ -84,33 +84,83 @@
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button Height="30" 
-                        Command="{Binding GoToUpFolder}"
-                        Width="90"
-                        VerticalContentAlignment="Center" 
-                        Padding="5" 
-                        Margin="0,5,10,0" 
-                        VerticalAlignment="Top" 
-                        HorizontalAlignment="Left" 
-                        BorderThickness="1" 
-                        BorderBrush="#413f54"
-                        Focusable="False"
-                        Content="Назад"
-                        Grid.Row="0"/>
-                <Label Content="{Binding CurrentFile.Name}"
-                       Width="90"
-                       Height="30"
-                       Padding="5" 
-                       Margin="0,0,10,5"
-                       Opacity="50"
-                       VerticalContentAlignment="Top"
-                       HorizontalAlignment="Right"
-                       Foreground="White"
-                       FontSize="14">
-                    
-                </Label>
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="0">
+                    <Button Height="30" 
+                            Command="{Binding GoToUpFolder}"
+                            Width="30"
+                            VerticalContentAlignment="Center" 
+                            Padding="5" 
+                            Margin="0,5,10,0" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left" 
+                            BorderThickness="1" 
+                            BorderBrush="#413f54"
+                            Focusable="False"
+                            Content=""
+                            Grid.Row="0"/>
+                    <Button Height="30" 
+                            
+                            Width="30"
+                            VerticalContentAlignment="Center" 
+                            Padding="5" 
+                            Margin="0,5,10,0" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left" 
+                            BorderThickness="1" 
+                            BorderBrush="#413f54"
+                            Focusable="False"
+                            Content=""
+                            Grid.Row="0"/>
+                    <Button Height="30" 
+                            
+                            Width="30"
+                            VerticalContentAlignment="Center" 
+                            Padding="5" 
+                            Margin="0,5,10,0" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left" 
+                            BorderThickness="1" 
+                            BorderBrush="#413f54"
+                            Focusable="False"
+                            Content=""
+                            Grid.Row="0"/>
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Background="Transparent"
+                            Height="60"
+                            Width="150"
+                            CornerRadius="5"
+                            Margin="3,3,3,3">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10,0,0,0">
+
+                            <Image Source="pack://siteoforigin:,,,/GuiSources/Images/folder.png"
+                                    Margin="0,0,0,0"
+                                    Width="33"
+                                    Height="33"
+                                    HorizontalAlignment="Left"/>
+
+                            <Label Content="{Binding CurrentFile.Name}"
+                                    Foreground="White"
+                                    FontSize="14"
+                                    Margin="0,0,0,0">
+                            </Label>
+
+                        </StackPanel>
+
+                    </Border>
+                </Grid>
+                
                 <ListView Name="UserList" 
                           ItemsSource="{Binding CurrentSubFiles}" 
                           Margin="5,5,5,5" 
@@ -121,7 +171,7 @@
                           ItemContainerStyle="{StaticResource FolderCard}"
                           BorderBrush="Transparent"
                           BorderThickness="5"
-                          Grid.Row="1">
+                          Grid.Row="2">
 
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>

@@ -44,11 +44,11 @@
                                VerticalAlignment="Top" 
                                HorizontalAlignment="left"
                                Foreground="Wheat"/>
-                        <TextBox Height="35"  Focusable="False"
+                        <TextBox Height="35" 
                                 
                                 Width="400" Background="#353340"
                                 Margin="0,0,0,0" 
-                                Text="{Binding Name}"
+                                Text="{Binding Name, Mode=OneWayToSource}"
                                 VerticalAlignment="Top" 
                                 HorizontalAlignment="Left" 
                                 BorderThickness="1" 
@@ -82,7 +82,7 @@
                             BorderBrush="#E0E0E0" 
                             Style="{StaticResource ButtonWithImage}"
                             local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/CANCEL_V2.png"/>
-                            <Button Height="35" Focusable="False"
+                            <Button Height="35"
                         Command="{Binding CreateFolderCommand}" 
                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                         Content="Подтвердить" 

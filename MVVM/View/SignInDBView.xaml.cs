@@ -35,5 +35,10 @@ namespace Password_Manager.MVVM.View
         {
             return passwordBox.Password;
         }
+
+        public void SetPassword(string password)
+        {
+            return;
+        }
     }
 }

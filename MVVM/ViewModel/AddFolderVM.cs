@@ -14,13 +14,10 @@ namespace Password_Manager.MVVM.ViewModel
         public ICommand CreateFolderCommand { get; set; }
         public AddFolderVM() : base()
         {
-            CreateFolderCommand = new RelayCommand(CreateFolder, CanCreateFolder);
+            CreateFolderCommand = new RelayCommand(CreateFolder);
         }
 
-        private bool CanCreateFolder(object obj)
-        {
-            return !string.IsNullOrEmpty(_name);
-        }
+    
 
         private void CreateFolder(object obj)
         {

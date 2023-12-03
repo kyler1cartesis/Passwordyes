@@ -17,26 +17,29 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
-                    <Grid>
+                    <Grid Margin="10,0,0,0">
 
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
                         <Border Background="{TemplateBinding Background}"
-                                Height="70"
-                                Width="70"
+                                Height="45"
+                                Width="130"
                                 CornerRadius="5"
-                                Margin="5,5,5,5">
+                                Margin="0,5,5,5"
+                                Grid.Column="2">
 
-                            <StackPanel Orientation="Vertical"
-                                        Margin="10,0,0,0">
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="5,0,0,0"
+                                        VerticalAlignment="Center">
 
                                 <Image Source="{Binding ImagePath}"
-                                       Margin="0,5,0,0"
-                                       Width="30"
-                                       Height="30"
+                                       Margin="0,0,10,0"
+                                       Width="33"
+                                       Height="33"
                                        HorizontalAlignment="Left"/>
 
                                 <Label Content="{Binding Name}"
@@ -48,6 +51,23 @@
                             </StackPanel>
 
                         </Border>
+                        <Line X1="0" X2="30"
+                              Y1="25" Y2="25"
+                              Stroke="Yellow"
+                              StrokeThickness="3"
+                              Margin="0,0,0,0"
+                              Grid.Column="1">
+
+                        </Line>
+                        <Line X1="0" X2="0"
+                              Y1="0" Y2="25"
+                              Stroke="Yellow"
+                              StrokeThickness="3"
+                              Margin="0,0,0,0"
+                              Grid.Column="0">
+
+                        </Line>
+
                         <Grid.InputBindings>
                             <MouseBinding 
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListView}}, Path=DataContext.SelectFile}" 

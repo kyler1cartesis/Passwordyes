@@ -58,7 +58,7 @@
                         Grid.Row="1"
                         Width="480"
                             HorizontalAlignment="Left">
-                        <Label Content="Пароль" 
+                        <Label Content="Новый пароль" 
                        VerticalAlignment="Top" 
                        HorizontalAlignment="left"
                        Foreground="Wheat"/>
@@ -73,7 +73,7 @@
                                 <Rectangle StrokeThickness="1"/>
 
                                 <PasswordBox Margin="1"
-                                     x:Name="firstBox"
+                                     x:Name="passwordBox"
                                      Background="Transparent"
                                      Foreground="#CECECE"
                                      BorderThickness="0"
@@ -138,7 +138,7 @@
                         <StackPanel Width="400"
                                 Orientation="Horizontal">
                             <Button Height="35"
-                                Command="{Binding CloseFormCommand}" 
+                                Command="{Binding CancelEditCommand}" 
                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                                 Content="Отмена"
                                 Grid.Column="0"

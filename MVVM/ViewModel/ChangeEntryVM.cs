@@ -7,38 +7,47 @@ using Password_Manager.Core;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using Password_Manager.MVVM.Model;
+using Password_Manager.MVVM.View;
+using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
     public class ChangeEntryVM : FilesEditForm
     {
+        private IUnityContainer _container;
+        public IUnityContainer Container
+        {
+            set => _container = value;
+        }
+        public EntryDataView EntryData { get; set; }
         public ICommand ChangeEntryCommand { get; set; }
-        public string Password { get; set; }
+        public ICommand CancelEditCommand { get; set; }
+        public string Password
+        {
+            get
+            {
+                IPasswordSupplier supl = _container.Resolve<IPasswordSupplier>();
+                return supl.GetPassword();
+            }
+        }
         public string Description { get; set; }
         public string URL { get; set; }
         public string OldName {  get; set; }
 
         public ChangeEntryVM() : base()
         {
-            ChangeEntryCommand = new RelayCommand(ChangeEntry, CanChangeEntry);
+            ChangeEntryCommand = new RelayCommand(ChangeEntry);
+            CancelEditCommand = new RelayCommand(CancelEdit);
         }
 
-        private bool CanChangeEntry(object obj)
+        private void ChangeEntry(object obj)
         {
             //ModelAPI.ValidateEntryPassword(Password);
             //ModelAPI.ValidateEntryDescription(Description);
             //ModelAPI.ValidateFileName(Name);
             //ModelAPI.VaildateEntruURL(URL);
-            if ((Password == null) || (Description == null) || (URL == null) || (Name == null))
-            {
-                return false;
-            }
-            else
-                return true;
-        }
 
-        private void ChangeEntry(object obj)
-        {
+
             //ModelAPI.ChangeEntry(OldName, Name, Description, URL, Password);
             //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
 
@@ -61,6 +70,11 @@ namespace Password_Manager.MVVM.ViewModel
             currentFolder.SubFiles = subFilesWithoutCurrentEntry;
 
             DBContext.ClosePage();
+        }
+
+        private void CancelEdit(object obj)
+        {
+            DBContext.CurrentView = EntryData;
         }
     }
 }

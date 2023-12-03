@@ -19,7 +19,7 @@ namespace Password_Manager.MVVM.ViewModel
             set 
             { 
                 _name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             } 
         }
         public DateTime CreateDate { get; set; }

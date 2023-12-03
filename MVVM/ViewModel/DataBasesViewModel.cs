@@ -99,7 +99,7 @@ namespace Password_Manager.MVVM.ViewModel
         private void ShowAddDBForm(object obj)
         {
             AddDBView addDBView = new AddDBView();
-            var container = RegisterControl(addDBView);
+            var container = ControlRegister.RegisterControl(addDBView);
             AddDBVM addDBVM = new AddDBVM(_mainVM, container);
 
             addDBView.DataContext = addDBVM;
@@ -109,20 +109,12 @@ namespace Password_Manager.MVVM.ViewModel
         private void ShowSignInDBForm(object obj)
         {
             SignInDBView signInDBView = new SignInDBView();
-            var container = RegisterControl(signInDBView);
+            var container = ControlRegister.RegisterControl(signInDBView);
             SignInDBVM signInDBVM = new SignInDBVM(SelectedDB, _mainVM, container);
 
             signInDBView.DataContext = signInDBVM;
             _mainVM.CurrentView = signInDBView;
         }
-
-        private IUnityContainer RegisterControl<T>(T control) where T : IPasswordSupplier
-        {
-            IUnityContainer container = new UnityContainer();
-            container.RegisterInstance<IPasswordSupplier>(control);
-            return container;
-        }
-
 
         public void AddDBD(DBDescriptionVM dBDescription)
         {

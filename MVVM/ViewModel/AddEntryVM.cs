@@ -7,38 +7,37 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
+using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
     public class AddEntryVM : FilesEditForm
     {
+        private IUnityContainer _container;
+        public IUnityContainer Container
+        {
+            set { _container = value; }
+        }
         public ICommand CreateEntryCommand { get; set; }
-        public Tuple<string, string> Password { get; set; }
+        public string Password
+        {
+            get
+            {
+                IPasswordSupplier supplier = _container.Resolve<IPasswordSupplier>();
+                return supplier.GetPassword();
+            }
+        }
         public string Description { get; set; }
         public string URL { get; set; }
 
         public AddEntryVM() : base()
         {
-            CreateEntryCommand = new RelayCommand(CreateEntry, CanCreateEntry);
-        }
-
-        private bool CanCreateEntry(object obj)
-        {
-            //ModelAPI.ValidateEntryPassword(Password);
-            //ModelAPI.ValidateEntryDescription(Description);
-            //ModelAPI.ValidateFileName(Name);
-            //ModelAPI.VaildateEntruURL(URL);
-            if ((Password == null) || (Description == null) || (URL == null) || (Name == null))
-            {
-                return false;
-            }
-            else
-                return true;
+            CreateEntryCommand = new RelayCommand(CreateEntry);
         }
 
         private void CreateEntry(object obj)
         {
-            //ModelAPI.CreateNewEntry(Name, Description, URL, Password.Item1
+            //ModelAPI.CreateNewEntry(Name, Description, URL, Password)
             //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
 
             FolderVM currentFolder = DBContext.CurrentFile as FolderVM;

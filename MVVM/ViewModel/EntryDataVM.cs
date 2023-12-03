@@ -11,6 +11,7 @@ using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
 using Password_Manager.MVVM.View.ViewUtilities;
+using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
@@ -62,15 +63,22 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ShowChangeEntryForm(object obj)
         {
+            ChangeEntryView changeEntryView = new ChangeEntryView();
+            IUnityContainer container = ControlRegister.RegisterControl(changeEntryView);
+
             ChangeEntryVM changeForm = new ChangeEntryVM();
             changeForm.DBContext = DBContext;
-            
+
+            changeForm.EntryData = (EntryDataView)DBContext.CurrentView;
             changeForm.Name = Name;
             changeForm.Description = Description;
             changeForm.URL = URL;
             changeForm.OldName = Name;
+            changeForm.Container = container;
+            changeEntryView.DataContext = changeForm;
 
-            DBContext.CurrentView = new ChangeEntryView(changeForm);
+            DBContext.CurrentView = changeEntryView;
+
         }
     }
 }

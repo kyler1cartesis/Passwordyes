@@ -10,6 +10,7 @@ using System.Windows.Input;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
+using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
@@ -94,7 +95,7 @@ namespace Password_Manager.MVVM.ViewModel
             en1.Description = "test entry 1";
             en1.Url = "https://test1";
             en2.Name = "en2";
-            en2.Description = "test entry 2qweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqweqweqweqweqweqweqweqweqwqweqwe";
+            en2.Description = "test entry 2";
             en2.Url = "https://test2";
 
             f1.SubFiles.Add(f2);
@@ -170,9 +171,15 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ShowCreateEntryForm(object obj)
         {
+            AddEntryView addEntryView = new AddEntryView();
+            IUnityContainer container = ControlRegister.RegisterControl(addEntryView);
+
             AddEntryVM createForm = new AddEntryVM();
             createForm.DBContext = this;
-            CurrentView = new AddEntryView(createForm);
+            createForm.Container = container;
+
+            addEntryView.DataContext = createForm;
+            CurrentView = addEntryView;
         }
         private bool CanShowCreateFolderForm(object obj)
         {
