@@ -24,7 +24,7 @@
                                     Grid.Column="0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
-                                    Margin="8,0,0,0">
+                                    Margin="3">
 
                             </Image>
                                 <TextBlock Text="{TemplateBinding Property=Content}"
@@ -62,6 +62,7 @@
 
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Focusable" Value="False"/>
         </Style.Setters>
         <Style.Triggers>
 

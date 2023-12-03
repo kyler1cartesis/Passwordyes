@@ -59,50 +59,9 @@ namespace Password_Manager.MVVM.Model
             throw new NotImplementedException();
         }
 
-        //Выходит из БД и завершает сессию
+        //Выходит из БД и завершает сессию UPD : Думаю просто один раз считать из json'а всю стуктуру и передать во VM, всю логику проще будет написать там,
+        //так ка VM слишком прирос в этом смысле к логике
         public static void Exit()
-        {
-            throw new NotImplementedException();
-        }
-
-        //Подняться в родительскую директорию текщуей директории
-        public static void ClimbUp()
-        {
-            throw new NotImplementedException();
-        }
-
-        //Спуститься в дочернюю директорию текущей папки
-        public static void GoIntoTheFolder(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Удалить файл из текущей директории по имени
-        public static void RemoveFileByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Вернуть актуальный список файлов в текущей директории
-        public static ObservableCollection<FileVM> UpdateFileList()
-        {
-            throw new NotImplementedException();
-        }
-
-        //Создать в текущей директории новыую папку
-        public static void CreatNewFolder(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Создаёт новую запись в текущей директории
-        public static void CreateNewEntry(string name, string description, string uRL, string item1)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Изменяет запись в текущей директории
-        public static void ChangeEntry(string oldName, string name, string description, string uRL, string password)
         {
             throw new NotImplementedException();
         }
