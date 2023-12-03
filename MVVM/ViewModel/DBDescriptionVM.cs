@@ -16,15 +16,15 @@ public class DBDescriptionVM {
                 CodeLevel.LOW => LowLevelImagePath,
                 CodeLevel.MID => MidLevelImagePath,
                 CodeLevel.HIGH => HighLevelImagePath,
-                _ => "",
+                _ => throw new NotImplementedException(),
             };
         }
     }
-    public string Name { get; set; }
-    public string Status { get; set; }
-    public DateTime DataBaseLastOpenDate { get; set; }
-    public DateTime DataBaseCreateDate { get; set; }
-    public CodeLevel Level { get; set; }
+    public string Name { get; init; }
+    public string Status { get; init; } // что?
+    public DateTime DataBaseLastOpenDate { get; init; }
+    public DateTime DataBaseCreateDate { get; init; }
+    public CodeLevel Level { get; init; } // зачем?
 
     public DBDescriptionVM (string dataBaseName, DateTime dataBaseCreateDate, CodeLevel level) {
         Name = dataBaseName;

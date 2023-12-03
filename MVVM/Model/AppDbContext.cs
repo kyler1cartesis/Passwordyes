@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Password_Manager.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Security.Policy;
 using System.Text.Json;
@@ -7,8 +9,9 @@ using System.Windows;
 
 namespace Password_Manager.MVVM.Model;
 
-public class AppDbContext {
-    private DbContext dbContext;
+internal class AppDbContext {
+    private DBDescriptionVM? selectedDBD;
+    //private DbContext dbContext;
     private Hash? masterKey;
     private Hash? publicKey;
     private List<Credentials>? authorizationEntries;
@@ -39,6 +42,19 @@ public class AppDbContext {
             return false;
         authorizationEntries.Add(new Credentials(login, password, domain, desription));
         return true;
+    }
+
+    internal ObservableCollection<DBDescriptionVM> GetDbDescriptions () {
+        string[] fileNames = DbManager.GetDbFileNames();
+        ObservableCollection<DBDescriptionVM> DbDescriptions = new();
+        for (int i = 0; i < fileNames.Length; i++)
+            DbDescriptions.Add(new DBDescriptionVM() {
+                Name = Path.GetFileNameWithoutExtension(fileNames[i]),
+                DataBaseLastOpenDate = File.GetLastWriteTime(fileNames[i]),
+                DataBaseCreateDate = File.GetCreationTime(fileNames[i]),
+                Level = CodeLevel.HIGH
+            });
+        return DbDescriptions;
     }
 
     internal void Close () {

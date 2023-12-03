@@ -29,31 +29,24 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Password_Manager.MVVM.Model.StaticHasher">
-    <Position X="4" Y="7.25" Width="1.75" />
+    <Position X="3.75" Y="6.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAACAAAAAIAAAQA=</HashCode>
-      <FileName>MVVM\Model\Static Helpers\Hasher.cs</FileName>
+      <FileName>MVVM\Model\Static Helpers\StaticHasher.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Password_Manager.MVVM.Model.StaticValidator">
-    <Position X="6.5" Y="7.25" Width="1.75" />
+    <Position X="5.75" Y="6.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
-      <FileName>MVVM\Model\Static Helpers\Validator.cs</FileName>
+      <FileName>MVVM\Model\Static Helpers\StaticValidator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Password_Manager.MVVM.Model.Folder">
-    <Position X="16" Y="4.5" Width="1.5" />
+    <Position X="15.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>MVVM\Model\Folder.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Password_Manager.MVVM.Model.File">
-    <Position X="16" Y="1.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAAACAAQAAAACAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MVVM\Model\File.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Password_Manager.MVVM.Model.View">
@@ -66,7 +59,7 @@
   <Class Name="Password_Manager.MVVM.Model.DbManager">
     <Position X="12.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACBAAAAAAAAQAAAAAABAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <HashCode>AAAACBAAAAAAAAQAAAAAABAAgAAAAAAAAAAAACAAAAA=</HashCode>
       <FileName>MVVM\Model\DbManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -78,18 +71,11 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Password_Manager.MVVM.Model.ClipBoard">
-    <Position X="9" Y="7.25" Width="1.5" />
+  <Class Name="Password_Manager.MVVM.Model.StaticClipBoard">
+    <Position X="7.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MVVM\Model\Static Helpers\ClipBoard.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Password_Manager.MVVM.Model.DBDescription">
-    <Position X="12.5" Y="5.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAAAAAAAAAAABAAIAAAAAABAAAAAAAAA=</HashCode>
-      <FileName>MVVM\Model\DBDescription.cs</FileName>
+      <FileName>MVVM\Model\Static Helpers\StaticClipBoard.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

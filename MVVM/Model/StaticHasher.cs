@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Isopoh.Cryptography.Argon2;
+using System;
 using System.Security.Policy;
 
 namespace Password_Manager.MVVM.Model;
 
 public static class StaticHasher {
-    public static Hash GetHash (string input) {
+    public static Isopoh.Cryptography.SecureArray.SecureArray<byte> GetHash (string input) {
+        var hasher = new Argon2(new Argon2Config());
+        return hasher.Hash();
         throw new NotImplementedException();
     }
 
