@@ -27,7 +27,7 @@
 
                         <Border Background="{TemplateBinding Background}"
                                 Height="45"
-                                Width="130"
+                                Width="125"
                                 CornerRadius="5"
                                 Margin="0,5,5,5"
                                 Grid.Column="2">
@@ -51,17 +51,17 @@
                             </StackPanel>
 
                         </Border>
-                        <Line X1="0" X2="30"
-                              Y1="25" Y2="25"
-                              Stroke="Yellow"
+                        <Line X1="0" X2="17"
+                              Y1="35" Y2="35"
+                              Stroke="#5F5AA2"
                               StrokeThickness="3"
                               Margin="0,0,0,0"
                               Grid.Column="1">
 
                         </Line>
-                        <Line X1="0" X2="0"
-                              Y1="0" Y2="25"
-                              Stroke="Yellow"
+                        <Line X1="18" X2="18"
+                              Y1="0" Y2="70"
+                              Stroke="#5F5AA2"
                               StrokeThickness="3"
                               Margin="0,0,0,0"
                               Grid.Column="0">

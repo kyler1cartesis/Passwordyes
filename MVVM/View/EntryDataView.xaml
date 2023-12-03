@@ -168,7 +168,7 @@
                                 BorderThickness="1" 
                                 BorderBrush="#E0E0E0" 
                                 Style="{StaticResource ButtonWithImage}"
-                                local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/OK.png"/>
+                                local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/edit_entry.png"/>
                         </StackPanel>
                     </Grid>
                 </Grid>

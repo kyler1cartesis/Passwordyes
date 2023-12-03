@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:local="clr-namespace:Password_Manager.MVVM.View"
+        xmlns:local="clr-namespace:Password_Manager.MVVM.View.ViewUtilities"
         xmlns:viewmodel="clr-namespace:Password_Manager.MVVM.ViewModel"
         mc:Ignorable="d"
         x:Name="DBContextWindow"
@@ -34,45 +34,67 @@
 
             <TextBlock Text="{Binding DbName}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Margin="20,0,0,0"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,0"
                        Foreground="FloralWhite"
                        FontSize="22"/>
 
             <StackPanel Grid.Column="1"
                         Grid.Row="0"
                         Orientation="Horizontal">
-                <Button Height="30"  
+                <Grid>
+                    <Button Height="35"  
                         Command="{Binding NewEntry}"
-                        Content="New Entry" 
-                        Width="100"  
+                        Content="Новая запись" 
+                        Width="135"  
                         VerticalContentAlignment="Center" 
-                        Padding="5" Margin="10,10,10,20"
+                        Padding="0" Margin="10,10,10,20"
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Right" 
                         BorderThickness="1" 
-                        BorderBrush="#E0E0E0" />
-                <Button Height="30"  
-                        Content="New Folder" 
+                        BorderBrush="#E0E0E0"
+                        Style="{StaticResource ButtonWithImage}"
+                        local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/notes.png"/>
+                    <Image Source="pack://siteoforigin:,,,/GuiSources/Images/add_file.png"
+                           Width="15"
+                           Height="15"
+                           Margin="22,35,113,15">
+                        
+                    </Image>
+                </Grid>
+                <Grid>
+                    <Button Height="35"  
+                        Content="Новый каталог" 
                         Command="{Binding NewFolder}"
-                        Width="100"  
+                        Width="135"  
                         VerticalContentAlignment="Center" 
                         Padding="5" Margin="10,10,10,20"
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Right" 
                         BorderThickness="1" 
-                        BorderBrush="#E0E0E0" />
-                <Button Height="30"  
-                        Content="Exit" 
+                        BorderBrush="#E0E0E0"
+                        Style="{StaticResource ButtonWithImage}"
+                        local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/folder.png"/>
+                    <Image Source="pack://siteoforigin:,,,/GuiSources/Images/add_file.png"
+                           Width="15"
+                           Height="15"
+                           Margin="28,35,107,15">
+
+                    </Image>
+                </Grid>
+                <Button Height="35"  
+                        Content="Выйти" 
                         Command="{Binding ExitDB}"
                         CommandParameter="{Binding ElementName=DBContextWindow}"
-                        Width="100"  
+                        Width="110"  
                         VerticalContentAlignment="Center" 
-                        Padding="5" Margin="330,10,10,20"
+                        Padding="5" Margin="250,10,10,20"
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Left" 
                         BorderThickness="1" 
-                        BorderBrush="#E0E0E0" />
+                        BorderBrush="#E0E0E0"
+                        Style="{StaticResource ButtonWithImage}"
+                        local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/enter (2).png"/>
             </StackPanel>
             
             <Rectangle Grid.Column="0"
@@ -81,7 +103,8 @@
                Fill="Transparent"
                StrokeThickness="3"/>
             
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1"
+                  Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="60"/>
@@ -93,77 +116,54 @@
                             Command="{Binding GoToUpFolder}"
                             Width="30"
                             VerticalContentAlignment="Center" 
-                            Padding="5" 
-                            Margin="0,5,10,0" 
+                            Padding="-5" 
+                            Margin="15,10,5,0" 
                             VerticalAlignment="Top" 
                             HorizontalAlignment="Left" 
                             BorderThickness="1" 
                             BorderBrush="#413f54"
                             Focusable="False"
                             Content=""
-                            Grid.Row="0"/>
+                            Grid.Row="0"
+                            Style="{StaticResource ButtonWithImage}"
+                            local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/climb_up.png"/>
                     <Button Height="30" 
-                            
+                            IsEnabled="False"
                             Width="30"
                             VerticalContentAlignment="Center" 
                             Padding="5" 
-                            Margin="0,5,10,0" 
+                            Margin="5,10,5,0" 
                             VerticalAlignment="Top" 
                             HorizontalAlignment="Left" 
                             BorderThickness="1" 
                             BorderBrush="#413f54"
                             Focusable="False"
                             Content=""
-                            Grid.Row="0"/>
+                            Grid.Row="0"
+                            Style="{StaticResource ButtonWithImage}"
+                            local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/edit_folder.png"/>
                     <Button Height="30" 
-                            
+                            IsEnabled="False"
                             Width="30"
                             VerticalContentAlignment="Center" 
                             Padding="5" 
-                            Margin="0,5,10,0" 
+                            Margin="5,10,5,0" 
                             VerticalAlignment="Top" 
                             HorizontalAlignment="Left" 
                             BorderThickness="1" 
                             BorderBrush="#413f54"
                             Focusable="False"
                             Content=""
-                            Grid.Row="0"/>
+                            Grid.Row="0"
+                            Style="{StaticResource ButtonWithImage}"
+                            local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/delete_folder.png"/>
                 </StackPanel>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Border Background="Transparent"
-                            Height="60"
-                            Width="150"
-                            CornerRadius="5"
-                            Margin="3,3,3,3">
-
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="10,0,0,0">
-
-                            <Image Source="pack://siteoforigin:,,,/GuiSources/Images/folder.png"
-                                    Margin="0,0,0,0"
-                                    Width="33"
-                                    Height="33"
-                                    HorizontalAlignment="Left"/>
-
-                            <Label Content="{Binding CurrentFile.Name}"
-                                    Foreground="White"
-                                    FontSize="14"
-                                    Margin="0,0,0,0">
-                            </Label>
-
-                        </StackPanel>
-
-                    </Border>
-                </Grid>
+               
                 
                 <ListView Name="UserList" 
                           ItemsSource="{Binding CurrentSubFiles}" 
-                          Margin="5,5,5,5" 
+                          Margin="5,0,5,5" 
                           Padding="0"
                           Background="#413f54"
                           Foreground="Cornsilk"
@@ -171,7 +171,9 @@
                           ItemContainerStyle="{StaticResource FolderCard}"
                           BorderBrush="Transparent"
                           BorderThickness="5"
-                          Grid.Row="2">
+                          Grid.Row="2"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
 
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -180,15 +182,54 @@
                     </ListView.ItemsPanel>
                 </ListView>
 
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Background="#5F5AA2"
+                            Height="45"
+                            Width="125"
+                            CornerRadius="5"
+                            Margin="13,3,3,3"
+                            Grid.Row="0"
+                            HorizontalAlignment="Left">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10,0,0,0">
+
+                            <Image Source="pack://siteoforigin:,,,/GuiSources/Images/folder.png"
+                                   Margin="0,0,0,0"
+                                   Width="33"
+                                   Height="33"
+                                   HorizontalAlignment="Left"/>
+
+                            <Label Content="{Binding CurrentFile.Name}"
+                                   Foreground="White"
+                                   FontSize="14"
+                                   Margin="0,0,0,0">
+                            </Label>
+
+                        </StackPanel>
+
+                    </Border>
+                </Grid>
             </Grid>
-            
-             
 
             <!--Место для отображения основаных данных-->
             <ContentControl Margin="10"
                             Grid.Column="1"
                             Grid.Row="1"
                             Content="{Binding CurrentView}"/>
+            <Line X1="39" X2="39"
+                  Y1="89" Y2="130"
+                  Stroke="#5F5AA2"
+                  StrokeThickness="3"
+                  Margin="0,0,0,0"
+                  Grid.Row="1">
+            </Line>
         </Grid>
 
     </Border>
