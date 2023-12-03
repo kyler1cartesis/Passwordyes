@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Password_Manager;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application
-{
-    private global::System.Int32 view;
-    private global::System.Int32 controller;
-    private global::System.Int32 mainWindow;
+public partial class App : Application {
+    private int view;
+    private int controller;
+    private int mainWindow;
 
-    public void main()
-    {
+    public void main () {
         throw new System.NotImplementedException();
     }
 }

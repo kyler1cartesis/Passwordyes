@@ -1,69 +1,56 @@
 ﻿using System;
 
 namespace Password_Manager.MVVM.Model;
-public class Controller
-{
+public class Controller {
     private View view;
     private MainWindow mainWindow;
     private AppDbContext appDbContext;
 
-    public void OnOpenDbList()
-    {
+    public void OnOpenDbList () {
         throw new NotImplementedException();
     }
 
-    public void OnNewDb()
-    {
+    public void OnNewDb () {
         throw new NotImplementedException();
     }
 
-    public void OnDataSend()
-    {
+    public void OnDataSend () {
         throw new NotImplementedException();
     }
 
-    public void OnDbCreate()
-    {
+    public void OnDbCreate () {
         throw new NotImplementedException();
     }
 
-    public void OnDbSelect()
-    {
+    public void OnDbSelect () {
         throw new NotImplementedException();
     }
 
-    public void OnMPW_Entered()
-    {
+    public void OnMPW_Entered () {
         throw new NotImplementedException();
     }
 
-    public void OnSearchFieldUpdate(string search)
-    {
+    public void OnSearchFieldUpdate (string search) {
         throw new NotImplementedException();
     }
 
-    private void SearchEntries()
-    {
+    private void SearchEntries () {
         throw new NotImplementedException();
     }
 
-    public void CreateEntry()
-    {
+    public void CreateEntry () {
         throw new NotImplementedException();
     }
 
-    private bool ValidateEntry()
-    {
+    private bool ValidateEntry () {
         throw new NotImplementedException();
     }
 
-    public void OnExit()
-    {
+    public void OnExit () {
         throw new NotImplementedException();
     }
 
-    public void OnURLClick()
-    {
+    public void OnURLClick () {
         throw new NotImplementedException();
     }
 }

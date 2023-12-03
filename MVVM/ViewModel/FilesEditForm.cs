@@ -1,32 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Password_Manager.Core;
+﻿using Password_Manager.Core;
 
-namespace Password_Manager.MVVM.ViewModel
-{
-    public class FilesEditForm : ObservableObject
-    {
-        public RelayCommand CloseFormCommand { get; set; }
-        public DataBaseContextVM DBContext { get; set; }
+namespace Password_Manager.MVVM.ViewModel;
 
-        protected string _name;
-        public string Name
-        {
-            get => _name;
-            set { _name = value; OnPropertyChanged(nameof(Name)); }
-        }
+public class FilesEditForm : ObservableObject {
+    public RelayCommand CloseFormCommand { get; set; }
+    public DataBaseContextVM DBContext { get; set; }
 
-        public FilesEditForm() 
-        { 
-            CloseFormCommand = new RelayCommand(CloseForm);
-        }
+    protected string _name;
+    public string Name {
+        get => _name;
+        set { _name = value; OnPropertyChanged(nameof(Name)); }
+    }
 
-        private void CloseForm(object obj)
-        {
-            DBContext.ClosePage();
-        }
+    public FilesEditForm () {
+        CloseFormCommand = new RelayCommand(CloseForm);
+    }
+
+    private void CloseForm (object obj) {
+        DBContext.ClosePage();
     }
 }
