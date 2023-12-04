@@ -1,184 +1,247 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
 using Unity;
 
-namespace Password_Manager.MVVM.ViewModel;
+namespace Password_Manager.MVVM.ViewModel
+{
+    public class DataBaseContextVM : ObservableObject
+    {
+        private ControlManager _controlManager;
 
-public class DataBaseContextVM : ObservableObject {
-    public ICommand SelectFile { get; set; }
-    public ICommand GoToUpFolder { get; set; }
-    public ICommand NewEntry { get; set; }
-    public ICommand NewFolder { get; set; }
-    public ICommand ExitDB { get; set; }
+        public ICommand SelectFile { get; set; }
+        public ICommand GoToUpFolder { get; set; }
+        public ICommand NewEntry { get; set; }
+        public ICommand NewFolder { get; set; }
+        public ICommand ExitDB { get; set; }
 
 
-
-    private ObservableCollection<FileVM> _currentSubFiles;
-    public ObservableCollection<FileVM> CurrentSubFiles {
-        get {
-            return _currentSubFiles;
+        private ObservableCollection<FileVM> _currentSubFiles;
+        public ObservableCollection<FileVM> CurrentSubFiles
+        {
+            get
+            {
+                return _currentSubFiles;
+            }
+            set
+            {
+                _currentSubFiles = value;
+                OnPropertyChanged(nameof(CurrentSubFiles));
+            }
         }
-        set {
-            _currentSubFiles = value;
-            OnPropertyChanged("CurrentSubFiles");
+        private FileVM? _currentFile;
+        public FileVM? CurrentFile 
+        {
+            get => _currentFile;
+            set
+            {
+                ClosePage();
+                _currentFile = value;
+                OnPropertyChanged(nameof(CurrentFile));
+            } 
         }
-    }
-    private FileVM _currentFile;
-    public FileVM CurrentFile {
-        get {
-            return _currentFile;
+
+        private FileVM? _selectedFile;
+        public FileVM? SelectedFile
+        {
+            get => _selectedFile;
+            set { _selectedFile = value; OnPropertyChanged(nameof(SelectedFile)); }
         }
-        set {
-            ClosePage();
-            _currentFile = value;
-            OnPropertyChanged("CurrentFile");
+
+        public DBDescriptionVM DataBase { get; set; }
+
+        private object? _currentView;
+
+        public object? CurrentView
+        {
+            get
+            {
+                return _currentView;
+            }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged(nameof(CurrentView));
+            }
         }
-    }
-    public FileVM SelectedFile { get; set; }
 
-    public string DbName { get; set; }
+        public DataBaseContextVM(DBDescriptionVM dBDescription)
+        {
+            //CurrentFile = ModelAPI.GetRootFolder();
+            _controlManager = new ControlManager();
+            DataBase = dBDescription;
 
-    public EntryDataVM EntryData { get; set; }
+            FolderVM f1 = new(null, "f1");
+            FolderVM f2 = new(f1, "f2");
+            FolderVM f3 = new(f1, "f3");
+            FolderVM f4 = new(f2, "f4");
+            FolderVM f5 = new(f2, "f5");
+            FolderVM f6 = new(f3, "f6");
+            EntryVM en1 = new(f2, "en1");
+            EntryVM en2 = new(f4, "en2");
+            f1.Name = "f1";
+            f2.Name = "f2";
+            f3.Name = "f3";
+            f4.Name = "f4";
+            f5.Name = "f5";
+            f6.Name = "f6";
+            en1.Name = "en1";
+            en1.Description = "test entry 1";
+            en1.Url = "https://test1";
+            en2.Name = "en2";
+            en2.Description = "test entry 2";
+            en2.Url = "https://test2";
 
-    private object _currentView;
+            f1.SubFiles.Add(f2);
+            f1.SubFiles.Add(f3);
+            f2.SubFiles.Add(f4);
+            f2.SubFiles.Add(en1);
+            f2.SubFiles.Add(f5);
+            f3.SubFiles.Add(f6);
+            f4.SubFiles.Add(en2);
 
-    public object CurrentView {
-        get {
-            return _currentView;
+            _currentSubFiles = f1.SubFiles;
+            CurrentFile = f1;
+
+            SelectFile = new RelayCommand(Select, CanSelect);
+            GoToUpFolder = new RelayCommand(ClimbUp, CanClimbUp);
+            NewEntry = new RelayCommand(ShowCreateEntryForm, CanShowCreateEntryForm);
+            NewFolder = new RelayCommand(ShowCreateFolderForm, CanShowCreateFolderForm);
+            ExitDB = new RelayCommand(Exit, CanExit);
         }
-        set {
-            _currentView = value;
-            OnPropertyChanged("CurrentView");
+
+        private bool CanSelect(object obj)
+        {
+            return true;
         }
-    }
 
-    public DataBaseContextVM () {
-        EntryData = new EntryDataVM();
-        //CurrentFile = ModelAPI.GetRootFolder();
-        CurrentSubFiles = new ObservableCollection<FileVM>();
-
-        FolderVM f1 = new(null);
-        FolderVM f2 = new(f1);
-        FolderVM f3 = new(f1);
-        FolderVM f4 = new(f2);
-        FolderVM f5 = new(f2);
-        FolderVM f6 = new(f3);
-        EntryVM en1 = new(f2);
-        EntryVM en2 = new(f4);
-        f1.Name = "f1";
-        f2.Name = "f2";
-        f3.Name = "f3";
-        f4.Name = "f4";
-        f5.Name = "f5";
-        f6.Name = "f6";
-        en1.Name = "en1";
-        en1.Description = "test entry 1";
-        en1.Url = "https://test1";
-        en2.Name = "en2";
-        en2.Description = "test entry 2";
-        en2.Url = "https://test2";
-
-        f1.SubFiles.Add(f2);
-        f1.SubFiles.Add(f3);
-        f2.SubFiles.Add(f4);
-        f2.SubFiles.Add(en1);
-        f2.SubFiles.Add(f5);
-        f3.SubFiles.Add(f6);
-        f4.SubFiles.Add(en2);
-
-        CurrentSubFiles = f1.SubFiles;
-        CurrentFile = f1;
-
-        SelectFile = new RelayCommand(Select, CanSelect);
-        GoToUpFolder = new RelayCommand(ClimbUp, CanClimbUp);
-        NewEntry = new RelayCommand(ShowCreateEntryForm, CanShowCreateEntryForm);
-        NewFolder = new RelayCommand(ShowCreateFolderForm, CanShowCreateFolderForm);
-        ExitDB = new RelayCommand(Exit, CanExit);
-    }
-
-    private bool CanSelect (object obj) {
-        return true;
-    }
-
-    private void Select (object obj) {
-        if (SelectedFile is FolderVM) {
-            FolderVM selected = SelectedFile as FolderVM;
-            GoIntoTheFolder(selected);
+        private void Select(object obj)
+        {
+            if (SelectedFile is FolderVM)
+            {
+                SelectFileHandler((FolderVM)SelectedFile);
+            }
+            if (SelectedFile is EntryVM)
+            {
+                SelectFileHandler((EntryVM)SelectedFile);
+            }
         }
-        if (SelectedFile is EntryVM) {
-            EntryVM? SelectedEntry = SelectedFile as EntryVM;
 
-            EntryData.Name = SelectedEntry?.Name;
-            EntryData.Password = "******";
-            EntryData.Description = SelectedEntry?.Description;
-            EntryData.URL = SelectedEntry?.Url;
-            EntryData.DBContext = this;
-
-            CurrentView = new EntryDataView(EntryData);
+        private void SelectFileHandler(FolderVM folder)
+        {
+            GoIntoTheFolder(folder);
         }
-    }
 
-    private void GoIntoTheFolder (FolderVM selected) {
-        //ModelAPI.GoIntoTheFolder(selected.Name);
-        CurrentSubFiles = selected.SubFiles;
-        CurrentFile = selected;
-    }
+        private void SelectFileHandler(EntryVM entry)
+        {
+            EntryDataVM entryData = CreateEntryDataFormVM(entry.Name, entry.Password, entry.Description, entry.Url);
 
-    private bool CanClimbUp (object obj) {
-        FolderVM? parent = (CurrentFile as FolderVM).Parent;
-        return parent != null;
-    }
+            CurrentView = new EntryDataView(entryData);
+        }
 
-    private void ClimbUp (object obj) {
-        //ModelAPI.ClimbUp();
-        FolderVM parent = (CurrentFile as FolderVM).Parent;
+        private EntryDataVM CreateEntryDataFormVM(string Name, string? Password, string? Description, string? URL)
+        {
+            return new EntryDataVM(this, Name, Password, Description, URL);
+        }
 
-        CurrentSubFiles = parent.SubFiles;
-        CurrentFile = parent;
-    }
+        private void GoIntoTheFolder(FolderVM selectedFolder)
+        {
+            SetFolderContext(selectedFolder);
+        }
 
-    private bool CanShowCreateEntryForm (object obj) {
-        return true;
-    }
+        private bool CanClimbUp(object obj)
+        {
+            FolderVM? parent = ((FolderVM?)CurrentFile)?.Parent;
+            return parent != null;
+        }
+        
+        private void ClimbUp(object obj)
+        {
+            FolderVM? parent = ((FolderVM?)CurrentFile)?.Parent;
 
-    private void ShowCreateEntryForm (object obj) {
-        AddEntryView addEntryView = new AddEntryView();
-        IUnityContainer container = ControlRegister.RegisterControl(addEntryView);
+            if (parent == null) throw new NullReferenceException("Parent was null while climb up");
 
-        AddEntryVM createForm = new AddEntryVM();
-        createForm.DBContext = this;
-        createForm.Container = container;
+            SetFolderContext(parent);
+        }
 
-        addEntryView.DataContext = createForm;
-        CurrentView = addEntryView;
-    }
-    private bool CanShowCreateFolderForm (object obj) {
-        return true;
-    }
+        private void SetFolderContext(FolderVM folder)
+        {
+            CurrentFile = folder;
+            CurrentSubFiles = folder.SubFiles;
+        }
 
-    private void ShowCreateFolderForm (object obj) {
-        AddFolderVM createForm = new AddFolderVM();
-        createForm.DBContext = this;
-        CurrentView = new AddFolderView(createForm);
-    }
+        private bool CanShowCreateEntryForm(object obj)
+        {
+            return true;
+        }
 
-    private bool CanExit (object obj) {
-        return true;
-    }
+        private void ShowCreateEntryForm(object obj)
+        {
+            AddEntryView addEntryView = _controlManager.CreateControl<AddEntryView>();
+            IUnityContainer container = _controlManager.RegisterControl(addEntryView);
 
-    private void Exit (object obj) {
-        //ModelAPI.Exit();
-        Window window = obj as Window;
-        MainWindow mainWindow = new MainWindow();
-        mainWindow.Show();
-        window?.Close();
-    }
+            AddEntryFormVM entryForm = CreateAddEntryFormVM(container);
 
-    public void ClosePage () {
-        CurrentView = null;
+            _controlManager.BindDataContextToControl(addEntryView, entryForm);
+
+            CurrentView = addEntryView;
+        }
+
+        private AddEntryFormVM CreateAddEntryFormVM(IUnityContainer container)
+        {
+            return new AddEntryFormVM(this, container);
+        }
+
+        private bool CanShowCreateFolderForm(object obj)
+        {
+            return true;
+        }
+
+        private void ShowCreateFolderForm(object obj)
+        {
+            AddFolderView addFolderForm = _controlManager.CreateControl<AddFolderView>();
+
+            AddFolderFormVM addFolderVM = CreateAddFolderFormVM();
+
+            _controlManager.BindDataContextToControl(addFolderForm, addFolderVM);
+            
+            CurrentView = addFolderForm;
+        }
+
+        private AddFolderFormVM CreateAddFolderFormVM()
+        {
+            return new AddFolderFormVM(this);
+        }
+
+        private bool CanExit(object obj)
+        {
+            return true;
+        }
+
+        private void Exit(object obj)
+        {
+            //ModelAPI.Exit();
+            Window dbContextWin = (Window)obj;
+            MainWindow mainWindow = _controlManager.CreateWindow<MainWindow>();
+
+            _controlManager.ShowWindowAtCenter(mainWindow);
+            _controlManager.CloseWindow(dbContextWin);
+        }
+
+        public void ClosePage()
+        {
+            CurrentView = null;
+        }
     }
 }

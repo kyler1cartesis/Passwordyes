@@ -1,6 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Password_Manager.Core;
@@ -9,64 +13,75 @@ using Password_Manager.MVVM.View;
 using Password_Manager.MVVM.View.ViewUtilities;
 using Unity;
 
-namespace Password_Manager.MVVM.ViewModel;
+namespace Password_Manager.MVVM.ViewModel
+{
+    public class EntryDataVM : FilesEditFormVM
+    {
+        private MessageBoxManager _dialogManager;
+        private ControlManager _controlManager;
+        public ICommand DeleteEntryCommand { get; set; }
+        public ICommand ChangeEntry { get; set; }
+        public string? Password { get; set; }
+		public string? Description { get; set; }
+		public string? URL { get; set; }
 
-public class EntryDataVM : FilesEditForm {
-    public ICommand DeleteEntryCommand { get; set; }
-    public ICommand ChangeEntry { get; set; }
-    public string Password { get; set; }
-    public string Description { get; set; }
-    public string URL { get; set; }
+		public EntryDataVM(DataBaseContextVM contextVM, string name, string? password, string? description, string? url) : base(contextVM)
+        {
+            _dialogManager = new MessageBoxManager();
+            _controlManager = new ControlManager();
+            Name = name;
+            Password = password;
+            Description = description;
+            URL = url;
 
-    public EntryDataVM () : base() {
-        DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
-        ChangeEntry = new RelayCommand(ShowChangeEntryForm, CanShowChangeEntryForm);
-    }
+			DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
+            ChangeEntry = new RelayCommand(ShowChangeEntryForm, CanShowChangeEntryForm);
+        }
 
-    private bool CanDeleteEntry (object obj) {
-        return true;
-    }
+		private bool CanDeleteEntry(object obj)
+		{
+			return true;
+		}
 
-    private void DeleteEntry (object obj) {
-        var answer = MessageBoxManager.ShowMessageBox("Вы уверены, что хотите удалить запись: " + Name + " ?",
-                                         "удаление БД",
-                                         MessageBoxImage.Question);
+		private void DeleteEntry(object obj)
+		{
+            var answer = _dialogManager.ShowMessageBox("Вы уверены, что хотите удалить запись: " + Name + " ?",
+                                                        "удаление БД",
+                                                        MessageBoxImage.Question);
 
-        if (answer == MessageBoxResult.No) return;
+            if (answer == MessageBoxResult.No) return;
 
-        //ModelAPI.RemoveFileByName(Name);
-        //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
+            FolderVM currentFolder = GetCurrentFolder();
 
-        var subFiles = DBContext.CurrentSubFiles.Where((file) => {
-            return file is not EntryVM || file.Name != Name;
-        });
-        var subFilesWithoutCurrentEntry = new ObservableCollection<FileVM>(subFiles);
-        DBContext.CurrentSubFiles = subFilesWithoutCurrentEntry;
-        (DBContext.CurrentFile as FolderVM).SubFiles = subFilesWithoutCurrentEntry;
+            currentFolder.RemoveFileByName(Name);
 
-        DBContext.ClosePage();
-    }
+            CloseForm(new object());
+		}
 
-    private bool CanShowChangeEntryForm (object obj) {
-        return true;
-    }
+        private bool CanShowChangeEntryForm(object obj)
+        {
+            return true;
+        }
 
-    private void ShowChangeEntryForm (object obj) {
-        ChangeEntryView changeEntryView = new ChangeEntryView();
-        IUnityContainer container = ControlRegister.RegisterControl(changeEntryView);
+        private void ShowChangeEntryForm(object obj)
+        {
+            ChangeEntryFormView changeEntryView = _controlManager.CreateControl<ChangeEntryFormView>();
+            IUnityContainer container = _controlManager.RegisterControl(changeEntryView);
 
-        ChangeEntryVM changeForm = new ChangeEntryVM();
-        changeForm.DBContext = DBContext;
+            EntryDataView entryDataForm = GetCurrentViewAsUserControl<EntryDataView>();
 
-        changeForm.EntryData = (EntryDataView) DBContext.CurrentView;
-        changeForm.Name = Name;
-        changeForm.Description = Description;
-        changeForm.URL = URL;
-        changeForm.OldName = Name;
-        changeForm.Container = container;
-        changeEntryView.DataContext = changeForm;
+            ChangeEntryFormVM changeFormVM = CreateChangeEntryFormVM(entryDataForm, container);
 
-        DBContext.CurrentView = changeEntryView;
+            _controlManager.BindDataContextToControl(changeEntryView, changeFormVM);
 
+            SetDBContextCurrentView(changeEntryView);
+        }
+
+        private ChangeEntryFormVM CreateChangeEntryFormVM(EntryDataView entryDataForm, IUnityContainer container)
+        {
+            return new ChangeEntryFormVM(Name, Description, URL, DBContext, entryDataForm, container);
+        }
+
+        
     }
 }
