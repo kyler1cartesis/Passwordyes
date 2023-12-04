@@ -33,11 +33,6 @@ namespace Password_Manager
             SubFiles.Remove(GetFileByName(name));
         }
 
-        private FileVM GetFileByName(string name)
-        {
-            return SubFiles.Single(file => file.Name == name);
-        }
-
         public void AddFile(FileVM file)
         {
             SubFiles.Add(file);
@@ -50,6 +45,10 @@ namespace Password_Manager
             entryVM.Name = newName;
             entryVM.Description = description;
             entryVM.Url = url;
+        }
+        private FileVM GetFileByName(string name)
+        {
+            return SubFiles.Single(file => file.Name == name);
         }
     }
 }

@@ -15,7 +15,7 @@ using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    class SignInDBFormVM : ObservableObject
+    public class SignInDBFormVM : ObservableObject
     {
 		private MainVM _mainVM;
 		private ControlManager _controlManager;
