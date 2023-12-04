@@ -21,7 +21,7 @@ public static class StaticFileManager {
 
     internal static FileStream CreateAndOpenDb (string fileName) {
         if (!Directory.Exists(DBsPath)) Directory.CreateDirectory(DBsPath);
-        return File.Open(GetRelDbPath(fileName), FileMode.CreateNew);
+        return File.Open(GetRelDbPath(fileName), FileMode.Create);
     }
 
     internal static void DeleteDb (string fileName)

@@ -19,7 +19,7 @@ public class DBDescriptionVM {
                 CodeLevel.LOW => LowLevelImagePath,
                 CodeLevel.MID => MidLevelImagePath,
                 CodeLevel.HIGH => HighLevelImagePath,
-                _ => throw new NotImplementedException(),
+                _ => "",
             };
         }
     }

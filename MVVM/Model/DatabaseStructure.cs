@@ -1,17 +1,14 @@
-﻿using Password_Manager.MVVM.ViewModel;
-using System.Collections.Generic;
-
-namespace Password_Manager.MVVM.Model;
+﻿namespace Password_Manager.MVVM.Model;
 
 public record DatabaseStructure {
     public readonly byte[] PublicKey;
-    public readonly List<IEntryOrFolderVM> AuthorizationEntries;
+    public readonly Folder DataRoot;
 
-    internal void Deconstruct (out byte[] publicKey, out List<IEntryOrFolderVM> authorizationEntries)
-        => (publicKey, authorizationEntries) = (PublicKey, AuthorizationEntries);
+    internal void Deconstruct (out byte[] publicKey, out Folder authorizationEntries)
+        => (publicKey, authorizationEntries) = (PublicKey, DataRoot);
 
-    public DatabaseStructure (byte[] publicKey, List<IEntryOrFolderVM> authorizationEntries) {
+    public DatabaseStructure (byte[] publicKey, Folder authorizationEntries) {
         PublicKey = publicKey;
-        AuthorizationEntries = authorizationEntries;
+        DataRoot = authorizationEntries;
     }
 }

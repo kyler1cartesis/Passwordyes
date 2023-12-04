@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using Password_Manager.Core;
+using Password_Manager.MVVM.Model;
 
 namespace Password_Manager.MVVM.ViewModel;
 
+[JsonDerivedType(typeof(Entry), typeDiscriminator: "entry")]
+[JsonDerivedType(typeof(Folder), typeDiscriminator: "folder")]
 public abstract class IEntryOrFolderVM : ObservableObject {
     private string _name;
 
-    public string Name {
+    internal string Name {
         get {
             return _name;
         }
@@ -15,6 +19,4 @@ public abstract class IEntryOrFolderVM : ObservableObject {
             OnPropertyChanged(nameof(Name));
         }
     }
-    public DateTime CreateDate { get; set; }
-    public string? Description { get; internal set; }
 }

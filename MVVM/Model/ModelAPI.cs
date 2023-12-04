@@ -34,7 +34,7 @@ internal class ModelAPI : IModelAPI {
         => throw new NotImplementedException();
 
     public IEntryOrFolderVM GetRootFolder ()
-        => throw new NotImplementedException();
+        => appDbContext.DataRoot;
 
     public bool ValidateDbName (string name)
         => throw new NotImplementedException();
@@ -56,7 +56,7 @@ internal class ModelAPI : IModelAPI {
         ModelAPI modelAPI = new();
         modelAPI.CreateNewDB("test", "test");
         modelAPI.SignInDb(modelAPI.GetDBDescriptions()[0]);
-        var gg = modelAPI.appDbContext.AuthorizationEntries;
+        var gg = modelAPI.appDbContext.DataRoot;
         Console.WriteLine(gg);
         modelAPI.Exit();
     }

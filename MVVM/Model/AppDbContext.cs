@@ -12,8 +12,8 @@ internal class AppDbContext {
     private DbManager dbManager;
     private byte[]? masterKey;
     private byte[]? publicKey;
-    private List<IEntryOrFolderVM>? authorizationEntries;
-    public List<IEntryOrFolderVM>? AuthorizationEntries { get; }
+    private Folder? dataRoot;
+    public Folder? DataRoot { get; }
 
     public AppDbContext (DbManager dbManager) => this.dbManager = dbManager ?? throw new ArgumentNullException(nameof(dbManager));
 
@@ -23,20 +23,21 @@ internal class AppDbContext {
         LoadData();
     }
 
-    static readonly JsonSerializerOptions jsonOptions = new() { IncludeFields = true, WriteIndented = true };
+    static readonly JsonSerializerOptions jsonOptions = new() { IncludeFields = true, MaxDepth = 7, WriteIndented = true };
     internal void LoadData () {
         using FileStream file = StaticFileManager.OpenDbForRead(selectedDb.Name);
-        (publicKey, authorizationEntries) = JsonSerializer.Deserialize<DatabaseStructure>(file, jsonOptions);
+        //(publicKey, dataRoot) = JsonSerializer.Deserialize<DatabaseStructure>(file, jsonOptions);
+        var j = JsonSerializer.Deserialize<DatabaseStructure>(file, jsonOptions);
     }
 
     internal void SaveData () {
         using FileStream file = StaticFileManager.OpenDbForWrite(selectedDb.Name);
-        JsonSerializer.Serialize(file, new DatabaseStructure(publicKey, authorizationEntries), jsonOptions);
+        JsonSerializer.Serialize(file, new DatabaseStructure(publicKey, dataRoot), jsonOptions);
     }
 
     internal void CreateNewDB (string name, string masterPassword) {
         using FileStream file = StaticFileManager.CreateAndOpenDb(name);
-        var db = new DatabaseStructure(Encoding.UTF8.GetBytes(masterPassword), new List<IEntryOrFolderVM>());
+        var db = new DatabaseStructure(Encoding.UTF8.GetBytes(masterPassword), new Folder());
         JsonSerializer.Serialize(file, db, jsonOptions);
     }
 
@@ -51,7 +52,7 @@ internal class AppDbContext {
     internal bool СreateEntry (string login, string password, string domain, string? desription) {
         if (!(StaticValidator.ValidateLogin(login) && StaticValidator.ValidatePassword(password)))
             return false;
-        authorizationEntries.Add(new Entry() {
+        dataRoot.Add(new Entry() {
             Name = login,
             Password = password,
             Url = domain,
@@ -64,20 +65,20 @@ internal class AppDbContext {
     internal void Close () {
         SaveData();
         selectedDb = null;
-        authorizationEntries = null;
+        dataRoot = null;
         masterKey = null; publicKey = null;
     }
 
     public void ClearClipBoard () => StaticClipBoard.ClearClipBoard();
 
     public void CopyPasswordToClipboard (int id)
-        => StaticClipBoard.CopyToClipboard(((Entry) authorizationEntries[id]).Password);
+        => StaticClipBoard.CopyToClipboard(((Entry) dataRoot[id]).Password);
 
     public void CopyLoginToClipboard (int id)
-        => StaticClipBoard.CopyToClipboard(((Entry) authorizationEntries[id]).Name);
+        => StaticClipBoard.CopyToClipboard(((Entry) dataRoot[id]).Name);
 
     public void CopyDomainToClipboard (int id)
-        => StaticClipBoard.CopyToClipboard(((Entry) authorizationEntries[id]).Url);
+        => StaticClipBoard.CopyToClipboard(((Entry) dataRoot[id]).Url);
 
     public void OpenWebPage ()
         => throw new NotImplementedException();
