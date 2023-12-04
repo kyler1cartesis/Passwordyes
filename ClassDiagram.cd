@@ -92,5 +92,33 @@
       <FileName>MVVM\Model\DBDescription.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Password_Manager.MVVM.ViewModel.MainViewModel" Collapsed="true">
+    <Position X="15.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACEAAAAEAAAAEAAAAAAgAAACAAAAAACAAIAAA=</HashCode>
+      <FileName>MVVM\ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Password_Manager.MVVM.ViewModel.FilesEditForm" Collapsed="true">
+    <Position X="14.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAIAEAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\ViewModel\FilesEditForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Password_Manager.MVVM.ViewModel.FileVM" Collapsed="true">
+    <Position X="16.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>MVVM\ViewModel\FileVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Password_Manager.MVVM.ViewModel.AddDBVM" Collapsed="true">
+    <Position X="17.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAIBAAQAAAABAAAAAEECQEAgAAAAABABAIAACAAAA=</HashCode>
+      <FileName>MVVM\ViewModel\AddDBVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
