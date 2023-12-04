@@ -22,8 +22,9 @@ namespace Password_Manager.MVVM.ViewModel;
 public class AddDBVM : ObservableObject
 {
     private MainViewModel _mainVM;
-	//Команда добавления БД в коллекцию
-	public ICommand AddDBCommand { get; set; }
+    private IUnityContainer _container;
+    private MessageBoxManager _dialogManager;
+    public ICommand AddDBCommand { get; set; }
     public ICommand CloseFormCommand { get; set; }
     public ICommand SetCodeLevelCommand { get; set; }
 
@@ -33,16 +34,12 @@ public class AddDBVM : ObservableObject
         get => _errorMessage;
         set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); }
     }
-	//Поле с именем новой БД
     private string _name;
 	public string Name
     {
         get => _name;
         set { _name = value; OnPropertyChanged(nameof(Name)); } 
     }
-
-    //Поле с Мастер паролем новой БД
-    private IUnityContainer _container;
 	public string MasterPassword
     {
         get
@@ -61,40 +58,35 @@ public class AddDBVM : ObservableObject
     }
     public CodeLevel Level { get; set; }
 
-
-	public AddDBVM(MainViewModel maiNVM, IUnityContainer container)
-	{
+    public AddDBVM(MainViewModel maiNVM, IUnityContainer container)
+    {
+        _errorMessage = string.Empty;
+        _name = string.Empty;
         _mainVM = maiNVM;
         _container = container;
-		AddDBCommand = new RelayCommand(AddDB, CanAddDB);
-		SetCodeLevelCommand = new RelayCommand(SetCodeLevel);
-		CloseFormCommand = new RelayCommand(Close);
-	}
 
-	private bool CanAddDB(object obj)
-	{
-		//bool isValidateName = ModelAPI.Validate_DB_Name(Name);
-		return true;
-	}
+        AddDBCommand = new RelayCommand(AddDB);
+        SetCodeLevelCommand = new RelayCommand(SetCodeLevel);
+        CloseFormCommand = new RelayCommand(Close);
+    }
 
 	private void AddDB(object obj)
 	{
         //bool isValidatePassword = ModelAPI.Validate_DB_MPassword(MasterPassword, MasterPasswordConfirm);
         //ModelAPI.CreateNewDB(Name, MasterPassword);
 
-        _mainVM.DataBasesViewCommand.Execute(null);
+        _mainVM.DataBasesViewCommand.Execute(new object());
 		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level));
     }
 
     private void Close(object obj)
     {
-        var answer = MessageBoxManager.ShowMessageBox("Отменить создание базы данных?",
+        var answer = _dialogManager.ShowMessageBox("Отменить создание базы данных?",
                                              "отмена создания БД",
                                              MessageBoxImage.Question);
+        
         if (answer == MessageBoxResult.Yes)
-            _mainVM.DataBasesViewCommand.Execute(null);
-        else
-            return;
+            _mainVM.DataBasesViewCommand.Execute(new object());
     }
 
     private void SetCodeLevel(object obj)

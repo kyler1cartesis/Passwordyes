@@ -3,7 +3,7 @@ using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.Model
 {
-    public class Folder : FileVM
+    public class Folder
     {
         private int entries;
 

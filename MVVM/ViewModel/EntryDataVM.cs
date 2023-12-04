@@ -17,14 +17,23 @@ namespace Password_Manager.MVVM.ViewModel
 {
     public class EntryDataVM : FilesEditForm
     {
+        private MessageBoxManager _dialogManager;
+        private ControlManager _controlManager;
         public ICommand DeleteEntryCommand { get; set; }
         public ICommand ChangeEntry { get; set; }
-        public string Password { get; set; }
-		public string Description { get; set; }
-		public string URL { get; set; }
+        public string? Password { get; set; }
+		public string? Description { get; set; }
+		public string? URL { get; set; }
 
-		public EntryDataVM() : base()
+		public EntryDataVM(DataBaseContextVM contextVM, string name, string? password, string? description, string? url) : base(contextVM)
         {
+            _dialogManager = new MessageBoxManager();
+            _controlManager = new ControlManager();
+            Name = name;
+            Password = password;
+            Description = description;
+            URL = url;
+
 			DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
             ChangeEntry = new RelayCommand(ShowChangeEntryForm, CanShowChangeEntryForm);
         }
@@ -36,24 +45,17 @@ namespace Password_Manager.MVVM.ViewModel
 
 		private void DeleteEntry(object obj)
 		{
-            var answer = MessageBoxManager.ShowMessageBox("Вы уверены, что хотите удалить запись: " + Name + " ?",
-                                             "удаление БД",
-                                             MessageBoxImage.Question);
+            var answer = _dialogManager.ShowMessageBox("Вы уверены, что хотите удалить запись: " + Name + " ?",
+                                                        "удаление БД",
+                                                        MessageBoxImage.Question);
 
             if (answer == MessageBoxResult.No) return;
 
-            //ModelAPI.RemoveFileByName(Name);
-            //DBContext.CurrentSubFiles = ModelAPI.UpdateFileList();
+            FolderVM currentFolder = GetCurrentFolder();
 
-            var subFiles = DBContext.CurrentSubFiles.Where((file) =>
-            {
-                return file is not EntryVM || file.Name != Name;
-            });
-			var subFilesWithoutCurrentEntry = new ObservableCollection<FileVM>(subFiles);
-			DBContext.CurrentSubFiles = subFilesWithoutCurrentEntry;
-			(DBContext.CurrentFile as FolderVM).SubFiles = subFilesWithoutCurrentEntry;
+            currentFolder.RemoveFileByName(Name);
 
-			DBContext.ClosePage();
+            CloseForm(new object());
 		}
 
         private bool CanShowChangeEntryForm(object obj)
@@ -63,22 +65,21 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ShowChangeEntryForm(object obj)
         {
-            ChangeEntryView changeEntryView = new ChangeEntryView();
-            IUnityContainer container = ControlRegister.RegisterControl(changeEntryView);
+            ChangeEntryFormView changeEntryView = _controlManager.CreateControl<ChangeEntryFormView>();
+            IUnityContainer container = _controlManager.RegisterControl(changeEntryView);
 
-            ChangeEntryVM changeForm = new ChangeEntryVM();
-            changeForm.DBContext = DBContext;
+            EntryDataView entryDataForm = GetCurrentViewAsUserControl<EntryDataView>();
 
-            changeForm.EntryData = (EntryDataView)DBContext.CurrentView;
-            changeForm.Name = Name;
-            changeForm.Description = Description;
-            changeForm.URL = URL;
-            changeForm.OldName = Name;
-            changeForm.Container = container;
-            changeEntryView.DataContext = changeForm;
+            ChangeEntryFormVM changeFormVM = CreateChangeEntryFormVM(entryDataForm, container);
+
+            _controlManager.BindDataContextToControl(changeEntryView, changeFormVM);
 
             DBContext.CurrentView = changeEntryView;
+        }
 
+        private ChangeEntryFormVM CreateChangeEntryFormVM(EntryDataView entryDataForm, IUnityContainer container)
+        {
+            return new ChangeEntryFormVM(Name, Description, URL, DBContext, entryDataForm, container);
         }
     }
 }

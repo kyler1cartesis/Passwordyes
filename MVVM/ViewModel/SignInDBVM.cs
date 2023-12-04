@@ -71,8 +71,8 @@ namespace Password_Manager.MVVM.ViewModel
 
                 var mainWindow = obj as Window;
 
-				DataBaseContextVM dbContextVM = new DataBaseContextVM();
-				dbContextVM.DbName = DbToSignIn.Name;
+				DataBaseContextVM dbContextVM = new DataBaseContextVM(DbToSignIn);
+				
 				DataBaseContextWindow dbContextWin = new DataBaseContextWindow();
 				dbContextWin.DataContext = dbContextVM;
 

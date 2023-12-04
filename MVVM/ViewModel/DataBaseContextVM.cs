@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
@@ -16,12 +18,13 @@ namespace Password_Manager.MVVM.ViewModel
 {
     public class DataBaseContextVM : ObservableObject
     {
+        private ControlManager _controlManager;
+
         public ICommand SelectFile { get; set; }
         public ICommand GoToUpFolder { get; set; }
         public ICommand NewEntry { get; set; }
         public ICommand NewFolder { get; set; }
         public ICommand ExitDB { get; set; }
-
 
 
         private ObservableCollection<FileVM> _currentSubFiles;
@@ -34,31 +37,33 @@ namespace Password_Manager.MVVM.ViewModel
             set
             {
                 _currentSubFiles = value;
-                OnPropertyChanged("CurrentSubFiles");
+                OnPropertyChanged(nameof(CurrentSubFiles));
             }
         }
-        private FileVM _currentFile;
-        public FileVM CurrentFile {
-            get
-            {
-                return _currentFile;
-            }
+        private FileVM? _currentFile;
+        public FileVM? CurrentFile 
+        {
+            get => _currentFile;
             set
             {
                 ClosePage();
                 _currentFile = value;
-                OnPropertyChanged("CurrentFile");
+                OnPropertyChanged(nameof(CurrentFile));
             } 
         }
-        public FileVM SelectedFile { get; set; }
 
-        public string DbName { get; set; }
+        private FileVM? _selectedFile;
+        public FileVM? SelectedFile
+        {
+            get => _selectedFile;
+            set { _selectedFile = value; OnPropertyChanged(nameof(SelectedFile)); }
+        }
 
-        public EntryDataVM EntryData  { get; set; }
+        public DBDescriptionVM DataBase { get; set; }
 
-        private object _currentView;
+        private object? _currentView;
 
-        public object CurrentView
+        public object? CurrentView
         {
             get
             {
@@ -67,24 +72,24 @@ namespace Password_Manager.MVVM.ViewModel
             set
             {
                 _currentView = value;
-                OnPropertyChanged("CurrentView");
+                OnPropertyChanged(nameof(CurrentView));
             }
         }
 
-        public DataBaseContextVM()
+        public DataBaseContextVM(DBDescriptionVM dBDescription)
         {
-            EntryData = new EntryDataVM();
             //CurrentFile = ModelAPI.GetRootFolder();
-            CurrentSubFiles = new ObservableCollection<FileVM>();
+            _controlManager = new ControlManager();
+            DataBase = dBDescription;
 
-            FolderVM f1 = new(null);
-            FolderVM f2 = new(f1);
-            FolderVM f3 = new(f1);
-            FolderVM f4 = new(f2);
-            FolderVM f5 = new(f2);
-            FolderVM f6 = new(f3);
-            EntryVM en1 = new(f2);
-            EntryVM en2 = new(f4);
+            FolderVM f1 = new(null, "f1");
+            FolderVM f2 = new(f1, "f2");
+            FolderVM f3 = new(f1, "f3");
+            FolderVM f4 = new(f2, "f4");
+            FolderVM f5 = new(f2, "f5");
+            FolderVM f6 = new(f3, "f6");
+            EntryVM en1 = new(f2, "en1");
+            EntryVM en2 = new(f4, "en2");
             f1.Name = "f1";
             f2.Name = "f2";
             f3.Name = "f3";
@@ -106,7 +111,7 @@ namespace Password_Manager.MVVM.ViewModel
             f3.SubFiles.Add(f6);
             f4.SubFiles.Add(en2);
 
-            CurrentSubFiles = f1.SubFiles;
+            _currentSubFiles = f1.SubFiles;
             CurrentFile = f1;
 
             SelectFile = new RelayCommand(Select, CanSelect);
@@ -123,45 +128,57 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void Select(object obj)
         {
-            if(SelectedFile is FolderVM)
+            if (SelectedFile is FolderVM)
             {
-                FolderVM selected = SelectedFile as FolderVM;
-                GoIntoTheFolder(selected);
+                SelectFileHandler((FolderVM)SelectedFile);
             }
-            if(SelectedFile is EntryVM)
+            if (SelectedFile is EntryVM)
             {
-                EntryVM? SelectedEntry = SelectedFile as EntryVM;
-               
-                EntryData.Name = SelectedEntry?.Name;
-                EntryData.Password = "******";
-                EntryData.Description = SelectedEntry?.Description;
-                EntryData.URL = SelectedEntry?.Url;
-                EntryData.DBContext = this;
-
-                CurrentView = new EntryDataView(EntryData);
+                SelectFileHandler((EntryVM)SelectedFile);
             }
         }
 
-        private void GoIntoTheFolder(FolderVM selected)
+        private void SelectFileHandler(FolderVM folder)
         {
-            //ModelAPI.GoIntoTheFolder(selected.Name);
-            CurrentSubFiles = selected.SubFiles;
-            CurrentFile = selected;
+            GoIntoTheFolder(folder);
+        }
+
+        private void SelectFileHandler(EntryVM entry)
+        {
+            EntryDataVM entryData = CreateEntryDataFormVM(entry.Name, entry.Password, entry.Description, entry.Url);
+
+            CurrentView = new EntryDataView(entryData);
+        }
+
+        private EntryDataVM CreateEntryDataFormVM(string Name, string? Password, string? Description, string? URL)
+        {
+            return new EntryDataVM(this, Name, Password, Description, URL);
+        }
+
+        private void GoIntoTheFolder(FolderVM selectedFolder)
+        {
+            SetFolderContext(selectedFolder);
         }
 
         private bool CanClimbUp(object obj)
         {
-            FolderVM? parent = (CurrentFile as FolderVM).Parent;
+            FolderVM? parent = ((FolderVM?)CurrentFile)?.Parent;
             return parent != null;
         }
-
+        
         private void ClimbUp(object obj)
         {
-            //ModelAPI.ClimbUp();
-            FolderVM parent = (CurrentFile as FolderVM).Parent;
+            FolderVM? parent = ((FolderVM?)CurrentFile)?.Parent;
 
-            CurrentSubFiles = parent.SubFiles;
-            CurrentFile = parent;
+            if (parent == null) throw new NullReferenceException("Parent was null while climb up");
+
+            SetFolderContext(parent);
+        }
+
+        private void SetFolderContext(FolderVM folder)
+        {
+            CurrentFile = folder;
+            CurrentSubFiles = folder.SubFiles;
         }
 
         private bool CanShowCreateEntryForm(object obj)
@@ -171,16 +188,21 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ShowCreateEntryForm(object obj)
         {
-            AddEntryView addEntryView = new AddEntryView();
-            IUnityContainer container = ControlRegister.RegisterControl(addEntryView);
+            AddEntryView addEntryView = _controlManager.CreateControl<AddEntryView>();
+            IUnityContainer container = _controlManager.RegisterControl(addEntryView);
 
-            AddEntryVM createForm = new AddEntryVM();
-            createForm.DBContext = this;
-            createForm.Container = container;
+            AddEntryVMForm entryForm = CreateAddEntryFormVM(container);
 
-            addEntryView.DataContext = createForm;
+            _controlManager.BindDataContextToControl(addEntryView, entryForm);
+
             CurrentView = addEntryView;
         }
+
+        private AddEntryVMForm CreateAddEntryFormVM(IUnityContainer container)
+        {
+            return new AddEntryVMForm(this, container);
+        }
+
         private bool CanShowCreateFolderForm(object obj)
         {
             return true;
@@ -188,9 +210,18 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ShowCreateFolderForm(object obj)
         {
-            AddFolderVM createForm = new AddFolderVM();
-            createForm.DBContext = this;
-            CurrentView = new AddFolderView(createForm);
+            AddFolderView addFolderForm = _controlManager.CreateControl<AddFolderView>();
+
+            AddFolderFormVM addFolderVM = CreateAddFolderFormVM();
+
+            _controlManager.BindDataContextToControl(addFolderForm, addFolderVM);
+            
+            CurrentView = addFolderForm;
+        }
+
+        private AddFolderFormVM CreateAddFolderFormVM()
+        {
+            return new AddFolderFormVM(this);
         }
 
         private bool CanExit(object obj)
@@ -201,10 +232,11 @@ namespace Password_Manager.MVVM.ViewModel
         private void Exit(object obj)
         {
             //ModelAPI.Exit();
-            Window window = obj as Window;
-            MainWindow mainWindow = new MainWindow();
+            Window window = (Window)obj;
+            MainWindow mainWindow = _controlManager.CreateWindow<MainWindow>();
+
             mainWindow.Show();
-            window?.Close();
+            window.Close();
         }
 
         public void ClosePage()

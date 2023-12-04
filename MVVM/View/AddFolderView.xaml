@@ -8,9 +8,6 @@
              xmlns:viewmodel="clr-namespace:Password_Manager.MVVM.ViewModel"
              d:DesignHeight="650" d:DesignWidth="850">
 
-    <UserControl.DataContext>
-        <viewmodel:AddFolderVM/>
-    </UserControl.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>

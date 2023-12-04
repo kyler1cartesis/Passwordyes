@@ -24,5 +24,10 @@ namespace Password_Manager.MVVM.ViewModel
         }
         public DateTime CreateDate { get; set; }
 
+        public FileVM(string name)
+        {
+            _name = name;
+        }
+
     }
 }

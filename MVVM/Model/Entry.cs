@@ -3,7 +3,7 @@ using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.Model
 {
-    public class Entry : FileVM
+    public class Entry
     {
         private int name;
         private int url;

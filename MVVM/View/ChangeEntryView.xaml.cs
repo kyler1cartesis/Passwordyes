@@ -20,9 +20,9 @@ namespace Password_Manager.MVVM.View
     /// <summary>
     /// Логика взаимодействия для ChangeEntryView.xaml
     /// </summary>
-    public partial class ChangeEntryView : UserControl, IPasswordSupplier
+    public partial class ChangeEntryFormView : UserControl, IPasswordSupplier
     {
-        public ChangeEntryView()
+        public ChangeEntryFormView()
         {
             InitializeComponent();
         }

@@ -7,14 +7,14 @@ using System.Windows;
 
 namespace Password_Manager.MVVM.View.ViewUtilities
 {
-    public static class MessageBoxManager
+    public class MessageBoxManager
     {
-        public static MessageBoxResult ShowMessageBox(string message, string title, MessageBoxImage image)
+        public MessageBoxResult ShowMessageBox(string message, string title, MessageBoxImage image)
         {
             return MessageBox.Show(message, "PasswordStorm : " + title, GetButton(image), image);
         }
 
-        private static MessageBoxButton GetButton(MessageBoxImage image)
+        private MessageBoxButton GetButton(MessageBoxImage image)
         {
             switch (image)
             {

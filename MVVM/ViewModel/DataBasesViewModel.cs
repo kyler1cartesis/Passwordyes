@@ -19,51 +19,48 @@ namespace Password_Manager.MVVM.ViewModel
 {
     public class DataBasesViewModel : ObservableObject
     {
-        ObservableCollection<DBDescriptionVM> _dBDescriptions;
-       
+        private MessageBoxManager _dialogManager;
+        private ControlManager _controlManager;
+
+        public ICommand ShowAddDbWindowCommand { get; set; }
+        public ICommand ShowSignInDbWindowCommand { get; set; }
+        public ICommand DeleteDBCommand { get; set; }
+
+        private ObservableCollection<DBDescriptionVM> _dBDescriptions;
         public ObservableCollection<DBDescriptionVM> DBDescriptions 
-        { 
-            get 
-            {
-                return _dBDescriptions;
-            } 
+        {
+            get => _dBDescriptions;
             set 
             {
                 _dBDescriptions = value;
-                OnPropertyChanged("DBDescriptions");
+                OnPropertyChanged(nameof(DBDescriptions));
             }
         }
 
-        private MainViewModel _mainVM;
+        private MainViewModel? _mainVM;
         public MainViewModel MainVM { set => _mainVM = value; }
 
-        private DBDescriptionVM _selectedBD;
-        public DBDescriptionVM SelectedDB
+        private DBDescriptionVM? _selectedBD;
+        public DBDescriptionVM? SelectedDB
         {
-            get
-            {
-                return _selectedBD;
-            }
+            get => _selectedBD;
             set
             {
                 _selectedBD = value;
                 OnPropertyChanged("SelectedDB");
             }
         }
-        
-        public ICommand ShowAddDbWindowCommand { get; set; }
-        public ICommand ShowSignInDbWindowCommand { get; set; }
-        public ICommand DeleteDBCommand { get; set; }
 
         public DataBasesViewModel()
         {
-            ShowAddDbWindowCommand = new RelayCommand(ShowAddDBForm, CanShowAddDBWindow);
-
-            ShowSignInDbWindowCommand = new RelayCommand(ShowSignInDBForm, CanShowSignInDBWindow);
-
-            DeleteDBCommand = new RelayCommand(DeleteDB, CanDeleteDB);
-
+            _dBDescriptions = new ObservableCollection<DBDescriptionVM>();
             DBDescriptions = new ObservableCollection<DBDescriptionVM>();
+            _dialogManager = new MessageBoxManager();
+            _controlManager = new ControlManager();
+
+            ShowAddDbWindowCommand = new RelayCommand(CreateShowAddDBForm, CanShowAddDBWindow);
+            ShowSignInDbWindowCommand = new RelayCommand(CreateAndShowSignInDBForm, CanShowSignInDBWindow);
+            DeleteDBCommand = new RelayCommand(DeleteDB, CanDeleteDB);
 
             UpdateDBDs();
         }
@@ -87,42 +84,67 @@ namespace Password_Manager.MVVM.ViewModel
         {
             //ModelAPI.RemoveDB(SelectedDBD);
             //UpdateDBDs();
-            var answer = MessageBoxManager.ShowMessageBox("Вы уверены, что хотите удалить базу данных: " + SelectedDB.Name + " ?\n БД будет удалена без возможности восстановления!", 
-                                             "удаление БД", 
-                                             MessageBoxImage.Question);
+            var answer = _dialogManager.ShowMessageBox("Вы уверены, что хотите удалить базу данных: " + SelectedDB?.Name + " ?\n БД будет удалена без возможности восстановления!", 
+                                                        "удаление БД", 
+                                                        MessageBoxImage.Question);
+            
             if (answer == MessageBoxResult.Yes)
-                DBDescriptions.Remove(SelectedDB);
-            else
-                return;
+                DeleteDBD(SelectedDB);
         }
 
-        private void ShowAddDBForm(object obj)
+        private void CreateShowAddDBForm(object obj)
         {
-            AddDBView addDBView = new AddDBView();
-            var container = ControlRegister.RegisterControl(addDBView);
-            AddDBVM addDBVM = new AddDBVM(_mainVM, container);
+            AddDBView addDBView = _controlManager.CreateControl<AddDBView>();
+            var container = _controlManager.RegisterControl(addDBView);
+            AddDBVM addDBVM = CreateAddDBVM(container);
 
-            addDBView.DataContext = addDBVM;
-            _mainVM.CurrentView = addDBView;
+            _controlManager.BindDataContextToControl(addDBView, addDBVM);
+            SetMainVMCurrentView(addDBView);
         }
 
-        private void ShowSignInDBForm(object obj)
+        private AddDBVM CreateAddDBVM(IUnityContainer container)
         {
-            SignInDBView signInDBView = new SignInDBView();
-            var container = ControlRegister.RegisterControl(signInDBView);
-            SignInDBVM signInDBVM = new SignInDBVM(SelectedDB, _mainVM, container);
+            if (_mainVM == null) throw new ArgumentException("MainVM was null while AddDBVM created");
 
-            signInDBView.DataContext = signInDBVM;
-            _mainVM.CurrentView = signInDBView;
+            return new AddDBVM(_mainVM, container);
+        }
+        private void CreateAndShowSignInDBForm(object obj)
+        {
+            SignInDBView signInDBView = _controlManager.CreateControl<SignInDBView>();
+            var container = _controlManager.RegisterControl(signInDBView);
+            SignInDBVM signInDBVM = CreateSignInDBVM(container);
+
+            _controlManager.BindDataContextToControl(signInDBView, signInDBVM);
+            SetMainVMCurrentView(signInDBView);
+        }
+
+        private SignInDBVM CreateSignInDBVM(IUnityContainer container)
+        {
+            if (_mainVM == null) throw new ArgumentException("MainVM was null while SignInDBVM created");
+            if (SelectedDB == null) throw new ArgumentException("SelectedDB was null while SignInDBVM created");
+
+            return new SignInDBVM(SelectedDB, _mainVM, container);
+        }
+        private void SetMainVMCurrentView(UserControl view)
+        {
+            if (_mainVM == null) throw new ArgumentException("MainVM was null while set currentView");
+
+            _mainVM.CurrentView = view;
         }
 
         public void AddDBD(DBDescriptionVM dBDescription)
         {
             //ModelAPI.AddNewDB(dBDescription);
             //UpdateDBDs();
-            var dbdescs = DBDescriptions;
-            dbdescs.Add(dBDescription);
-            DBDescriptions = dbdescs;
+            
+            DBDescriptions.Add(dBDescription);
+        }
+
+        private void DeleteDBD(DBDescriptionVM? dBDescription)
+        {
+            if (dBDescription == null) throw new NullReferenceException("dBDescription was null while delete db");
+
+            DBDescriptions.Remove(dBDescription);
         }
 
         private void UpdateDBDs()
@@ -132,7 +154,7 @@ namespace Password_Manager.MVVM.ViewModel
             DBDescriptions.Add(new DBDescriptionVM
             {
                 Name = "Test DataBase №1",
-                Status = "Open",
+               
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now
             });
@@ -140,7 +162,7 @@ namespace Password_Manager.MVVM.ViewModel
             DBDescriptions.Add(new DBDescriptionVM
             {
                 Name = "Test DataBase №2",
-                Status = "Open",
+                
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now,
                 Level = CodeLevel.HIGH
@@ -149,14 +171,14 @@ namespace Password_Manager.MVVM.ViewModel
             DBDescriptions.Add(new DBDescriptionVM
             {
                 Name = "Test DataBase №2",
-                Status = "Open",
+                
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now
             });
             DBDescriptions.Add(new DBDescriptionVM
             {
                 Name = "Test DataBase №2",
-                Status = "Open",
+                
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now,
                 Level = CodeLevel.MID
@@ -164,7 +186,7 @@ namespace Password_Manager.MVVM.ViewModel
             DBDescriptions.Add(new DBDescriptionVM
             {
                 Name = "Test DataBase №2",
-                Status = "Open",
+                
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now,
                 Level = CodeLevel.HIGH
@@ -172,14 +194,14 @@ namespace Password_Manager.MVVM.ViewModel
             DBDescriptions.Add(new DBDescriptionVM
             {
                 Name = "Test DataBase №2",
-                Status = "Open",
+                
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now
             });
             DBDescriptions.Add(new DBDescriptionVM
             {
                 Name = "Test DataBase №2",
-                Status = "Open",
+                
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now
             });

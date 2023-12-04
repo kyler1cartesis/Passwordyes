@@ -21,10 +21,9 @@ namespace Password_Manager.MVVM.View
     /// </summary>
     public partial class AddFolderView : UserControl
     {
-        public AddFolderView(AddFolderVM addFolder)
+        public AddFolderView()
         {
             InitializeComponent();
-            this.DataContext = addFolder;
         }
     }
 }
