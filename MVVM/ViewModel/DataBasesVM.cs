@@ -17,7 +17,7 @@ using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    public class DataBasesVM : ObservableObject
+    public class DataBasesViewModel : ObservableObject
     {
         private MessageBoxManager _dialogManager;
         private ControlManager _controlManager;
@@ -37,8 +37,8 @@ namespace Password_Manager.MVVM.ViewModel
             }
         }
 
-        private MainVM? _mainVM;
-        public MainVM MainVM { set => _mainVM = value; }
+        private MainViewModel? _mainVM;
+        public MainViewModel MainVM { set => _mainVM = value; }
 
         private DBDescriptionVM? _selectedBD;
         public DBDescriptionVM? SelectedDB
@@ -51,7 +51,7 @@ namespace Password_Manager.MVVM.ViewModel
             }
         }
 
-        public DataBasesVM()
+        public DataBasesViewModel()
         {
             _dBDescriptions = new ObservableCollection<DBDescriptionVM>();
             DBDescriptions = new ObservableCollection<DBDescriptionVM>();
@@ -96,34 +96,34 @@ namespace Password_Manager.MVVM.ViewModel
         {
             AddDBView addDBView = _controlManager.CreateControl<AddDBView>();
             var container = _controlManager.RegisterControl(addDBView);
-            AddDBFormVM addDBVM = CreateAddDBVM(container);
+            AddDBVM addDBVM = CreateAddDBVM(container);
 
             _controlManager.BindDataContextToControl(addDBView, addDBVM);
             SetMainVMCurrentView(addDBView);
         }
 
-        private AddDBFormVM CreateAddDBVM(IUnityContainer container)
+        private AddDBVM CreateAddDBVM(IUnityContainer container)
         {
             if (_mainVM == null) throw new ArgumentException("MainVM was null while AddDBVM created");
 
-            return new AddDBFormVM(_mainVM, container);
+            return new AddDBVM(_mainVM, container);
         }
         private void CreateAndShowSignInDBForm(object obj)
         {
             SignInDBView signInDBView = _controlManager.CreateControl<SignInDBView>();
             var container = _controlManager.RegisterControl(signInDBView);
-            SignInDBFormVM signInDBVM = CreateSignInDBVM(container);
+            SignInDBVM signInDBVM = CreateSignInDBVM(container);
 
             _controlManager.BindDataContextToControl(signInDBView, signInDBVM);
             SetMainVMCurrentView(signInDBView);
         }
 
-        private SignInDBFormVM CreateSignInDBVM(IUnityContainer container)
+        private SignInDBVM CreateSignInDBVM(IUnityContainer container)
         {
             if (_mainVM == null) throw new ArgumentException("MainVM was null while SignInDBVM created");
             if (SelectedDB == null) throw new ArgumentException("SelectedDB was null while SignInDBVM created");
 
-            return new SignInDBFormVM(SelectedDB, _mainVM, container);
+            return new SignInDBVM(SelectedDB, _mainVM, container);
         }
         private void SetMainVMCurrentView(UserControl view)
         {

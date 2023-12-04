@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Password_Manager.MVVM.View.ChangeEntryView"
+﻿<UserControl x:Class="Password_Manager.MVVM.View.ChangeEntryFormView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,10 +7,7 @@
              mc:Ignorable="d" 
              xmlns:viewmodel="clr-namespace:Password_Manager.MVVM.ViewModel"
              d:DesignHeight="650" d:DesignWidth="850">
-    <UserControl.DataContext>
-        <viewmodel:ChangeEntryVM/>
-    </UserControl.DataContext>
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>

@@ -12,7 +12,7 @@ using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    public class ChangeEntryFormVM : FilesEditFormVM
+    public class ChangeEntryFormVM : FilesEditForm
     {
         private IUnityContainer _container;
         public EntryDataView EntryDataForm { get; set; }
@@ -55,7 +55,10 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void CancelEdit(object obj)
         {
-            SetDBContextCurrentView(EntryDataForm);
+            if (DBContext != null)
+                DBContext.CurrentView = EntryDataForm;
+            else
+                CloseForm(new object());
         }
     }
 }

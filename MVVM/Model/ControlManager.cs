@@ -23,30 +23,16 @@ namespace Password_Manager.MVVM.Model
         {
             return new T();
         }
-        public T CreateWindow<T>() where T : Window, new()
-        {
-            return new T();
-        }
 
-        public void BindDataContextToControl<T, V>(T control, V viewModel) where T : UserControl
+        public void BindDataContextToControl<T, V>(T control, V viewModel) where T : UserControl, new() 
                                                                            where V : ObservableObject
         {
             control.DataContext = viewModel;
         }
-        public void BindDataContextToWindow<T, V>(T window, V viewModel) where T : Window
-                                                                         where V : ObservableObject
-        {
-            window.DataContext = viewModel;
-        }
 
-        public void ShowWindowAtCenter<T>(T window) where T : Window
+        public T CreateWindow<T>() where T : Window, new()
         {
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.Show();
-        }
-        public void CloseWindow<T>(T window) where T : Window
-        {
-            window.Close();
+            return new T();
         }
     }
 }

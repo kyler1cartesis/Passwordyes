@@ -19,9 +19,9 @@ using Unity;
 
 namespace Password_Manager.MVVM.ViewModel;
 
-public class AddDBFormVM : ObservableObject
+public class AddDBVM : ObservableObject
 {
-    private MainVM _mainVM;
+    private MainViewModel _mainVM;
     private IUnityContainer _container;
     private MessageBoxManager _dialogManager;
     public ICommand AddDBCommand { get; set; }
@@ -58,13 +58,12 @@ public class AddDBFormVM : ObservableObject
     }
     public CodeLevel Level { get; set; }
 
-    public AddDBFormVM(MainVM maiNVM, IUnityContainer container)
+    public AddDBVM(MainViewModel maiNVM, IUnityContainer container)
     {
         _errorMessage = string.Empty;
         _name = string.Empty;
         _mainVM = maiNVM;
         _container = container;
-        _dialogManager = new MessageBoxManager();
 
         AddDBCommand = new RelayCommand(AddDB);
         SetCodeLevelCommand = new RelayCommand(SetCodeLevel);

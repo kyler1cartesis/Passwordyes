@@ -7,10 +7,6 @@
              xmlns:viewmodel="clr-namespace:Password_Manager.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="850">
-    
-    <UserControl.DataContext>
-        <viewmodel:AddEntryVM/>
-    </UserControl.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
