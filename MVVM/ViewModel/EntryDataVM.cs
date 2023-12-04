@@ -15,7 +15,7 @@ using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    public class EntryDataVM : FilesEditForm
+    public class EntryDataVM : FilesEditFormVM
     {
         private MessageBoxManager _dialogManager;
         private ControlManager _controlManager;
@@ -74,12 +74,14 @@ namespace Password_Manager.MVVM.ViewModel
 
             _controlManager.BindDataContextToControl(changeEntryView, changeFormVM);
 
-            DBContext.CurrentView = changeEntryView;
+            SetDBContextCurrentView(changeEntryView);
         }
 
         private ChangeEntryFormVM CreateChangeEntryFormVM(EntryDataView entryDataForm, IUnityContainer container)
         {
             return new ChangeEntryFormVM(Name, Description, URL, DBContext, entryDataForm, container);
         }
+
+        
     }
 }

@@ -11,7 +11,7 @@ using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    public class AddEntryVMForm : FilesEditForm
+    public class AddEntryFormVM : FilesEditFormVM
     {
         private IUnityContainer _container;
         public ICommand CreateEntryCommand { get; set; }
@@ -26,7 +26,7 @@ namespace Password_Manager.MVVM.ViewModel
             }
         }
 
-        public AddEntryVMForm(DataBaseContextVM contextVM, IUnityContainer container) : base(contextVM)
+        public AddEntryFormVM(DataBaseContextVM contextVM, IUnityContainer container) : base(contextVM)
         {
             _container = container;
 

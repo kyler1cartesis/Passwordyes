@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,15 +15,14 @@ using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    class SignInDBVM : ObservableObject
+    class SignInDBFormVM : ObservableObject
     {
-		private MainViewModel _mainVM;
+		private MainVM _mainVM;
+		private ControlManager _controlManager;
 		private IUnityContainer _container;
-		//Команда добавления БД в коллекцию
 		public ICommand SignInDataBaseCommand { get; set; }
         public ICommand CloseFormCommand { get; set; }
 
-        //Поле с именем новой БД
         public DBDescriptionVM DbToSignIn { get; set; }
 
 		public string MasterPassword
@@ -46,11 +46,13 @@ namespace Password_Manager.MVVM.ViewModel
 			get => "Вход в \"" + DbToSignIn.Name + "\"";
 		}
 
-        public SignInDBVM(DBDescriptionVM dbToSignIn, MainViewModel mainVM, IUnityContainer contianer)
+        public SignInDBFormVM(DBDescriptionVM dbToSignIn, MainVM mainVM, IUnityContainer contianer)
 		{
 			DbToSignIn = dbToSignIn;
 			_mainVM = mainVM;
 			_container = contianer;
+			_errorMessage = string.Empty;
+			_controlManager = new ControlManager();
 
 			SignInDataBaseCommand = new RelayCommand(Enter, CanEnter);
             CloseFormCommand = new RelayCommand(Close);
@@ -69,22 +71,27 @@ namespace Password_Manager.MVVM.ViewModel
 			{
 				//ModelAPI.SignInBD(DbToSignIn);
 
-                var mainWindow = obj as Window;
+                MainWindow mainWindow = (MainWindow)obj;
 
-				DataBaseContextVM dbContextVM = new DataBaseContextVM(DbToSignIn);
-				
-				DataBaseContextWindow dbContextWin = new DataBaseContextWindow();
-				dbContextWin.DataContext = dbContextVM;
+                DataBaseContextWindow dbContextWin = _controlManager.CreateWindow<DataBaseContextWindow>();
 
-				dbContextWin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-				dbContextWin.Show();
-				mainWindow.Close();
+                DataBaseContextVM dbContextVM = CreateDBContextVM();
+
+				_controlManager.BindDataContextToWindow(dbContextWin, dbContextVM);
+
+				_controlManager.ShowWindowAtCenter(dbContextWin);
+				_controlManager.CloseWindow(mainWindow);
 			}
 			else
 			{
 
 			}
 		}
+
+		private DataBaseContextVM CreateDBContextVM()
+		{
+			return new DataBaseContextVM(DbToSignIn);
+        }
 
         private void Close(object obj)
         {

@@ -9,7 +9,7 @@
              x:Name="mainwindow">
 
     <UserControl.DataContext>
-        <viewModel:DataBasesViewModel/>
+        <viewModel:DataBasesVM/>
     </UserControl.DataContext>
 
     <Grid Background="#413f54">

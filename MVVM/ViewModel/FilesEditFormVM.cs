@@ -9,7 +9,7 @@ using Password_Manager.Core;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    public class FilesEditForm : ObservableObject
+    public class FilesEditFormVM : ObservableObject
     {
         public RelayCommand CloseFormCommand { get; set; }
         public DataBaseContextVM? DBContext { get; set; }
@@ -21,7 +21,7 @@ namespace Password_Manager.MVVM.ViewModel
             set { _name = value; OnPropertyChanged(nameof(Name)); }
         }
 
-        public FilesEditForm(DataBaseContextVM? contextVM) 
+        public FilesEditFormVM(DataBaseContextVM? contextVM) 
         { 
             _name = string.Empty;
             DBContext = contextVM;
@@ -50,6 +50,14 @@ namespace Password_Manager.MVVM.ViewModel
         protected void CloseForm(object obj)
         {
             DBContext?.ClosePage();
+        }
+
+        protected void SetDBContextCurrentView<FORM>(FORM filesEditForm) where FORM : UserControl
+        {
+            if (DBContext != null)
+                DBContext.CurrentView = filesEditForm;
+            else
+                CloseForm(new object());
         }
 
         protected EntryVM CreateEntry(FolderVM parentFolder, string Name, string? Description, string? URL)

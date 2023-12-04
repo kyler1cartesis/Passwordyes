@@ -191,16 +191,16 @@ namespace Password_Manager.MVVM.ViewModel
             AddEntryView addEntryView = _controlManager.CreateControl<AddEntryView>();
             IUnityContainer container = _controlManager.RegisterControl(addEntryView);
 
-            AddEntryVMForm entryForm = CreateAddEntryFormVM(container);
+            AddEntryFormVM entryForm = CreateAddEntryFormVM(container);
 
             _controlManager.BindDataContextToControl(addEntryView, entryForm);
 
             CurrentView = addEntryView;
         }
 
-        private AddEntryVMForm CreateAddEntryFormVM(IUnityContainer container)
+        private AddEntryFormVM CreateAddEntryFormVM(IUnityContainer container)
         {
-            return new AddEntryVMForm(this, container);
+            return new AddEntryFormVM(this, container);
         }
 
         private bool CanShowCreateFolderForm(object obj)
@@ -232,11 +232,11 @@ namespace Password_Manager.MVVM.ViewModel
         private void Exit(object obj)
         {
             //ModelAPI.Exit();
-            Window window = (Window)obj;
+            Window dbContextWin = (Window)obj;
             MainWindow mainWindow = _controlManager.CreateWindow<MainWindow>();
 
-            mainWindow.Show();
-            window.Close();
+            _controlManager.ShowWindowAtCenter(mainWindow);
+            _controlManager.CloseWindow(dbContextWin);
         }
 
         public void ClosePage()
