@@ -51,7 +51,7 @@ public class ChangeEntryVM : FilesEditForm {
         var subFiles = DBContext.CurrentSubFiles.Where((file) => {
             return file is not EntryVM || file.Name != OldName;
         });
-        var subFilesWithoutCurrentEntry = new ObservableCollection<FileVM>(subFiles)
+        var subFilesWithoutCurrentEntry = new ObservableCollection<IEntryOrFolderVM>(subFiles)
         {
             entry
         };

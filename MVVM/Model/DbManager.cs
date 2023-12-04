@@ -1,24 +1,38 @@
-﻿using System;
+﻿using Password_Manager.MVVM.ViewModel;
+using System;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace Password_Manager.MVVM.Model;
 
-public static class DbManager {
-    private const string DBsPath = "/databases/";
+internal class DbManager {
+    private ObservableCollection<DBDescriptionVM> DbDescriptions;
 
-    public static string[] GetDbFileNames ()
-        => Directory.GetFiles(DBsPath, "*.json");
+    internal ObservableCollection<DBDescriptionVM> GetDbDescriptions () {
+        UpdateDbDescriptions();
+        return DbDescriptions;
+    }
 
-    internal static FileStream OpenDbForRead (string FileName)
-       => File.Open(DBsPath + FileName, FileMode.Open, FileAccess.Read);
+    internal void RemoveDb (DBDescriptionVM selectedDb) {
+        UpdateDbDescriptions();
+        if (!CheckDbExistence(selectedDb)) throw new ArgumentException();
+        StaticFileManager.DeleteDb(selectedDb.Name);
+        DbDescriptions.Remove(selectedDb);
+    }
 
-    internal static FileStream OpenDbForWrite (string FileName)
-       => File.Open(DBsPath + FileName, FileMode.Open, FileAccess.ReadWrite);
-
-    internal static FileStream CreateAndOpenDb (string FileName)
-       => File.Open(DBsPath + FileName, FileMode.CreateNew);
-
-    internal static bool ValidateDb () {
-        throw new NotImplementedException();
+    private void UpdateDbDescriptions () {
+        string[] fileNames = StaticFileManager.GetDbFileNames();
+        DbDescriptions = new();
+        for (int i = 0; i < fileNames.Length; i++)
+            DbDescriptions.Add(new DBDescriptionVM() {
+                Name = Path.GetFileNameWithoutExtension(fileNames[i]),
+                DataBaseLastOpenDate = File.GetLastWriteTime(fileNames[i]),
+                DataBaseCreateDate = File.GetCreationTime(fileNames[i]),
+                Level = CodeLevel.HIGH,
+            });
+    }
+    
+    internal bool CheckDbExistence (DBDescriptionVM selectedDb) {
+        return DbDescriptions.Contains(selectedDb);
     }
 }

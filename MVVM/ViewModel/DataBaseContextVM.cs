@@ -17,8 +17,8 @@ public class DataBaseContextVM : ObservableObject {
 
 
 
-    private ObservableCollection<FileVM> _currentSubFiles;
-    public ObservableCollection<FileVM> CurrentSubFiles {
+    private ObservableCollection<IEntryOrFolderVM> _currentSubFiles;
+    public ObservableCollection<IEntryOrFolderVM> CurrentSubFiles {
         get {
             return _currentSubFiles;
         }
@@ -27,8 +27,8 @@ public class DataBaseContextVM : ObservableObject {
             OnPropertyChanged("CurrentSubFiles");
         }
     }
-    private FileVM _currentFile;
-    public FileVM CurrentFile {
+    private IEntryOrFolderVM _currentFile;
+    public IEntryOrFolderVM CurrentFile {
         get {
             return _currentFile;
         }
@@ -38,7 +38,7 @@ public class DataBaseContextVM : ObservableObject {
             OnPropertyChanged("CurrentFile");
         }
     }
-    public FileVM SelectedFile { get; set; }
+    public IEntryOrFolderVM SelectedFile { get; set; }
 
     public string DbName { get; set; }
 
@@ -59,7 +59,7 @@ public class DataBaseContextVM : ObservableObject {
     public DataBaseContextVM () {
         EntryData = new EntryDataVM();
         //CurrentFile = ModelAPI.GetRootFolder();
-        CurrentSubFiles = new ObservableCollection<FileVM>();
+        CurrentSubFiles = new ObservableCollection<IEntryOrFolderVM>();
 
         FolderVM f1 = new(null);
         FolderVM f2 = new(f1);

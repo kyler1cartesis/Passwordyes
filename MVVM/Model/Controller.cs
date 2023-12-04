@@ -2,8 +2,6 @@
 
 namespace Password_Manager.MVVM.Model;
 public class Controller {
-    private View view;
-    private MainWindow mainWindow;
     private AppDbContext appDbContext;
 
     public void OnOpenDbList () {

@@ -28,7 +28,7 @@ internal interface IModelAPI {
     internal void SignInDb (DBDescriptionVM dbToSignIn);
 
     //Возвращает корневую директорию БД
-    internal FileVM GetRootFolder ();
+    internal IEntryOrFolderVM GetRootFolder ();
 
     //Выходит из БД и завершает сессию
     internal void Exit ();

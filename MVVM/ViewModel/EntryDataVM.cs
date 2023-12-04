@@ -40,7 +40,7 @@ public class EntryDataVM : FilesEditForm {
         var subFiles = DBContext.CurrentSubFiles.Where((file) => {
             return file is not EntryVM || file.Name != Name;
         });
-        var subFilesWithoutCurrentEntry = new ObservableCollection<FileVM>(subFiles);
+        var subFilesWithoutCurrentEntry = new ObservableCollection<IEntryOrFolderVM>(subFiles);
         DBContext.CurrentSubFiles = subFilesWithoutCurrentEntry;
         (DBContext.CurrentFile as FolderVM).SubFiles = subFilesWithoutCurrentEntry;
 

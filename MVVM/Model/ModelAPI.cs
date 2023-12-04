@@ -4,26 +4,36 @@ using System.Collections.ObjectModel;
 
 namespace Password_Manager.MVVM.Model;
 internal class ModelAPI : IModelAPI {
-    private View view;
-    private MainWindow mainWindow;
+    private DbManager dbManager;
     private AppDbContext appDbContext;
 
-    public void CreateNewDB (string Name, string MasterPassword)
-        => throw new NotImplementedException();
+    public ModelAPI () {
+        dbManager = new();
+        appDbContext = new(dbManager);
+    }
 
     public void Exit ()
         => appDbContext.Close();
 
     public ObservableCollection<DBDescriptionVM> GetDBDescriptions ()
-        => appDbContext.GetDbDescriptions();
+        => dbManager.GetDbDescriptions();
 
-    public FileVM GetRootFolder ()
-        => throw new NotImplementedException();
+    public bool ValidatePassword (string masterPassword, string masterPasswordConfirm)
+        => StaticValidator.ValidatePassword(masterPassword);
 
-    public void RemoveDB (DBDescriptionVM selectedDBD)
-        => throw new NotImplementedException();
+    public void CreateNewDB (string Name, string MasterPassword)
+        => appDbContext.CreateNewDB(Name, MasterPassword);
+
+    public void RemoveDB (DBDescriptionVM selectedDb)
+        => dbManager.RemoveDb(selectedDb);
 
     public void SignInDb (DBDescriptionVM dbToSignIn)
+        => appDbContext.SignInDb(dbToSignIn);
+
+    public bool VerifyPassword (DBDescriptionVM DbToSignIn, string MasterPassword)
+        => throw new NotImplementedException();
+
+    public IEntryOrFolderVM GetRootFolder ()
         => throw new NotImplementedException();
 
     public bool ValidateDbName (string name)
@@ -41,9 +51,13 @@ internal class ModelAPI : IModelAPI {
     public bool ValidateFileName (string name)
         => throw new NotImplementedException();
 
-    public bool ValidatePassword (string masterPassword, string masterPasswordConfirm)
-        => throw new NotImplementedException();
-
-    public bool VerifyPassword (DBDescriptionVM DbToSignIn, string MasterPassword)
-        => throw new NotImplementedException();
+    static void Main(string[] args) {
+        // test
+        ModelAPI modelAPI = new();
+        modelAPI.CreateNewDB("test", "test");
+        modelAPI.SignInDb(modelAPI.GetDBDescriptions()[0]);
+        var gg = modelAPI.appDbContext.AuthorizationEntries;
+        Console.WriteLine(gg);
+        modelAPI.Exit();
+    }
 }

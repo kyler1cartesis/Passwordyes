@@ -63,7 +63,7 @@ public class AddDBVM : ObservableObject {
         //ModelAPI.CreateNewDB(Name, MasterPassword);
 
         _mainVM.DataBasesViewCommand.Execute(null);
-        _mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level));
+        _mainVM.DataBasesVM.AddDBD(new DBDescriptionVM { Name = Name, DataBaseLastOpenDate = DateTime.Now, Level = Level });
     }
 
     private void Close (object obj) {

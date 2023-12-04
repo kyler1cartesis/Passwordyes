@@ -3,7 +3,7 @@ using Password_Manager.Core;
 
 namespace Password_Manager.MVVM.ViewModel;
 
-public class FileVM : ObservableObject {
+public abstract class IEntryOrFolderVM : ObservableObject {
     private string _name;
 
     public string Name {
@@ -16,5 +16,5 @@ public class FileVM : ObservableObject {
         }
     }
     public DateTime CreateDate { get; set; }
-
+    public string? Description { get; internal set; }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Password_Manager.MVVM.ViewModel;
 
-public class EntryVM : FileVM {
+public class EntryVM : IEntryOrFolderVM {
     private FolderVM? _parent;
     public string ImagePath { get; } = "pack://siteoforigin:,,,/GuiSources/Images/notes.png";
     public FolderVM? Parent { get { return _parent; } }

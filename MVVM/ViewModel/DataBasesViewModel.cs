@@ -105,14 +105,14 @@ public class DataBasesViewModel : ObservableObject {
     private void UpdateDBDs () {
 
         //DBDescriptions = ModelAPI.GetDBDescriptions();
-        DBDescriptions.Add(new DBDescriptionVM {
+        DBDescriptions.Add(new DBDescriptionVM() {
             Name = "Test DataBase №1",
             Status = "Open",
             DataBaseLastOpenDate = DateTime.Now,
             DataBaseCreateDate = DateTime.Now
         });
 
-        DBDescriptions.Add(new DBDescriptionVM {
+        DBDescriptions.Add(new DBDescriptionVM() {
             Name = "Test DataBase №2",
             Status = "Open",
             DataBaseLastOpenDate = DateTime.Now,
@@ -120,33 +120,33 @@ public class DataBasesViewModel : ObservableObject {
             Level = CodeLevel.HIGH
         });
 
-        DBDescriptions.Add(new DBDescriptionVM {
+        DBDescriptions.Add(new DBDescriptionVM() {
             Name = "Test DataBase №2",
             Status = "Open",
             DataBaseLastOpenDate = DateTime.Now,
             DataBaseCreateDate = DateTime.Now
         });
-        DBDescriptions.Add(new DBDescriptionVM {
+        DBDescriptions.Add(new DBDescriptionVM() {
             Name = "Test DataBase №2",
             Status = "Open",
             DataBaseLastOpenDate = DateTime.Now,
             DataBaseCreateDate = DateTime.Now,
             Level = CodeLevel.MID
         });
-        DBDescriptions.Add(new DBDescriptionVM {
+        DBDescriptions.Add(new DBDescriptionVM() {
             Name = "Test DataBase №2",
             Status = "Open",
             DataBaseLastOpenDate = DateTime.Now,
             DataBaseCreateDate = DateTime.Now,
             Level = CodeLevel.HIGH
         });
-        DBDescriptions.Add(new DBDescriptionVM {
+        DBDescriptions.Add(new DBDescriptionVM() {
             Name = "Test DataBase №2",
             Status = "Open",
             DataBaseLastOpenDate = DateTime.Now,
             DataBaseCreateDate = DateTime.Now
         });
-        DBDescriptions.Add(new DBDescriptionVM {
+        DBDescriptions.Add(new DBDescriptionVM() {
             Name = "Test DataBase №2",
             Status = "Open",
             DataBaseLastOpenDate = DateTime.Now,
