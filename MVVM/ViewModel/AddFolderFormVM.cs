@@ -9,7 +9,7 @@ using Password_Manager.MVVM.Model;
 
 namespace Password_Manager.MVVM.ViewModel
 {
-    public class AddFolderFormVM : FilesEditForm
+    public class AddFolderFormVM : FilesEditFormVM
     {
         public ICommand CreateFolderCommand { get; set; }
         public AddFolderFormVM(DataBaseContextVM contextVM) : base(contextVM)
