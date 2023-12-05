@@ -22,7 +22,7 @@ namespace Password_Manager.MVVM.ViewModel
         }
 
         public FilesEditFormVM(DataBaseContextVM? contextVM) 
-        { 
+        {
             _name = string.Empty;
             DBContext = contextVM;
 
