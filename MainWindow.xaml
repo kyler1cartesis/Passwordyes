@@ -10,10 +10,10 @@
         Height="600" Width="900"
         AllowsTransparency="False"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="SingleBorderWindow"
+        WindowStyle="None"
         Background="Transparent"
         ResizeMode="NoResize"
-        BorderBrush="#413f54"
+        BorderBrush="#2d2c36"
         BorderThickness="2" Icon="pack://siteoforigin:,,,/GuiSources/Images/whirlwind.ico">
 
 
@@ -21,9 +21,19 @@
         <viewModel:MainVM/>
     </Window.DataContext>
 
-
-    <Border Background="#413f54"
-            CornerRadius="0">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="#2d2c36"
+                CornerRadius="0"
+                Grid.Row="0">
+            
+        </Border>
+      <Border Background="#413f54"
+            CornerRadius="0"
+            Grid.Row="1">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -46,7 +56,7 @@
             <Rectangle Grid.Column="0"
                Grid.Row="1"  
                Stroke="#5F5AA2"
-               Fill="Transparent"
+               Fill="#353340"
                StrokeThickness="3"/>
 
             <!--Кнопки главного меню-->
@@ -86,5 +96,6 @@
         </Grid>
         
     </Border>
+    </Grid>
     
 </Window>
