@@ -24,6 +24,7 @@ namespace Password_Manager.MVVM.ViewModel
         private string _encryptedPassword;
         public ICommand DeleteEntryCommand { get; set; }
         public ICommand ChangeEntry { get; set; }
+        public ICommand CopyPasswordCommand { get; set; }
         public string Password
         {
             set
@@ -51,6 +52,7 @@ namespace Password_Manager.MVVM.ViewModel
 
             DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
             ChangeEntry = new RelayCommand(ShowChangeEntryForm, CanShowChangeEntryForm);
+            CopyPasswordCommand = new RelayCommand(CopyPassword);
         }
 
 		private bool CanDeleteEntry(object obj)
@@ -97,6 +99,10 @@ namespace Password_Manager.MVVM.ViewModel
             return new ChangeEntryFormVM(Name, _encryptedPassword, Description, URL, Login, DBContext, entryDataForm, container);
         }
 
-        
+        private void CopyPassword(object obj)
+        {
+            return;
+            ModelAPI.CopyPasswordToClipBoard(_encryptedPassword);
+        }
     }
 }

@@ -101,5 +101,10 @@ namespace Password_Manager.MVVM.Model
         {
             return string.Empty;
         }
+
+        internal static void CopyPasswordToClipBoard(string encryptedPassword)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

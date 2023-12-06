@@ -6,7 +6,7 @@ using System.Text;
 using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.ViewModel;
 
-namespace Password_Manager
+namespace Password_Manager.MVVM.ViewModel
 {
     public class FolderVM : FileVM
     {
@@ -31,12 +31,12 @@ namespace Password_Manager
 
         public void RemoveFileByName(string name)
         {
-            SubFiles.Remove(GetFileByName(name));
+            SubFiles.Remove(GetFileByName<EntryVM>(name));
         }
 
-        private FileVM GetFileByName(string name)
+        private FILE GetFileByName<FILE>(string name) where FILE : FileVM
         {
-            return SubFiles.Single(file => file.Name == name);
+            return (FILE)SubFiles.Single(file => file.Name == name && file is FILE);
         }
 
         public void AddFile(FileVM file)
@@ -46,7 +46,7 @@ namespace Password_Manager
 
         public void FindAndChangeFileByName(string oldName, string newName, string Password, string? description, string? url, string? login)
         {
-            EntryVM entryVM = (EntryVM)GetFileByName(oldName);
+            EntryVM entryVM = GetFileByName<EntryVM>(oldName);
 
             entryVM.Name = newName;
             entryVM.Description = description;

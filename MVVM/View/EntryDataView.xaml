@@ -69,7 +69,10 @@
                                 HorizontalAlignment="Left">
 
                             <Grid>
-                                <Rectangle StrokeThickness="1"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
 
                                 <PasswordBox Margin="1"
                                             x:Name="passwordBox"
@@ -80,6 +83,17 @@
                                             HorizontalContentAlignment="Left"
                                             Padding="5"
                                             FontSize="17" IsEnabled="False"/>
+                                <Button Height="35" 
+                                        Grid.Column="1"
+                                        Width="25"  
+                                        Command="{Binding CopyPasswordCommand}"
+                                        VerticalContentAlignment="Center" 
+                                        Padding="5" Margin="0,0,0,0" 
+                                        VerticalAlignment="Center" 
+                                        HorizontalAlignment="Center" 
+                                        BorderThickness="1" 
+                                        Style="{StaticResource ButtonWithImage}"
+                                        local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/copy.png"/>
                             </Grid>
                         </Border>
                     </StackPanel>
