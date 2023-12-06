@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -48,7 +48,7 @@
                         Content="Новая запись" 
                         Width="135"  
                         VerticalContentAlignment="Center" 
-                        Padding="0" Margin="10,10,10,20"
+                        Padding="0" Margin="10,10,10,10"
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Right" 
                         BorderThickness="1" 
@@ -58,7 +58,7 @@
                     <Image Source="pack://siteoforigin:,,,/GuiSources/Images/add_file.png"
                            Width="15"
                            Height="15"
-                           Margin="22,35,113,15">
+                           Margin="22,35,113,5">
                         
                     </Image>
                 </Grid>
@@ -68,7 +68,7 @@
                         Command="{Binding NewFolder}"
                         Width="135"  
                         VerticalContentAlignment="Center" 
-                        Padding="5" Margin="10,10,10,20"
+                        Padding="5" Margin="10,10,10,10"
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Right" 
                         BorderThickness="1" 
@@ -78,7 +78,7 @@
                     <Image Source="pack://siteoforigin:,,,/GuiSources/Images/add_file.png"
                            Width="15"
                            Height="15"
-                           Margin="28,35,107,15">
+                           Margin="28,35,107,5">
 
                     </Image>
                 </Grid>
@@ -88,7 +88,7 @@
                         CommandParameter="{Binding ElementName=DBContextWindow}"
                         Width="110"  
                         VerticalContentAlignment="Center" 
-                        Padding="5" Margin="250,10,10,20"
+                        Padding="5" Margin="250,10,10,10"
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Left" 
                         BorderThickness="1" 

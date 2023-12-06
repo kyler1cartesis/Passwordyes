@@ -145,14 +145,18 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void SelectFileHandler(EntryVM entry)
         {
-            EntryDataVM entryData = CreateEntryDataFormVM(entry.Name, entry.Password, entry.Description, entry.Url);
+            EntryDataView entryDataView = _controlManager.CreateControl<EntryDataView>();
+            IUnityContainer container = _controlManager.RegisterControl(entryDataView);
 
-            CurrentView = new EntryDataView(entryData);
+            EntryDataVM entryDataVM = CreateEntryDataFormVM(entry.Name, entry.Password, entry.Description, entry.Url, entry.Login, container);
+
+            _controlManager.BindDataContextToControl(entryDataView, entryDataVM);
+            CurrentView = entryDataView;
         }
 
-        private EntryDataVM CreateEntryDataFormVM(string Name, string? Password, string? Description, string? URL)
+        private EntryDataVM CreateEntryDataFormVM(string Name, string Password, string? Description, string? URL, string? Login, IUnityContainer container)
         {
-            return new EntryDataVM(this, Name, Password, Description, URL);
+            return new EntryDataVM(this, Name, Password, Description, URL, Login, container);
         }
 
         private void GoIntoTheFolder(FolderVM selectedFolder)

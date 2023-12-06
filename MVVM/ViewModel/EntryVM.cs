@@ -28,18 +28,28 @@ namespace Password_Manager.MVVM.ViewModel
             set { _url = value; OnPropertyChanged(nameof(Url)); }
         }
 
-        private string? _password;
-        public string? Password
+        private string _password;
+        public string Password
         {
             get => _password;
             set { _password = value; OnPropertyChanged(nameof(Password)); }
         }
 
-        public EntryVM(FolderVM? parent, string name, string? description, string? url) : base(name)
+        private string? _login;
+        public string? Login
+        {
+            get => _login;
+            set { _login = value; OnPropertyChanged(nameof(Login)); }
+        }
+
+
+        public EntryVM(FolderVM? parent, string name, string password, string? description, string? url, string? login) : base(name)
         {
             _parent = parent;
             _description = description;
             _url = url;
+            _password = password;
+            _login = login;
         }
 
         public EntryVM(FolderVM? parent, string name) : base(name)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager
@@ -43,13 +44,14 @@ namespace Password_Manager
             SubFiles.Add(file);
         }
 
-        public void FindAndChangeFileByName(string oldName, string newName, string? description, string? url)
+        public void FindAndChangeFileByName(string oldName, string newName, string Password, string? description, string? url, string? login)
         {
             EntryVM entryVM = (EntryVM)GetFileByName(oldName);
 
             entryVM.Name = newName;
             entryVM.Description = description;
             entryVM.Url = url;
+            entryVM.Login = login;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +15,12 @@ namespace Password_Manager.MVVM.ViewModel
     public class AddEntryFormVM : FilesEditFormVM
     {
         private IUnityContainer _container;
+        private string _ecnryptPassword;
         public ICommand CreateEntryCommand { get; set; }
         public string? Description { get; set; }
         public string? URL { get; set; }
-        public string? Password
+        public string? Login { get; set; }
+        public string Password
         {
             get
             {
@@ -29,6 +32,7 @@ namespace Password_Manager.MVVM.ViewModel
         public AddEntryFormVM(DataBaseContextVM contextVM, IUnityContainer container) : base(contextVM)
         {
             _container = container;
+            _ecnryptPassword = string.Empty;
 
             CreateEntryCommand = new RelayCommand(AddEntry);
         }
@@ -37,7 +41,9 @@ namespace Password_Manager.MVVM.ViewModel
         {
             FolderVM currentFolder = GetCurrentFolder();
 
-            EntryVM entry = CreateEntry(currentFolder, Name, Description, URL);
+            _ecnryptPassword = ModelAPI.EncryptEntryPassword(Password);
+
+            EntryVM entry = CreateEntry(currentFolder, Name, _ecnryptPassword, Description, URL, Login);
 
             currentFolder.AddFile(entry);
 

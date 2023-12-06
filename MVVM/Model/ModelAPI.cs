@@ -89,5 +89,17 @@ namespace Password_Manager.MVVM.Model
         {
             throw new NotImplementedException();
         }
+
+        //Зашифровать пароль и вернуть (не обязательно в виде string, можно поменять тип любой объект)
+        internal static string EncryptEntryPassword(string password)
+        {
+            return string.Empty;
+        }
+
+        //Дешифровать зашифрованный пароль
+        internal static string DecryptEntryPassword(string password)
+        {
+            return string.Empty;
+        }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.View
@@ -19,12 +20,26 @@ namespace Password_Manager.MVVM.View
     /// <summary>
     /// Логика взаимодействия для CreateEntryForm.xaml
     /// </summary>
-    public partial class EntryDataView : UserControl
+    public partial class EntryDataView : UserControl, IPasswordSupplier
     {
-        public EntryDataView(EntryDataVM createEntry)
+        public EntryDataView()
         {
             InitializeComponent();
-            this.DataContext = createEntry;
+        }
+
+        public string GetPassword()
+        {
+            return string.Empty;
+        }
+
+        public string GetPasswordConfirm()
+        {
+            return string.Empty;
+        }
+
+        public void SetPassword(string password)
+        {
+            passwordBox.Password = password;
         }
     }
 }

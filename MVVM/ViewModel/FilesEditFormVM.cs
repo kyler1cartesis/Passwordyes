@@ -60,9 +60,9 @@ namespace Password_Manager.MVVM.ViewModel
                 CloseForm(new object());
         }
 
-        protected EntryVM CreateEntry(FolderVM parentFolder, string Name, string? Description, string? URL)
+        protected EntryVM CreateEntry(FolderVM parentFolder, string Name, string password, string? Description, string? URL, string? login)
         {
-            return new EntryVM(parentFolder, Name, Description, URL);
+            return new EntryVM(parentFolder, Name, password, Description, URL, login);
         }
     }
 }

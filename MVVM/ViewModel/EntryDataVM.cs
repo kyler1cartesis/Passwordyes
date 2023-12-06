@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,22 +20,36 @@ namespace Password_Manager.MVVM.ViewModel
     {
         private MessageBoxManager _dialogManager;
         private ControlManager _controlManager;
+        private IUnityContainer _container;
+        private string _encryptedPassword;
         public ICommand DeleteEntryCommand { get; set; }
         public ICommand ChangeEntry { get; set; }
-        public string? Password { get; set; }
+        public string Password
+        {
+            set
+            {
+                IPasswordSupplier sup = _container.Resolve<IPasswordSupplier>();
+                sup.SetPassword(value);
+            }
+        }
+        public string? Login { get; set; }
 		public string? Description { get; set; }
 		public string? URL { get; set; }
 
-		public EntryDataVM(DataBaseContextVM contextVM, string name, string? password, string? description, string? url) : base(contextVM)
+		public EntryDataVM(DataBaseContextVM contextVM, string name, string password, string? description, string? url, string? login, IUnityContainer container) : base(contextVM)
         {
             _dialogManager = new MessageBoxManager();
             _controlManager = new ControlManager();
+            _container = container;
+            _encryptedPassword = password;
             Name = name;
-            Password = password;
+            Login = login;
             Description = description;
             URL = url;
 
-			DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
+            Password = ModelAPI.DecryptEntryPassword(_encryptedPassword);
+
+            DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
             ChangeEntry = new RelayCommand(ShowChangeEntryForm, CanShowChangeEntryForm);
         }
 
@@ -79,7 +94,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         private ChangeEntryFormVM CreateChangeEntryFormVM(EntryDataView entryDataForm, IUnityContainer container)
         {
-            return new ChangeEntryFormVM(Name, Description, URL, DBContext, entryDataForm, container);
+            return new ChangeEntryFormVM(Name, _encryptedPassword, Description, URL, Login, DBContext, entryDataForm, container);
         }
 
         

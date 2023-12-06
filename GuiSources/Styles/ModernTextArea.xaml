@@ -21,7 +21,7 @@
                                      BorderThickness="0"
                                      VerticalContentAlignment="Top"
                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                     Padding="5"
+                                     Padding="2"
                                      TextWrapping="Wrap"
                                      AcceptsReturn="True"
                                      VerticalScrollBarVisibility="Hidden"/>
