@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:Password_Manager.MVVM.ViewModel"
-        xmlns:local="clr-namespace:Password_Manager"
+        xmlns:local="clr-namespace:Password_Manager.MVVM.View.ViewUtilities"
         mc:Ignorable="d"
+        x:Name="Window"
         Title="Password Storm" 
         Height="600" Width="900"
         AllowsTransparency="False"
@@ -14,7 +15,7 @@
         Background="Transparent"
         ResizeMode="NoResize"
         BorderBrush="#2d2c36"
-        BorderThickness="2" Icon="pack://siteoforigin:,,,/GuiSources/Images/whirlwind.ico">
+        BorderThickness="0" Icon="pack://siteoforigin:,,,/GuiSources/Images/whirlwind.ico">
 
 
     <Window.DataContext>
@@ -27,9 +28,34 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Border Background="#2d2c36"
-                CornerRadius="0"
-                Grid.Row="0">
-            
+                Grid.Row="0"
+                x:Name="Border"
+                MouseDown="Window_MouseDown">
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Height="25"  
+                        Command=""
+                        Width="25"  
+                        VerticalContentAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        Margin="5,0,5,0"
+                        BorderBrush="#E0E0E0"
+                        Style="{StaticResource BarButton}"
+                        local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/min_window.png">
+                </Button>
+                <Button Height="25"  
+                        Width="25"  
+                        Command="{Binding CloseWindowCommand}"
+                        CommandParameter="{Binding ElementName=Window}"
+                        VerticalContentAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right" 
+                        Margin="5,0,5,0"
+                        BorderBrush="#E0E0E0"
+                        Style="{StaticResource CloseButton}"
+                        local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/close_window.png"/>
+            </StackPanel>
         </Border>
       <Border Background="#413f54"
             CornerRadius="0"

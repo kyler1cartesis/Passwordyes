@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
@@ -13,6 +14,7 @@ namespace Password_Manager.MVVM.ViewModel
     {
         private ControlManager _controlManager;
         public RelayCommand HomeViewCommand { get; set; }
+        public RelayCommand CloseWindowCommand { get; set; }
 
         public RelayCommand DataBasesViewCommand { get; set; }
 
@@ -66,6 +68,14 @@ namespace Password_Manager.MVVM.ViewModel
             {
                 CurrentView = SettingsVM;
             });
+
+            CloseWindowCommand = new RelayCommand(CloseWindow);
+        }
+
+        private void CloseWindow(object obj)
+        {
+            Window window = (Window)obj;
+            window.Close();
         }
     }
 }
