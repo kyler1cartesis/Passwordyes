@@ -45,12 +45,6 @@
                                                Width="35"
                                                Height="35"
                                                HorizontalAlignment="Left"/>
-                                        <Image Source="{Binding CodeLevelImagePath}"
-                                               Width="15"
-                                               Height="15"
-                                               Margin="0,-25,-15,0"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"/>
                                     </Grid>
                                 </Border>
                                 <Grid Grid.Column="1">

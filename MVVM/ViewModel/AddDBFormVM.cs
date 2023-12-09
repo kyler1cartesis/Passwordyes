@@ -27,6 +27,7 @@ public class AddDBFormVM : ObservableObject
     public ICommand AddDBCommand { get; set; }
     public ICommand CloseFormCommand { get; set; }
     public ICommand SetCodeLevelCommand { get; set; }
+    public ICommand RunFileManagerCommand {  get; set; }
 
     private string _errorMessage;
     public string ErrorMessage
@@ -69,6 +70,7 @@ public class AddDBFormVM : ObservableObject
         AddDBCommand = new RelayCommand(AddDB);
         SetCodeLevelCommand = new RelayCommand(SetCodeLevel);
         CloseFormCommand = new RelayCommand(Close);
+        RunFileManagerCommand = new RelayCommand(RunFileManager);
     }
 
 	private void AddDB(object obj)
@@ -77,7 +79,7 @@ public class AddDBFormVM : ObservableObject
         //ModelAPI.CreateNewDB(Name, MasterPassword);
 
         _mainVM.DataBasesViewCommand.Execute(new object());
-		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Level));
+		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, string.Empty));
     }
 
     private void Close(object obj)
@@ -111,4 +113,22 @@ public class AddDBFormVM : ObservableObject
             }
         }
 	}
+
+    private void RunFileManager(object obj)
+    {
+        Microsoft.Win32.OpenFolderDialog dialog = new();
+
+        dialog.Multiselect = false;
+        dialog.Title = "Select a folder";
+
+        bool? result = dialog.ShowDialog();
+
+        if (result == true)
+        {
+            string fullPathToFolder = dialog.FolderName;
+            string folderNameOnly = dialog.SafeFolderName;
+
+            Debug.WriteLine(fullPathToFolder + "  \\  " + folderNameOnly);
+        }
+    }
 }
