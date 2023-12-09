@@ -85,13 +85,13 @@
                                                 <ColumnDefinition Width="80"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Content="Создано: "
+                                            <Label Content="Последний вход: "
                                                    Foreground="Gray"
                                                    FontSize="9"
                                                    Margin="0,0,0,0"
                                                    HorizontalAlignment="Left"
                                                    Grid.Column="0"/>
-                                            <Label Content="{Binding DataBaseCreateDate}"
+                                            <Label Content="{Binding DataBaseLastOpenDate}"
                                                    Foreground="White"
                                                    FontSize="9"
                                                    Margin="0,0,0,0"
@@ -109,13 +109,13 @@
                                                 <ColumnDefinition Width="80"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Content="Последний вход: "
+                                            <Label Content="Расположение: "
                                                    Foreground="Gray"
                                                    FontSize="9"
                                                    Margin="0,0,0,0"
                                                    HorizontalAlignment="Left"
                                                    Grid.Column="0"/>
-                                            <Label Content="{Binding DataBaseLastOpenDate}"
+                                            <Label Content="{Binding Path}"
                                                    Foreground="White"
                                                    FontSize="9"
                                                    Margin="0,0,0,0"

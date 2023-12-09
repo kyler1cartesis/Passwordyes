@@ -59,6 +59,20 @@ public class AddDBFormVM : ObservableObject
     }
     public CodeLevel Level { get; set; }
 
+    private string _hint;
+    public string Hint
+    {
+        get => _hint;
+        set { _hint = value; OnPropertyChanged(nameof(Hint)); }
+    }
+
+    private string _path;
+    public string Path
+    {
+        get => _path;
+        set { _path = value; OnPropertyChanged(nameof(Path)); }
+    }
+
     public AddDBFormVM(MainVM maiNVM, IUnityContainer container)
     {
         _errorMessage = string.Empty;
@@ -79,7 +93,7 @@ public class AddDBFormVM : ObservableObject
         //ModelAPI.CreateNewDB(Name, MasterPassword);
 
         _mainVM.DataBasesViewCommand.Execute(new object());
-		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, string.Empty));
+		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Hint, Path));
     }
 
     private void Close(object obj)
@@ -125,10 +139,7 @@ public class AddDBFormVM : ObservableObject
 
         if (result == true)
         {
-            string fullPathToFolder = dialog.FolderName;
-            string folderNameOnly = dialog.SafeFolderName;
-
-            Debug.WriteLine(fullPathToFolder + "  \\  " + folderNameOnly);
+            Path = dialog.FolderName;
         }
     }
 }

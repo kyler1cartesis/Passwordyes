@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.Model;
 
 public static class DbManager
 {
+
+    private static List<DBDescriptionVM> _descriptionVM = new List<DBDescriptionVM>();
+
     public static string[] GetDbList()
         => Directory.GetFiles("/databases");
 

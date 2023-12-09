@@ -38,12 +38,14 @@ namespace Password_Manager.MVVM.ViewModel
         public DateTime DataBaseCreateDate { get; set; }
         public CodeLevel Level { get; set; }
         public string Hint { get; set; }
+        public string Path {  get; set; }
 
-        public DBDescriptionVM(string name, DateTime createDate, string hint)
+        public DBDescriptionVM(string name, DateTime createDate, string hint, string path)
         {
             Name = name;
             DataBaseCreateDate = createDate;
             Hint = hint;
+            Path = path;
         }
 
         public DBDescriptionVM()
@@ -53,6 +55,7 @@ namespace Password_Manager.MVVM.ViewModel
             DataBaseLastOpenDate = DateTime.Now;
             Level = CodeLevel.LOW;
             Hint = string.Empty;
+            Path = string.Empty;
         }
     }
 }
