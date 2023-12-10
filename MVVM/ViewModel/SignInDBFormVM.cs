@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
@@ -18,6 +19,7 @@ namespace Password_Manager.MVVM.ViewModel
     class SignInDBFormVM : ObservableObject
     {
 		private MainVM _mainVM;
+		private MessageBoxManager _dialogManager;
 		private ControlManager _controlManager;
 		private IUnityContainer _container;
 		public ICommand SignInDataBaseCommand { get; set; }
@@ -49,6 +51,7 @@ namespace Password_Manager.MVVM.ViewModel
         public SignInDBFormVM(DBDescriptionVM dbToSignIn, MainVM mainVM, IUnityContainer contianer)
 		{
 			DbToSignIn = dbToSignIn;
+			_dialogManager = new MessageBoxManager();
 			_mainVM = mainVM;
 			_container = contianer;
 			_errorMessage = string.Empty;
@@ -65,9 +68,9 @@ namespace Password_Manager.MVVM.ViewModel
 
 		private void Enter(object obj)
 		{
-			//bool isValidate = ModelAPI.VerifyPassword(DbToSignIn, MasterPassword);
+			bool isValidate = ModelAPI.VerifyPassword(DbToSignIn, MasterPassword);
 
-			if (true)
+			if (isValidate)
 			{
 				//ModelAPI.SignInBD(DbToSignIn);
 
@@ -84,8 +87,10 @@ namespace Password_Manager.MVVM.ViewModel
 			}
 			else
 			{
-
-			}
+                var answer = _dialogManager.ShowMessageBox("Парль не подходит!",
+                                                        "Попытка входа",
+                                                        MessageBoxImage.Error);
+            }
 		}
 
 		private DataBaseContextVM CreateDBContextVM()

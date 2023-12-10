@@ -26,7 +26,7 @@ namespace Password_Manager.MVVM.Model
         //Сверяет пароль для входа в БД
         public static bool VerifyPassword(DBDescriptionVM DbToSignIn, string MasterPassword)
         {
-            throw new NotImplementedException();
+            return DbManager.VerifyPassword(DbToSignIn, MasterPassword);
         }
 
         //Проверяет название БД
@@ -44,7 +44,7 @@ namespace Password_Manager.MVVM.Model
         //Удаляет БД из системы
         public static void RemoveDB(DBDescriptionVM selectedDBD)
         {
-            throw new NotImplementedException();
+            DbManager.RemoveDB(selectedDBD);
         }
 
         //Входит в БД и начинает сессию работы с БД

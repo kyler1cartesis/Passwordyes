@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Security.Cryptography;
+using System.Linq;
 
 namespace Password_Manager.MVVM.Model;
 
@@ -34,6 +35,7 @@ public static class DbManager
     public static ObservableCollection<DBDescriptionVM> GetObservableDescriptions()
     {
         DeserializeDataBases();
+
         return new ObservableCollection<DBDescriptionVM>(_descriptionVM);
     }
 
@@ -47,6 +49,13 @@ public static class DbManager
         SerializeDataBases();
     }
 
+    public static void RemoveDB(DBDescriptionVM description)
+    {
+        _descriptionVM.RemoveAll(dsc => dsc.Name.Equals(description.Name));
+
+        SerializeDataBases();
+    }
+
     public static byte[] GetBytesIn_UTF8_Encoding(string password)
     {
         return Encoding.UTF8.GetBytes(password);
@@ -56,19 +65,14 @@ public static class DbManager
         return SHA256.Create().ComputeHash(passwordBytes);
     }
 
-    public static string[] GetDbList()
-        => Directory.GetFiles("/databases");
-
     internal static FileStream OpenDbForRead (string FileName)
        => System.IO.File.Open("/databases/" + FileName, FileMode.Open, FileAccess.Read);
     
     internal static FileStream OpenDbForWrite (string FileName)
        => System.IO.File.Open("/databases/" + FileName, FileMode.Open, FileAccess.ReadWrite);
 
-    internal static FileStream CreateAndOpenDb (string FileName)
-       => System.IO.File.Open("/databases/" + FileName, FileMode.CreateNew);
-    
-    internal static bool ValidateDb() {
-        throw new NotImplementedException();
+    internal static bool VerifyPassword(DBDescriptionVM DbToSignIn, string MasterPassword)
+    {
+        return HashPasswordSHA256(GetBytesIn_UTF8_Encoding(MasterPassword)).SequenceEqual(DbToSignIn.HashedPassword);
     }
 }

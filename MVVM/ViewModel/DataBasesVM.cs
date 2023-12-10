@@ -144,7 +144,10 @@ namespace Password_Manager.MVVM.ViewModel
         {
             if (dBDescription == null) throw new NullReferenceException("dBDescription was null while delete db");
 
-            DBDescriptions.Remove(dBDescription);
+            ModelAPI.RemoveDB(dBDescription);
+            UpdateDBDs();
+
+            //DBDescriptions.Remove(dBDescription);
         }
 
         private void UpdateDBDs()
