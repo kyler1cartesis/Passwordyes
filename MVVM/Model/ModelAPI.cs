@@ -13,13 +13,13 @@ namespace Password_Manager.MVVM.Model
         //Возвращает актульный список баз данных в системе
         public static ObservableCollection<DBDescriptionVM> GetDBDescriptions()
         {
-            throw new NotImplementedException();
+            return DbManager.GetObservableDescriptions();
         }
 
         //Создаёт в системе новую БД с указанным именем и паролем
-        public static void CreateNewDB(string Name, string MasterPassword)
-        {            
-            throw new NotImplementedException();
+        public static void CreateNewDB(DBDescriptionVM description, string Password)
+        {
+            DbManager.CreateNewDB(description, Password);
         }
 
        

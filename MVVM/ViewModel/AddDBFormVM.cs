@@ -93,7 +93,7 @@ public class AddDBFormVM : ObservableObject
         //ModelAPI.CreateNewDB(Name, MasterPassword);
 
         _mainVM.DataBasesViewCommand.Execute(new object());
-		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Hint, Path));
+		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Hint, Path), MasterPassword);
     }
 
     private void Close(object obj)

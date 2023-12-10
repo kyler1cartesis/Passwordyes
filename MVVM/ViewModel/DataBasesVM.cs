@@ -132,12 +132,12 @@ namespace Password_Manager.MVVM.ViewModel
             _mainVM.CurrentView = view;
         }
 
-        public void AddDBD(DBDescriptionVM dBDescription)
+        public void AddDBD(DBDescriptionVM dBDescription, string Password)
         {
-            //ModelAPI.AddNewDB(dBDescription);
-            //UpdateDBDs();
+            ModelAPI.CreateNewDB(dBDescription, Password);
+            UpdateDBDs();
             
-            DBDescriptions.Add(dBDescription);
+            //DBDescriptions.Add(dBDescription);
         }
 
         private void DeleteDBD(DBDescriptionVM? dBDescription)
@@ -150,8 +150,8 @@ namespace Password_Manager.MVVM.ViewModel
         private void UpdateDBDs()
         {
 
-            //DBDescriptions = ModelAPI.GetDBDescriptions();
-            DBDescriptions.Add(new DBDescriptionVM
+            DBDescriptions = ModelAPI.GetDBDescriptions();
+            /*DBDescriptions.Add(new DBDescriptionVM
             {
                 Name = "Test DataBase №1",
                
@@ -204,7 +204,7 @@ namespace Password_Manager.MVVM.ViewModel
                 
                 DataBaseLastOpenDate = DateTime.Now,
                 DataBaseCreateDate = DateTime.Now
-            });
+            });*/
         }
     }
 }

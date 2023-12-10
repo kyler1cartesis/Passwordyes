@@ -40,12 +40,21 @@ namespace Password_Manager.MVVM.ViewModel
         public string Hint { get; set; }
         public string Path {  get; set; }
 
+        private byte[] _hashedPassword;
+        public byte[] HashedPassword
+        {
+            get => _hashedPassword;
+            set => _hashedPassword = value;
+        }
+
         public DBDescriptionVM(string name, DateTime createDate, string hint, string path)
         {
             Name = name;
             DataBaseCreateDate = createDate;
             Hint = hint;
             Path = path;
+
+           _hashedPassword = new byte[0];
         }
 
         public DBDescriptionVM()
@@ -56,6 +65,8 @@ namespace Password_Manager.MVVM.ViewModel
             Level = CodeLevel.LOW;
             Hint = string.Empty;
             Path = string.Empty;
+
+            _hashedPassword = new byte[0];
         }
     }
 }
