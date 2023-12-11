@@ -4,7 +4,8 @@ namespace Password_Manager.MVVM.Model;
 
 public class DbContext
 {
-    string DbName;
+    private string _dbName;
+    private string _masterPassword;
     internal object SQL_Execute(string query)
     {
         throw new NotImplementedException();

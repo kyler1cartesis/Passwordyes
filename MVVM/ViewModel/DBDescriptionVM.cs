@@ -39,6 +39,7 @@ namespace Password_Manager.MVVM.ViewModel
         public CodeLevel Level { get; set; }
         public string Hint { get; set; }
         public string Path {  get; set; }
+        public string UniqueName { get; set; }
 
         private byte[] _hashedPassword;
         public byte[] HashedPassword
@@ -53,6 +54,7 @@ namespace Password_Manager.MVVM.ViewModel
             DataBaseCreateDate = createDate;
             Hint = hint;
             Path = path;
+            UniqueName = string.Empty;
 
            _hashedPassword = new byte[0];
         }
@@ -65,8 +67,14 @@ namespace Password_Manager.MVVM.ViewModel
             Level = CodeLevel.LOW;
             Hint = string.Empty;
             Path = string.Empty;
+            UniqueName = string.Empty;
 
             _hashedPassword = new byte[0];
+        }
+
+        public string GetFullPathToFile()
+        {
+            return Path + "/" + UniqueName;
         }
     }
 }

@@ -41,6 +41,10 @@ public static class DbManager
 
     public static void CreateNewDB(DBDescriptionVM description, string Password)
     {
+        description.UniqueName = GenerateUniqueName(description);
+
+        CreateDbFile(description);
+
         _descriptionVM.Add(description);
 
         byte[] hasedPassword = GetBytesIn_UTF8_Encoding(Password);
@@ -49,11 +53,48 @@ public static class DbManager
         SerializeDataBases();
     }
 
+    private static string GenerateUniqueName(DBDescriptionVM desc)
+    {
+        string name = desc.DataBaseCreateDate.Second.ToString();
+        name += desc.DataBaseCreateDate.Minute.ToString();
+        name += desc.DataBaseCreateDate.Hour.ToString();
+        name += desc.DataBaseCreateDate.Month.ToString();
+
+        int counter = 0;
+        while (IsContainsDbWithName(name))
+        {
+            counter++;
+        }
+
+        name += counter.ToString();
+        return name;
+    }
+
+    private static bool IsContainsDbWithName(string Name)
+    {
+        return _descriptionVM.Any(x => x.UniqueName.Equals(Name));
+    }
+
     public static void RemoveDB(DBDescriptionVM description)
     {
+        RemoveDbFile(description);
+
         _descriptionVM.RemoveAll(dsc => dsc.Name.Equals(description.Name));
 
         SerializeDataBases();
+    }
+
+    private static void CreateDbFile(DBDescriptionVM desc)
+    {
+        FolderVM RootFolder = new FolderVM(null, desc.Name + "-root");
+        string json = JsonConvert.SerializeObject(RootFolder);
+
+        File.WriteAllText(desc.GetFullPathToFile(), json);
+    }
+
+    private static void RemoveDbFile(DBDescriptionVM desc)
+    {
+        File.Delete(desc.GetFullPathToFile());
     }
 
     public static byte[] GetBytesIn_UTF8_Encoding(string password)
