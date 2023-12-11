@@ -17,6 +17,8 @@ public static class DbManager
 
     public static List<DBDescriptionVM> DescriptionsVM { get => _descriptionVM; }
 
+    public static DbContext? DBContext { get; set; }
+
     public static void DeserializeDataBases()
     {
         var json = File.ReadAllText(JsonPath);
@@ -106,6 +108,11 @@ public static class DbManager
         return SHA256.Create().ComputeHash(passwordBytes);
     }
 
+    public static void SignInDb(DBDescriptionVM desc)
+    {
+        DBContext = new DbContext(desc);
+    }
+
     internal static FileStream OpenDbForRead (string FileName)
        => System.IO.File.Open("/databases/" + FileName, FileMode.Open, FileAccess.Read);
     
@@ -115,5 +122,11 @@ public static class DbManager
     internal static bool VerifyPassword(DBDescriptionVM DbToSignIn, string MasterPassword)
     {
         return HashPasswordSHA256(GetBytesIn_UTF8_Encoding(MasterPassword)).SequenceEqual(DbToSignIn.HashedPassword);
+    }
+
+    internal static void Exit()
+    {
+        DBContext?.SerializeFileSystem();
+        DBContext = null;
     }
 }

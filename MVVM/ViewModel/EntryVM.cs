@@ -9,10 +9,7 @@ namespace Password_Manager.MVVM.ViewModel
 {
     public class EntryVM : FileVM
     {
-        public string ImagePath { get; } = "pack://siteoforigin:,,,/GuiSources/Images/notes.png";
-
-        private FolderVM? _parent;
-        public FolderVM? Parent { get { return _parent; } }
+        public override string ImagePath { get => entry_path; }
 
         private string? _description;
         public string? Description
@@ -43,7 +40,7 @@ namespace Password_Manager.MVVM.ViewModel
         }
 
 
-        public EntryVM(FolderVM? parent, string name, string password, string? description, string? url, string? login) : base(name)
+        public EntryVM(FolderVM? parent, string name, string password, string? description, string? url, string? login) : base(parent, name)
         {
             _parent = parent;
             _description = description;
@@ -52,11 +49,20 @@ namespace Password_Manager.MVVM.ViewModel
             _login = login;
         }
 
-        public EntryVM(FolderVM? parent, string name) : base(name)
+        public EntryVM(FolderVM? parent, string name) : base(parent, name)
         {
             _parent = parent;
             _description = string.Empty;
             _url = string.Empty;
+            _password = string.Empty;
+        }
+
+        public EntryVM() : base()
+        {
+            _parent = null;
+            _description = string.Empty;
+            _url = string.Empty;
+            _password = string.Empty;
         }
     }
 }

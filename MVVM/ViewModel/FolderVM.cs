@@ -10,9 +10,7 @@ namespace Password_Manager.MVVM.ViewModel
 {
     public class FolderVM : FileVM
     {
-        public string ImagePath { get; } = "pack://siteoforigin:,,,/GuiSources/Images/folder.png";
-
-        private FolderVM? _parent;
+        public override string ImagePath { get => folder_path; }
 
         private ObservableCollection<FileVM> _subFiles;
         public ObservableCollection<FileVM> SubFiles
@@ -21,11 +19,15 @@ namespace Password_Manager.MVVM.ViewModel
             set { _subFiles = value; OnPropertyChanged(nameof(SubFiles)); }
         }
 
-        public FolderVM? Parent { get { return _parent; } }
-
-        public FolderVM(FolderVM? parent, string name) : base(name)
+        public FolderVM(FolderVM? parent, string name) : base(parent, name)
         {
             _parent = parent;
+            _subFiles = new ObservableCollection<FileVM>();
+        }
+
+        public FolderVM() : base()
+        {
+            _parent = null;
             _subFiles = new ObservableCollection<FileVM>();
         }
 

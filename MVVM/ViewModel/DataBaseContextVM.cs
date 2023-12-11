@@ -78,41 +78,46 @@ namespace Password_Manager.MVVM.ViewModel
 
         public DataBaseContextVM(DBDescriptionVM dBDescription)
         {
-            //CurrentFile = ModelAPI.GetRootFolder();
+            FolderVM? root = ModelAPI.GetRootFolder();
+            if (root != null)
+            {
+                CurrentFile = root;
+                _currentSubFiles = root.SubFiles;
+            }
             _controlManager = new ControlManager();
             DataBase = dBDescription;
 
-            FolderVM f1 = new(null, "f1");
-            FolderVM f2 = new(f1, "f2");
-            FolderVM f3 = new(f1, "f3");
-            FolderVM f4 = new(f2, "f4");
-            FolderVM f5 = new(f2, "f5");
-            FolderVM f6 = new(f3, "f6");
-            EntryVM en1 = new(f2, "en1");
-            EntryVM en2 = new(f4, "en2");
-            f1.Name = "f1";
-            f2.Name = "f2";
-            f3.Name = "f3";
-            f4.Name = "f4";
-            f5.Name = "f5";
-            f6.Name = "f6";
-            en1.Name = "en1";
-            en1.Description = "test entry 1";
-            en1.Url = "https://test1";
-            en2.Name = "en2";
-            en2.Description = "test entry 2";
-            en2.Url = "https://test2";
+            //FolderVM f1 = new(null, "f1");
+            //FolderVM f2 = new(f1, "f2");
+            //FolderVM f3 = new(f1, "f3");
+            //FolderVM f4 = new(f2, "f4");
+            //FolderVM f5 = new(f2, "f5");
+            //FolderVM f6 = new(f3, "f6");
+            //EntryVM en1 = new(f2, "en1");
+            //EntryVM en2 = new(f4, "en2");
+            //f1.Name = "f1";
+            //f2.Name = "f2";
+            //f3.Name = "f3";
+            //f4.Name = "f4";
+            //f5.Name = "f5";
+            //f6.Name = "f6";
+            //en1.Name = "en1";
+            //en1.Description = "test entry 1";
+            //en1.Url = "https://test1";
+            //en2.Name = "en2";
+            //en2.Description = "test entry 2";
+            //en2.Url = "https://test2";
 
-            f1.SubFiles.Add(f2);
-            f1.SubFiles.Add(f3);
-            f2.SubFiles.Add(f4);
-            f2.SubFiles.Add(en1);
-            f2.SubFiles.Add(f5);
-            f3.SubFiles.Add(f6);
-            f4.SubFiles.Add(en2);
+            //f1.SubFiles.Add(f2);
+            //f1.SubFiles.Add(f3);
+            //f2.SubFiles.Add(f4);
+            //f2.SubFiles.Add(en1);
+            //f2.SubFiles.Add(f5);
+            //f3.SubFiles.Add(f6);
+            //f4.SubFiles.Add(en2);
 
-            _currentSubFiles = f1.SubFiles;
-            CurrentFile = f1;
+            //_currentSubFiles = f1.SubFiles;
+            //CurrentFile = f1;
 
             SelectFile = new RelayCommand(Select, CanSelect);
             GoToUpFolder = new RelayCommand(ClimbUp, CanClimbUp);
@@ -235,7 +240,7 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void Exit(object obj)
         {
-            //ModelAPI.Exit();
+            ModelAPI.Exit();
             Window dbContextWin = (Window)obj;
             MainWindow mainWindow = _controlManager.CreateWindow<MainWindow>();
 

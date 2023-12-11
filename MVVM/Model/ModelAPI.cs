@@ -50,20 +50,20 @@ namespace Password_Manager.MVVM.Model
         //Входит в БД и начинает сессию работы с БД
         public static void SignInBD(DBDescriptionVM dbToSignIn)
         {
-            throw new NotImplementedException();
+            DbManager.SignInDb(dbToSignIn);
         }
 
         //Возвращает корневую директорию БД
-        public static FileVM GetRootFolder()
+        public static FolderVM? GetRootFolder()
         {
-            throw new NotImplementedException();
+            return DbManager.DBContext?.RootFolder;
         }
 
         //Выходит из БД и завершает сессию UPD : Думаю просто один раз считать из json'а всю стуктуру и передать во VM, всю логику проще будет написать там,
         //так ка VM слишком прирос в этом смысле к логике
         public static void Exit()
         {
-            throw new NotImplementedException();
+            DbManager.Exit();
         }
 
         //Проверяет корректность описания записи
