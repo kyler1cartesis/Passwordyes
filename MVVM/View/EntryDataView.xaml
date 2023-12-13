@@ -62,6 +62,7 @@
                                HorizontalAlignment="left"
                                Foreground="Wheat"/>
                         <!--PASSWORD BOX-->
+                        <StackPanel Orientation="Horizontal">
                         <Border CornerRadius="10"
                                 Background="#474551"
                                 Width="400"
@@ -96,6 +97,16 @@
                                         local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/copy.png"/>
                             </Grid>
                         </Border>
+                            <ToggleButton x:Name="hide" Height="35" 
+                                Width="35"
+                                VerticalContentAlignment="Center" 
+                                Padding="5" Margin="0,0,5,0" 
+                                VerticalAlignment="Bottom" 
+                                HorizontalAlignment="Right" 
+                                BorderThickness="1" 
+                                BorderBrush="#E0E0E0" 
+                                Style="{StaticResource HideButton}"/>
+                        </StackPanel>
                     </StackPanel>
                     <StackPanel Width="480"
                                 Margin="30,0,0,0"

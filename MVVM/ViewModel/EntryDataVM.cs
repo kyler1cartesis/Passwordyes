@@ -21,7 +21,7 @@ namespace Password_Manager.MVVM.ViewModel
         private MessageBoxManager _dialogManager;
         private ControlManager _controlManager;
         private IUnityContainer _container;
-        private string _encryptedPassword;
+        private byte[] _encryptedPassword;
         public ICommand DeleteEntryCommand { get; set; }
         public ICommand ChangeEntry { get; set; }
         public ICommand CopyPasswordCommand { get; set; }
@@ -37,7 +37,7 @@ namespace Password_Manager.MVVM.ViewModel
 		public string? Description { get; set; }
 		public string? URL { get; set; }
 
-		public EntryDataVM(DataBaseContextVM contextVM, string name, string password, string? description, string? url, string? login, IUnityContainer container) : base(contextVM)
+		public EntryDataVM(DataBaseContextVM contextVM, string name, byte[] password, string? description, string? url, string? login, IUnityContainer container) : base(contextVM)
         {
             _dialogManager = new MessageBoxManager();
             _controlManager = new ControlManager();
@@ -101,7 +101,6 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void CopyPassword(object obj)
         {
-            return;
             ModelAPI.CopyPasswordToClipBoard(_encryptedPassword);
         }
     }

@@ -17,7 +17,7 @@ namespace Password_Manager.MVVM.ViewModel
     public class ChangeEntryFormVM : FilesEditFormVM
     {
         private IUnityContainer _container;
-        private string _encryptedPassword;
+        private byte[] _encryptedPassword;
         private ControlManager _controlManager;
         public EntryDataView EntryDataForm { get; set; }
         public ICommand ChangeEntryCommand { get; set; }
@@ -40,7 +40,7 @@ namespace Password_Manager.MVVM.ViewModel
             }
         }
 
-        public ChangeEntryFormVM(string name, string password, string? description, string? url, string? login, DataBaseContextVM? contextVM,
+        public ChangeEntryFormVM(string name, byte[] password, string? description, string? url, string? login, DataBaseContextVM? contextVM,
                                 EntryDataView entryData, IUnityContainer container) : base(contextVM)
         {
             _container = container;

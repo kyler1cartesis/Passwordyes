@@ -36,7 +36,7 @@
                                         Margin="5,0,0,0"
                                         VerticalAlignment="Center">
 
-                                <Image 
+                                <Image Source="{Binding ImagePath}"
                                        Margin="0,0,10,0"
                                        Width="23"
                                        Height="23"

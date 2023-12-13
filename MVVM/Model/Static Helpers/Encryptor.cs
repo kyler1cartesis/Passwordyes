@@ -43,7 +43,7 @@ namespace Password_Manager.MVVM.Model.Static_Helpers
 
         public static byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
         {
-            byte[] decryptedBytes = null;
+            byte[] decryptedBytes = [];
 
 
             using (MemoryStream ms = WithMemoryStream())

@@ -15,7 +15,7 @@ namespace Password_Manager.MVVM.ViewModel
     public class AddEntryFormVM : FilesEditFormVM
     {
         private IUnityContainer _container;
-        private string _ecnryptPassword;
+        private byte[] _ecnryptPassword;
         public ICommand CreateEntryCommand { get; set; }
         public string? Description { get; set; }
         public string? URL { get; set; }
@@ -32,7 +32,7 @@ namespace Password_Manager.MVVM.ViewModel
         public AddEntryFormVM(DataBaseContextVM contextVM, IUnityContainer container) : base(contextVM)
         {
             _container = container;
-            _ecnryptPassword = string.Empty;
+            _ecnryptPassword = [];
 
             CreateEntryCommand = new RelayCommand(AddEntry);
         }

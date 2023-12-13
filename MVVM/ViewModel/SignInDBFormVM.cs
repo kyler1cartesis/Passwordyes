@@ -72,7 +72,7 @@ namespace Password_Manager.MVVM.ViewModel
 
 			if (isValidate)
 			{
-				ModelAPI.SignInBD(DbToSignIn);
+				ModelAPI.SignInBD(DbToSignIn, MasterPassword);
 
                 MainWindow mainWindow = (MainWindow)obj;
 

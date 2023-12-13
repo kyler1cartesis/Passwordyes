@@ -48,9 +48,9 @@ namespace Password_Manager.MVVM.Model
         }
 
         //Входит в БД и начинает сессию работы с БД
-        public static void SignInBD(DBDescriptionVM dbToSignIn)
+        public static void SignInBD(DBDescriptionVM dbToSignIn, string MasterPassword)
         {
-            DbManager.SignInDb(dbToSignIn);
+            DbManager.SignInDb(dbToSignIn, MasterPassword);
         }
 
         //Возвращает корневую директорию БД
@@ -91,20 +91,26 @@ namespace Password_Manager.MVVM.Model
         }
 
         //Зашифровать пароль и вернуть (не обязательно в виде string, можно поменять тип любой объект)
-        internal static string EncryptEntryPassword(string password)
+        internal static byte[] EncryptEntryPassword(string password)
         {
-            return string.Empty;
+            if (DbManager.DBContext != null)
+                return DbManager.DBContext.EncryptPassword(password);
+            else
+                return [];
         }
 
         //Дешифровать зашифрованный пароль
-        internal static string DecryptEntryPassword(string password)
+        internal static string DecryptEntryPassword(byte[] password)
         {
-            return string.Empty;
+            if (DbManager.DBContext != null)
+                return DbManager.DBContext.DecryptPassword(password);
+            else
+                return string.Empty;
         }
 
-        internal static void CopyPasswordToClipBoard(string encryptedPassword)
+        internal static void CopyPasswordToClipBoard(byte[] encryptedPassword)
         {
-            throw new NotImplementedException();
+            System.Windows.Clipboard.SetText(DecryptEntryPassword(encryptedPassword));
         }
     }
 }

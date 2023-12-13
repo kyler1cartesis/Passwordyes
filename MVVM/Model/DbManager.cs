@@ -108,9 +108,9 @@ public static class DbManager
         return SHA256.Create().ComputeHash(passwordBytes);
     }
 
-    public static void SignInDb(DBDescriptionVM desc)
+    public static void SignInDb(DBDescriptionVM desc, string MasterPassword)
     {
-        DBContext = new DbContext(desc);
+        DBContext = new DbContext(desc, MasterPassword);
     }
 
     internal static FileStream OpenDbForRead (string FileName)

@@ -25,8 +25,8 @@ namespace Password_Manager.MVVM.ViewModel
             set { _url = value; OnPropertyChanged(nameof(Url)); }
         }
 
-        private string _password;
-        public string Password
+        private byte[] _password;
+        public byte[] Password
         {
             get => _password;
             set { _password = value; OnPropertyChanged(nameof(Password)); }
@@ -40,7 +40,7 @@ namespace Password_Manager.MVVM.ViewModel
         }
 
 
-        public EntryVM(FolderVM? parent, string name, string password, string? description, string? url, string? login) : base(parent, name)
+        public EntryVM(FolderVM? parent, string name, byte[] password, string? description, string? url, string? login) : base(parent, name)
         {
             _parent = parent;
             _description = description;
@@ -54,7 +54,7 @@ namespace Password_Manager.MVVM.ViewModel
             _parent = parent;
             _description = string.Empty;
             _url = string.Empty;
-            _password = string.Empty;
+            _password = [];
         }
 
         public EntryVM() : base()
@@ -62,7 +62,7 @@ namespace Password_Manager.MVVM.ViewModel
             _parent = null;
             _description = string.Empty;
             _url = string.Empty;
-            _password = string.Empty;
+            _password = [];
         }
     }
 }

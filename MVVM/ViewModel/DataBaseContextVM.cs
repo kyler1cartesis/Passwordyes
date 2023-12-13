@@ -159,7 +159,7 @@ namespace Password_Manager.MVVM.ViewModel
             CurrentView = entryDataView;
         }
 
-        private EntryDataVM CreateEntryDataFormVM(string Name, string Password, string? Description, string? URL, string? Login, IUnityContainer container)
+        private EntryDataVM CreateEntryDataFormVM(string Name, byte[] Password, string? Description, string? URL, string? Login, IUnityContainer container)
         {
             return new EntryDataVM(this, Name, Password, Description, URL, Login, container);
         }

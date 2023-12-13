@@ -6,6 +6,8 @@ using System.IO;
 using System.Text.Json.Serialization;
 using System.Diagnostics;
 using Microsoft.VisualBasic.FileIO;
+using System.Text;
+using Password_Manager.MVVM.Model.Static_Helpers;
 
 namespace Password_Manager.MVVM.Model;
 
@@ -14,15 +16,16 @@ public class DbContext
     private DBDescriptionVM _description;
     private FolderVM? _rootFolder;
     private JsonSerializerOptions _options;
-
+    private byte[] _masterPassword;
     public FolderVM? RootFolder
     {
         get => _rootFolder;
     }
     
-    public DbContext(DBDescriptionVM desc)
+    public DbContext(DBDescriptionVM desc, string password)
     {
         _description = desc;
+        _masterPassword = Encoding.UTF8.GetBytes(password);
         _options = new JsonSerializerOptions()
         {
             ReferenceHandler = ReferenceHandler.Preserve,
@@ -46,5 +49,19 @@ public class DbContext
         string json = JsonSerializer.Serialize(_rootFolder, _options);
        
         File.WriteAllText(_description.GetFullPathToFile(), json);
+    }
+
+    public byte[] EncryptPassword(string Password)
+    {
+        byte[] pwd = Encryptor.AES_Encrypt(Encoding.UTF8.GetBytes(Password), _masterPassword);
+
+        return pwd;
+    }
+
+    public string DecryptPassword(byte[] Password)
+    {
+        byte[] pwd = Encryptor.AES_Decrypt(Password, _masterPassword);
+
+        return Encoding.UTF8.GetString(pwd);
     }
 }

@@ -46,7 +46,7 @@ namespace Password_Manager.MVVM.ViewModel
             SubFiles.Add(file);
         }
 
-        public void FindAndChangeFileByName(string oldName, string newName, string Password, string? description, string? url, string? login)
+        public void FindAndChangeFileByName(string oldName, string newName, byte[] Password, string? description, string? url, string? login)
         {
             EntryVM entryVM = GetFileByName<EntryVM>(oldName);
 
@@ -54,6 +54,7 @@ namespace Password_Manager.MVVM.ViewModel
             entryVM.Description = description;
             entryVM.Url = url;
             entryVM.Login = login;
+            entryVM.Password = Password;
         }
     }
 }

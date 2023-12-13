@@ -39,6 +39,7 @@ namespace Password_Manager.MVVM.View
 
         public void SetPassword(string password)
         {
+            passwordBox.Password = password;
         }
     }
 }

@@ -30,6 +30,7 @@
                 <ResourceDictionary Source="GuiSources/Styles/ModernTextArea.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/BarButton.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/CloseButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/HideButton.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
 
