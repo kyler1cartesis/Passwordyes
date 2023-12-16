@@ -70,7 +70,7 @@ namespace Password_Manager.MVVM.ViewModel
 
             FolderVM currentFolder = GetCurrentFolder();
 
-            currentFolder.RemoveFileByName(Name);
+            currentFolder.RemoveFileByName<EntryVM>(Name);
 
             CloseForm(new object());
 		}

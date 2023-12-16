@@ -31,9 +31,9 @@ namespace Password_Manager.MVVM.ViewModel
             _subFiles = new ObservableCollection<FileVM>();
         }
 
-        public void RemoveFileByName(string name)
+        public void RemoveFileByName<FILE>(string name) where FILE : FileVM
         {
-            SubFiles.Remove(GetFileByName<EntryVM>(name));
+            SubFiles.Remove(GetFileByName<FILE>(name));
         }
 
         private FILE GetFileByName<FILE>(string name) where FILE : FileVM

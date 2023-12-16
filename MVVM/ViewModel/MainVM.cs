@@ -15,6 +15,7 @@ namespace Password_Manager.MVVM.ViewModel
         private ControlManager _controlManager;
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand CloseWindowCommand { get; set; }
+        public RelayCommand CollapseWindowCommand { get; set; }
 
         public RelayCommand DataBasesViewCommand { get; set; }
 
@@ -70,12 +71,19 @@ namespace Password_Manager.MVVM.ViewModel
             });
 
             CloseWindowCommand = new RelayCommand(CloseWindow);
+            CollapseWindowCommand = new RelayCommand(CollapseWindow);
         }
 
         private void CloseWindow(object obj)
         {
             Window window = (Window)obj;
             window.Close();
+        }
+
+        private void CollapseWindow(object obj)
+        {
+            Window window = (Window)obj;
+            window.WindowState = WindowState.Minimized;
         }
     }
 }

@@ -9,9 +9,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Xml.Linq;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.View;
+using Password_Manager.MVVM.View.ViewUtilities;
 using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
@@ -19,12 +21,14 @@ namespace Password_Manager.MVVM.ViewModel
     public class DataBaseContextVM : ObservableObject
     {
         private ControlManager _controlManager;
+        private MessageBoxManager _dialogManager;
 
         public ICommand SelectFile { get; set; }
         public ICommand GoToUpFolder { get; set; }
         public ICommand NewEntry { get; set; }
         public ICommand NewFolder { get; set; }
         public ICommand ExitDB { get; set; }
+        public ICommand DeleteFolderCommand { get; set; }
 
 
         private ObservableCollection<FileVM> _currentSubFiles;
@@ -85,6 +89,7 @@ namespace Password_Manager.MVVM.ViewModel
                 _currentSubFiles = root.SubFiles;
             }
             _controlManager = new ControlManager();
+            _dialogManager = new MessageBoxManager();
             DataBase = dBDescription;
 
             //FolderVM f1 = new(null, "f1");
@@ -124,6 +129,7 @@ namespace Password_Manager.MVVM.ViewModel
             NewEntry = new RelayCommand(ShowCreateEntryForm, CanShowCreateEntryForm);
             NewFolder = new RelayCommand(ShowCreateFolderForm, CanShowCreateFolderForm);
             ExitDB = new RelayCommand(Exit, CanExit);
+            DeleteFolderCommand = new RelayCommand(DeleteFolder, CanDeleteFolder);
         }
 
         private bool CanSelect(object obj)
@@ -251,6 +257,30 @@ namespace Password_Manager.MVVM.ViewModel
         public void ClosePage()
         {
             CurrentView = null;
+        }
+
+        private bool CanDeleteFolder(object obj)
+        {
+            return SelectedFile is FolderVM;
+        }
+
+        private void DeleteFolder(object obj)
+        {
+            FolderVM? folderToDelete = (FolderVM?)SelectedFile;
+            FolderVM? currentFolder = (FolderVM?)CurrentFile;
+
+            if (folderToDelete == null) throw new NullReferenceException("folderToDelete was null while delete folder");
+            if (currentFolder == null) throw new NullReferenceException("CurrentFile was null while delete folder");
+
+            var answer = _dialogManager.ShowMessageBox("Вы уверены, что хотите удалить запись: " + folderToDelete.Name + " ?",
+                                                        "удаление БД",
+                                                        MessageBoxImage.Question);
+
+            if (answer == MessageBoxResult.No) return;
+
+            currentFolder.RemoveFileByName<FolderVM>(folderToDelete.Name);
+
+            ClosePage();
         }
     }
 }
