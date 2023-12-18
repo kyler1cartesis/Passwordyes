@@ -21,6 +21,10 @@ public class DbContext
     {
         get => _rootFolder;
     }
+    public DBDescriptionVM Description
+    {
+        get => _description;
+    }
     
     public DbContext(DBDescriptionVM desc, string password)
     {

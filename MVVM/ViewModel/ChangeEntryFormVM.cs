@@ -63,6 +63,12 @@ namespace Password_Manager.MVVM.ViewModel
 
         private void ChangeEntry(object obj)
         {
+            if (IsShown)
+            {
+                Password = PasswordToShow;
+                PasswordToShow = string.Empty;
+            }
+
             FolderVM currentFolder = GetCurrentFolder();
 
             _encryptedPassword = ModelAPI.EncryptEntryPassword(Password);

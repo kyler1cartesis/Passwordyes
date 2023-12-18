@@ -112,5 +112,10 @@ namespace Password_Manager.MVVM.Model
         {
             System.Windows.Clipboard.SetText(DecryptEntryPassword(encryptedPassword));
         }
+
+        internal static void UpdateDescription(DBDescriptionVM description)
+        {
+            DbManager.UpdateObservableDescriptions(description);
+        }
     }
 }

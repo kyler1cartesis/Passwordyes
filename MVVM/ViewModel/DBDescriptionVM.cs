@@ -40,6 +40,8 @@ namespace Password_Manager.MVVM.ViewModel
         public string Hint { get; set; }
         public string Path {  get; set; }
         public string UniqueName { get; set; }
+        public string CharsForPwdGenerator {  get; set; }
+        public int PasswordLength {  get; set; }
 
         private byte[] _hashedPassword;
         public byte[] HashedPassword
@@ -55,6 +57,8 @@ namespace Password_Manager.MVVM.ViewModel
             Hint = hint;
             Path = path;
             UniqueName = string.Empty;
+            CharsForPwdGenerator = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmopqrstuvwxyz!@#$%^";
+            PasswordLength = 16;
 
            _hashedPassword = new byte[0];
         }
@@ -68,6 +72,8 @@ namespace Password_Manager.MVVM.ViewModel
             Hint = string.Empty;
             Path = string.Empty;
             UniqueName = string.Empty;
+            CharsForPwdGenerator = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmopqrstuvwxyz!@#$%^";
+            PasswordLength = 16;
 
             _hashedPassword = new byte[0];
         }

@@ -22,6 +22,7 @@ namespace Password_Manager.MVVM.ViewModel
     {
         private ControlManager _controlManager;
         private MessageBoxManager _dialogManager;
+        private DBSettingsVM _dbSettingsView;
 
         public ICommand SelectFile { get; set; }
         public ICommand GoToUpFolder { get; set; }
@@ -31,6 +32,7 @@ namespace Password_Manager.MVVM.ViewModel
         public ICommand DeleteFolderCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
         public ICommand CollapseWindowCommand { get; set; }
+        public ICommand OpenSettingsCommand { get; set; }
 
 
         private ObservableCollection<FileVM> _currentSubFiles;
@@ -92,6 +94,7 @@ namespace Password_Manager.MVVM.ViewModel
             }
             _controlManager = new ControlManager();
             _dialogManager = new MessageBoxManager();
+            _dbSettingsView = new DBSettingsVM();
             DataBase = dBDescription;
 
             //FolderVM f1 = new(null, "f1");
@@ -134,6 +137,7 @@ namespace Password_Manager.MVVM.ViewModel
             DeleteFolderCommand = new RelayCommand(DeleteFolder, CanDeleteFolder);
             CloseWindowCommand = new RelayCommand(CloseWindow);
             CollapseWindowCommand = new RelayCommand(CollapseWindow);
+            OpenSettingsCommand = new RelayCommand(OpenSettings);
         }
 
         private bool CanSelect(object obj)
@@ -297,6 +301,12 @@ namespace Password_Manager.MVVM.ViewModel
         {
             Window window = (Window)obj;
             window.WindowState = WindowState.Minimized;
+        }
+
+        private void OpenSettings(object obj)
+        {
+            _dbSettingsView.Message = string.Empty;
+            CurrentView = _dbSettingsView;
         }
     }
 }

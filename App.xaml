@@ -47,7 +47,11 @@
             <DataTemplate DataType="{x:Type viewModel:SettingsVM}">
                 <view:SettingsView/>
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type viewModel:DBSettingsVM}">
+                <view:DBSettingsView/>
+            </DataTemplate>
+
             <!--<DataTemplate DataType="{x:Type viewModel:CreateEntryVM}">
                 <view:CreateEntryForm/>
             </DataTemplate>-->

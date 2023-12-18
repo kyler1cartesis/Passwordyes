@@ -94,8 +94,8 @@ namespace Password_Manager.MVVM.ViewModel
         {
             Random random = new Random();
 
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            const int length = 10;
+            string chars = DBContext.DataBase.CharsForPwdGenerator;
+            int length = DBContext.DataBase.PasswordLength;
 
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());

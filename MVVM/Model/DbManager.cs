@@ -129,4 +129,12 @@ public static class DbManager
         DBContext?.SerializeFileSystem();
         DBContext = null;
     }
+
+    internal static void UpdateObservableDescriptions(DBDescriptionVM description)
+    {
+        _descriptionVM.RemoveAll(desc => desc.UniqueName == description.UniqueName);
+        _descriptionVM.Add(description);
+
+        SerializeDataBases();
+    }
 }
