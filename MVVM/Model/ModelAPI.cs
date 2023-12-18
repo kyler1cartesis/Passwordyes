@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Password_Manager.MVVM.ViewModel;
 
 namespace Password_Manager.MVVM.Model
@@ -98,7 +100,7 @@ namespace Password_Manager.MVVM.Model
 
         internal static void CopyPasswordToClipBoard(byte[] encryptedPassword)
         {
-            System.Windows.Clipboard.SetText(DecryptEntryPassword(encryptedPassword));
+            ClipBoardManager.SetText(DecryptEntryPassword(encryptedPassword));
         }
 
         internal static void UpdateDescription(DBDescriptionVM description)
