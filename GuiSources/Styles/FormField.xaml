@@ -19,6 +19,7 @@
                                      Background="Transparent"
                                      Foreground="#CECECE"
                                      BorderThickness="0"
+                                     MaxLength="{TemplateBinding MaxLength}"
                                      VerticalContentAlignment="Center"
                                      Cursor="{TemplateBinding Cursor}"
                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"

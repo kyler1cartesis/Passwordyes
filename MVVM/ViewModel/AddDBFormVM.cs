@@ -27,7 +27,7 @@ public class AddDBFormVM : ObservableObject
     public ICommand AddDBCommand { get; set; }
     public ICommand CloseFormCommand { get; set; }
     public ICommand SetCodeLevelCommand { get; set; }
-    public ICommand RunFileManagerCommand {  get; set; }
+    public ICommand RunFileManagerCommand { get; set; }
     public ICommand ShowPwdCommand { get; set; }
 
     private string _errorMessage;
@@ -97,13 +97,15 @@ public class AddDBFormVM : ObservableObject
 
     public AddDBFormVM(MainVM maiNVM, IUnityContainer container)
     {
+        var settings = (AppSettings)ConfigUtil.AppConf.GetSection("StormSettings");
+
         _errorMessage = string.Empty;
         _name = string.Empty;
         _mainVM = maiNVM;
         _container = container;
         _dialogManager = new MessageBoxManager();
         _hint = string.Empty;
-        _path = string.Empty;
+        _path = settings.WorkDir;
 
         AddDBCommand = new RelayCommand(AddDB);
         SetCodeLevelCommand = new RelayCommand(SetCodeLevel);
@@ -159,6 +161,7 @@ public class AddDBFormVM : ObservableObject
 
         dialog.Multiselect = false;
         dialog.Title = "Select a folder";
+        dialog.InitialDirectory = Path;
 
         bool? result = dialog.ShowDialog();
 
