@@ -116,6 +116,12 @@ public class AddDBFormVM : ObservableObject
 
 	private void AddDB(object obj)
 	{
+        if (IsShown)
+        {
+            MasterPassword = PasswordToShow;
+            PasswordToShow = string.Empty;
+        }
+
         //bool isValidatePassword = ModelAPI.Validate_DB_MPassword(MasterPassword, MasterPasswordConfirm);
         //ModelAPI.CreateNewDB(Name, MasterPassword);
 

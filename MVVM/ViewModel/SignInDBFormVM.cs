@@ -91,7 +91,13 @@ namespace Password_Manager.MVVM.ViewModel
 
 		private void Enter(object obj)
 		{
-			bool isValidate = ModelAPI.VerifyPassword(DbToSignIn, MasterPassword);
+            if (IsShown)
+            {
+                MasterPassword = PasswordToShow;
+                PasswordToShow = string.Empty;
+            }
+
+            bool isValidate = ModelAPI.VerifyPassword(DbToSignIn, MasterPassword);
 
 			if (isValidate)
 			{

@@ -23,7 +23,7 @@
                                      VerticalContentAlignment="Center"
                                      Cursor="{TemplateBinding Cursor}"
                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                     Padding="5"/>
+                                     Padding="4"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

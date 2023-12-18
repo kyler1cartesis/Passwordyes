@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,19 @@ namespace Password_Manager.MVVM.View
                 passwordBox.Visibility = Visibility.Collapsed;
             else
                 passwordBox.Visibility = Visibility.Visible;
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo { FileName = e.Uri.AbsoluteUri, UseShellExecute = true });
+            }
+            catch
+            {
+
+            }
+            e.Handled = true;
         }
     }
 }

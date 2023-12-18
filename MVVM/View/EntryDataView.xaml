@@ -169,16 +169,25 @@
                                VerticalAlignment="Top" 
                                HorizontalAlignment="left"
                                Foreground="Wheat"/>
-                        <TextBox Height="35" Background="#474551"
-                                 Width="400" 
-                                 Margin="0,0,0,0" 
-                                 Text="{Binding URL}"
-                                 VerticalAlignment="Top" 
-                                 HorizontalAlignment="Left" 
-                                 BorderThickness="1" Cursor="Arrow"
-                                 Style="{StaticResource ModernFormField}"
-                                 FontSize="17" IsReadOnly="True"
-                                 HorizontalContentAlignment="Left"/>
+                        <Border CornerRadius="10"
+                                Width="400"
+                                Height="35"
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Left" 
+                                Background="#474551">
+                                
+                            <Grid>
+                                <TextBlock Padding="4" Margin="1" VerticalAlignment="Center">           
+                                    <Hyperlink NavigateUri="{Binding URL}" 
+                                               RequestNavigate="Hyperlink_RequestNavigate"
+                                               >
+                                        <TextBlock Text="{Binding URL}"
+                                                   Foreground="Aqua"
+                                                    FontSize="13" />
+                                    </Hyperlink>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
                     </StackPanel>
 
 
