@@ -24,12 +24,34 @@ namespace Password_Manager.MVVM.ViewModel
 		private IUnityContainer _container;
 		public ICommand SignInDataBaseCommand { get; set; }
         public ICommand CloseFormCommand { get; set; }
+        public ICommand ShowPwdCommand { get; set; }
+        private bool _isHide = true;
+        public bool IsShown
+        {
+            get => _isHide;
+            set { _isHide = value; OnPropertyChanged(nameof(IsShown)); }
+        }
+
+        public string _passwordToShow = string.Empty;
+        public string PasswordToShow
+        {
+            get => _passwordToShow;
+            set
+            {
+                _passwordToShow = value; OnPropertyChanged(nameof(PasswordToShow));
+            }
+        }
 
         public DBDescriptionVM DbToSignIn { get; set; }
 
 		public string MasterPassword
 		{
-			get
+            set
+            {
+                IPasswordSupplier supl = _container.Resolve<IPasswordSupplier>();
+                supl.SetPassword(value);
+            }
+            get
 			{
 				IPasswordSupplier passwordSupplier = _container.Resolve<IPasswordSupplier>();
 				return passwordSupplier.GetPassword();
@@ -59,6 +81,7 @@ namespace Password_Manager.MVVM.ViewModel
 
 			SignInDataBaseCommand = new RelayCommand(Enter, CanEnter);
             CloseFormCommand = new RelayCommand(Close);
+            ShowPwdCommand = new RelayCommand(SwitchPasswordVisibility);
         }
 
 		private bool CanEnter(object obj)
@@ -101,6 +124,19 @@ namespace Password_Manager.MVVM.ViewModel
         private void Close(object obj)
         {
             _mainVM.DataBasesViewCommand.Execute(null);
+        }
+
+        private void SwitchPasswordVisibility(object obj)
+        {
+            if (IsShown)
+            {
+                PasswordToShow = MasterPassword;
+            }
+            else
+            {
+                MasterPassword = PasswordToShow;
+                PasswordToShow = string.Empty;
+            }
         }
     }
 }

@@ -94,5 +94,16 @@ namespace Password_Manager.MVVM.ViewModel
 
             return new EntryDataVM(DBContext, Name, _encryptedPassword, Description, URL, Login, container);
         }
+
+        protected override void SwitchPasswordVisibility(object obj)
+        {
+            if (IsShown)
+                PasswordToShow = Password;
+            else
+            {
+                Password = PasswordToShow;
+                PasswordToShow = string.Empty;
+            }
+        }
     }
 }

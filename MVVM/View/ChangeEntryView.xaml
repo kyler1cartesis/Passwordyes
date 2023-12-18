@@ -61,26 +61,51 @@
                        HorizontalAlignment="left"
                        Foreground="Wheat"/>
                         <!--PASSWORD BOX-->
-                        <Border CornerRadius="10"
+                        <StackPanel Orientation="Horizontal">
+                            <Border CornerRadius="10"
                         Background="#353340"
                         Width="400"
                         Height="35"
                          HorizontalAlignment="Left">
 
-                            <Grid>
-                                <Rectangle StrokeThickness="1"/>
+                                <Grid>
+                                    <Rectangle StrokeThickness="1"/>
 
-                                <PasswordBox Margin="1"
-                                     x:Name="passwordBox"
-                                     Background="Transparent"
-                                     Foreground="#CECECE"
-                                     BorderThickness="0"
-                                     VerticalContentAlignment="Center"
-                                     HorizontalContentAlignment="Left"
-                                     Padding="5"
-                                     FontSize="17"/>
-                            </Grid>
-                        </Border>
+                                    <PasswordBox Margin="1"
+                                                x:Name="passwordBox"
+                                                Background="Transparent"
+                                                Foreground="#CECECE"
+                                                BorderThickness="0"
+                                                VerticalContentAlignment="Center"
+                                                HorizontalContentAlignment="Left"
+                                                Padding="5"
+                                                FontSize="17"/>
+                                    <TextBox Margin="1"
+                                             x:Name="textBox"
+                                            Text="{Binding PasswordToShow}"
+                                            Background="Transparent"
+                                            Foreground="#CECECE"
+                                            BorderThickness="0"
+                                            VerticalContentAlignment="Center"
+                                            HorizontalContentAlignment="Left"
+                                            Padding="5"
+                                            FontSize="17"
+                                            Visibility="Collapsed"/>
+                                </Grid>
+                            </Border>
+                            <ToggleButton x:Name="hide" Height="35" 
+                                        Width="35"
+                                        Click="hide_Click"
+                                        IsChecked="{Binding IsShown, Mode=OneWayToSource}"
+                                        Command="{Binding ShowPwdCommand}"
+                                        VerticalContentAlignment="Center" 
+                                        Padding="5" Margin="6,0,5,0" 
+                                        VerticalAlignment="Bottom" 
+                                        HorizontalAlignment="Right" 
+                                        BorderThickness="1" 
+                                        BorderBrush="#E0E0E0" 
+                                        Style="{StaticResource HideButton}"/>
+                        </StackPanel>
                     </StackPanel>
                     <StackPanel Width="480"
             Margin="30,0,0,0"

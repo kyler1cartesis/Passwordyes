@@ -22,6 +22,11 @@ namespace Password_Manager.MVVM.ViewModel
         public string? Login { get; set; }
         public string Password
         {
+            set
+            {
+                IPasswordSupplier supl = _container.Resolve<IPasswordSupplier>();
+                supl.SetPassword(value);
+            }
             get
             {
                 IPasswordSupplier supplier = _container.Resolve<IPasswordSupplier>();
@@ -48,6 +53,18 @@ namespace Password_Manager.MVVM.ViewModel
             currentFolder.AddFile(entry);
 
             CloseForm(new object());
+        }
+        protected override void SwitchPasswordVisibility(object obj)
+        {
+            if (IsShown)
+            {
+                PasswordToShow = Password;
+            }
+            else
+            {
+                Password = PasswordToShow;
+                PasswordToShow = string.Empty;
+            }
         }
     }
 }

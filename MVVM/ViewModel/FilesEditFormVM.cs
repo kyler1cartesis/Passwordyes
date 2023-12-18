@@ -5,7 +5,9 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Password_Manager.Core;
+using Password_Manager.MVVM.Model;
 
 namespace Password_Manager.MVVM.ViewModel
 {
@@ -13,6 +15,24 @@ namespace Password_Manager.MVVM.ViewModel
     {
         public RelayCommand CloseFormCommand { get; set; }
         public DataBaseContextVM? DBContext { get; set; }
+        public ICommand ShowPwdCommand { get; set; }
+
+        private bool _isHide = true;
+        public bool IsShown
+        {
+            get => _isHide;
+            set { _isHide = value; OnPropertyChanged(nameof(IsShown)); }
+        }
+
+        public string _passwordToShow = string.Empty;
+        public string PasswordToShow
+        {
+            get => _passwordToShow;
+            set
+            {
+                _passwordToShow = value; OnPropertyChanged(nameof(PasswordToShow));
+            }
+        }
 
         protected string _name;
         public string Name
@@ -27,6 +47,7 @@ namespace Password_Manager.MVVM.ViewModel
             DBContext = contextVM;
 
             CloseFormCommand = new RelayCommand(CloseForm);
+            ShowPwdCommand = new RelayCommand(SwitchPasswordVisibility);
         }
 
         protected FolderVM GetCurrentFolder()
@@ -63,6 +84,10 @@ namespace Password_Manager.MVVM.ViewModel
         protected EntryVM CreateEntry(FolderVM parentFolder, string Name, byte[] password, string? Description, string? URL, string? login)
         {
             return new EntryVM(parentFolder, Name, password, Description, URL, login);
+        }
+
+        protected virtual void SwitchPasswordVisibility(object obj)
+        {
         }
     }
 }

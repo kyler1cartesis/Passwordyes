@@ -28,6 +28,7 @@ public class AddDBFormVM : ObservableObject
     public ICommand CloseFormCommand { get; set; }
     public ICommand SetCodeLevelCommand { get; set; }
     public ICommand RunFileManagerCommand {  get; set; }
+    public ICommand ShowPwdCommand { get; set; }
 
     private string _errorMessage;
     public string ErrorMessage
@@ -41,8 +42,29 @@ public class AddDBFormVM : ObservableObject
         get => _name;
         set { _name = value; OnPropertyChanged(nameof(Name)); } 
     }
-	public string MasterPassword
+    private bool _isHide = true;
+    public bool IsShown
     {
+        get => _isHide;
+        set { _isHide = value; OnPropertyChanged(nameof(IsShown)); }
+    }
+
+    public string _passwordToShow = string.Empty;
+    public string PasswordToShow
+    {
+        get => _passwordToShow;
+        set
+        {
+            _passwordToShow = value; OnPropertyChanged(nameof(PasswordToShow));
+        }
+    }
+    public string MasterPassword
+    {
+        set
+        {
+            IPasswordSupplier supl = _container.Resolve<IPasswordSupplier>();
+            supl.SetPassword(value);
+        }
         get
         {
             IPasswordSupplier passwordSupplier = _container.Resolve<IPasswordSupplier>();
@@ -80,11 +102,14 @@ public class AddDBFormVM : ObservableObject
         _mainVM = maiNVM;
         _container = container;
         _dialogManager = new MessageBoxManager();
+        _hint = string.Empty;
+        _path = string.Empty;
 
         AddDBCommand = new RelayCommand(AddDB);
         SetCodeLevelCommand = new RelayCommand(SetCodeLevel);
         CloseFormCommand = new RelayCommand(Close);
         RunFileManagerCommand = new RelayCommand(RunFileManager);
+        ShowPwdCommand = new RelayCommand(SwitchPasswordVisibility);
     }
 
 	private void AddDB(object obj)
@@ -140,6 +165,18 @@ public class AddDBFormVM : ObservableObject
         if (result == true)
         {
             Path = dialog.FolderName;
+        }
+    }
+    private void SwitchPasswordVisibility(object obj)
+    {
+        if (IsShown)
+        {
+            PasswordToShow = MasterPassword;
+        }
+        else
+        {
+            MasterPassword = PasswordToShow;
+            PasswordToShow = string.Empty;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Password_Manager.MVVM.View
 
         public string GetPassword()
         {
-            return string.Empty;
+            return passwordBox.Password;
         }
 
         public string GetPasswordConfirm()

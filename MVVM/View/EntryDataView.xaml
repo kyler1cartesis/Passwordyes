@@ -110,7 +110,7 @@
                             <ToggleButton x:Name="hide" Height="35" 
                                 Width="35"
                                 Click="hide_Click"
-                                IsChecked="{Binding IsHide, Mode=OneWayToSource}"
+                                IsChecked="{Binding IsShown, Mode=OneWayToSource}"
                                 Command="{Binding ShowPwdCommand}"
                                 VerticalContentAlignment="Center" 
                                 Padding="5" Margin="8,0,5,0" 

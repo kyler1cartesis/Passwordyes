@@ -28,10 +28,10 @@
                                         <Style TargetType="{x:Type Image}">
 
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsHide, Mode=OneWay}"  Value="True">
+                                                <DataTrigger Binding="{Binding IsShown, Mode=OneWay}"  Value="True">
                                                     <Setter Property="Source" Value="pack://siteoforigin:,,,/GuiSources/Images/show.png"/>
                                                 </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsHide, Mode=OneWay}"  Value="False">
+                                                <DataTrigger Binding="{Binding IsShown, Mode=OneWay}"  Value="False">
                                                     <Setter Property="Source" Value="pack://siteoforigin:,,,/GuiSources/Images/hide.png"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
