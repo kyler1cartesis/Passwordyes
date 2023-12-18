@@ -5,9 +5,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Password_Manager.Core;
 using Password_Manager.MVVM.Model;
+using Password_Manager.MVVM.View.ViewUtilities;
 using Unity;
 
 namespace Password_Manager.MVVM.ViewModel
@@ -15,6 +17,7 @@ namespace Password_Manager.MVVM.ViewModel
     public class AddEntryFormVM : FilesEditFormVM
     {
         private IUnityContainer _container;
+        private MessageBoxManager _dialogManager;
         public ICommand CreateEntryCommand { get; set; }
         public ICommand GeneratePasswordCommand { get; set; }
         private byte[] _ecnryptPassword;
@@ -39,6 +42,7 @@ namespace Password_Manager.MVVM.ViewModel
         {
             _container = container;
             _ecnryptPassword = [];
+            _dialogManager = new MessageBoxManager();
 
             CreateEntryCommand = new RelayCommand(AddEntry);
             GeneratePasswordCommand = new RelayCommand(GeneratePassword);
@@ -57,6 +61,15 @@ namespace Password_Manager.MVVM.ViewModel
             _ecnryptPassword = ModelAPI.EncryptEntryPassword(Password);
 
             EntryVM entry = CreateEntry(currentFolder, Name, _ecnryptPassword, Description, URL, Login);
+
+            bool isValid = currentFolder.ValidateNameOfFile<EntryVM>(entry.Name);
+            if (!isValid)
+            {
+                _dialogManager.ShowMessageBox("Имя пустое или уже существует!",
+                                                        "ошибка данных",
+                                                        MessageBoxImage.Error);
+                return;
+            }
 
             currentFolder.AddFile(entry);
 

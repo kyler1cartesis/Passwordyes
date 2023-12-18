@@ -23,8 +23,8 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="70"/>
-                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="140"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
@@ -38,7 +38,8 @@
                     </TextBlock>
                     <StackPanel Margin="0,0,0,0"
                             Grid.Row="1"
-                            Width="350">
+                            Width="350"
+                                Height="150">
                         <Label Content="Мастер Пароль" 
                            VerticalAlignment="Top" 
                            HorizontalAlignment="center"
@@ -88,7 +89,25 @@
                                         BorderBrush="#E0E0E0" 
                                         Style="{StaticResource HideButton}"/>
                         </StackPanel>
-                     </StackPanel>
+
+                        <ToggleButton  Height="30" 
+                                        Width="30"
+                                        Click="hint_Click"
+                                        IsChecked="{Binding IsHint, Mode=OneWayToSource}"
+                                        VerticalContentAlignment="Center" 
+                                        Padding="5" Margin="6,5,5,5" 
+                                        VerticalAlignment="Bottom" 
+                                        HorizontalAlignment="Center" 
+                                        BorderThickness="1" 
+                                        BorderBrush="#E0E0E0" 
+                                        Style="{StaticResource HintButton}"/>
+                        <Label Content="{Binding Hint, Mode=OneTime}" 
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="center"
+                                Foreground="Wheat"
+                               x:Name="hint" Visibility="Collapsed"
+                               FontSize="16"/>
+                    </StackPanel>
                     
                     <Label Content="{Binding ErrorMessage, Mode=OneWay}" 
                            VerticalAlignment="Top" 

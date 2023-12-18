@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using Password_Manager.MVVM.Model;
 using Password_Manager.MVVM.ViewModel;
 
@@ -39,6 +40,11 @@ namespace Password_Manager.MVVM.ViewModel
         private FILE GetFileByName<FILE>(string name) where FILE : FileVM
         {
             return (FILE)SubFiles.Single(file => file.Name == name && file is FILE);
+        }
+
+        public bool ValidateNameOfFile<FILE>(string name) where FILE : FileVM
+        {
+            return !SubFiles.Any(file => file.Name == name && file is FILE) && !string.IsNullOrWhiteSpace(name) && !string.IsNullOrEmpty(name);
         }
 
         public void AddFile(FileVM file)

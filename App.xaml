@@ -33,6 +33,7 @@
                 <ResourceDictionary Source="GuiSources/Styles/HideButton.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/CustomComboBox.xaml"/>
                 <ResourceDictionary Source="GuiSources/Styles/CustomComboBoxItem.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/HintButton.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
 

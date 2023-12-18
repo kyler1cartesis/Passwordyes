@@ -122,8 +122,33 @@ public class AddDBFormVM : ObservableObject
             PasswordToShow = string.Empty;
         }
 
-        //bool isValidatePassword = ModelAPI.Validate_DB_MPassword(MasterPassword, MasterPasswordConfirm);
-        //ModelAPI.CreateNewDB(Name, MasterPassword);
+        bool isPasswordCorrect = ModelAPI.CheckPassword(MasterPassword);
+        if (!isPasswordCorrect)
+        {
+            _dialogManager.ShowMessageBox("Пароль пустой или содержит слишком много символов!",
+                                             "ошибка данных",
+                                             MessageBoxImage.Error);
+            return;
+        }
+
+
+        bool isValidatePassword = ModelAPI.ValidatePassword(MasterPassword, MasterPasswordConfirm);
+        if (!isValidatePassword)
+        {
+            _dialogManager.ShowMessageBox("Пароли не совпадают!",
+                                             "ошибка данных",
+                                             MessageBoxImage.Error);
+            return;
+        }
+
+        bool isNameCorrect = ModelAPI.CheckName(Name);
+        if (!isNameCorrect)
+        {
+            _dialogManager.ShowMessageBox("Некорректное имя!",
+                                             "ошибка данных",
+                                             MessageBoxImage.Error);
+            return;
+        }
 
         _mainVM.DataBasesViewCommand.Execute(new object());
 		_mainVM.DataBasesVM.AddDBD(new DBDescriptionVM(Name, DateTime.Now, Hint, Path), MasterPassword);

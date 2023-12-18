@@ -25,11 +25,18 @@ namespace Password_Manager.MVVM.ViewModel
 		public ICommand SignInDataBaseCommand { get; set; }
         public ICommand CloseFormCommand { get; set; }
         public ICommand ShowPwdCommand { get; set; }
+
         private bool _isHide = true;
         public bool IsShown
         {
             get => _isHide;
             set { _isHide = value; OnPropertyChanged(nameof(IsShown)); }
+        }
+        private bool _isHint = false;
+        public bool IsHint
+        {
+            get => _isHint;
+            set { _isHint = value; OnPropertyChanged(nameof(IsHint)); }
         }
 
         public string _passwordToShow = string.Empty;
@@ -44,7 +51,14 @@ namespace Password_Manager.MVVM.ViewModel
 
         public DBDescriptionVM DbToSignIn { get; set; }
 
-		public string MasterPassword
+        private string _hint;
+        public string Hint
+        {
+            get => _hint;
+            set { _hint = value; OnPropertyChanged(nameof(Hint)); }
+        }
+
+        public string MasterPassword
 		{
             set
             {
@@ -78,6 +92,7 @@ namespace Password_Manager.MVVM.ViewModel
 			_container = contianer;
 			_errorMessage = string.Empty;
 			_controlManager = new ControlManager();
+            _hint = DbToSignIn.Hint;
 
 			SignInDataBaseCommand = new RelayCommand(Enter, CanEnter);
             CloseFormCommand = new RelayCommand(Close);

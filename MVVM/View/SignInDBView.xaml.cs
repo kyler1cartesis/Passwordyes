@@ -59,5 +59,21 @@ namespace Password_Manager.MVVM.View
                 textBox.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void hint_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleButton btn = (ToggleButton)sender;
+            bool? isChecked = btn.IsChecked;
+            if (isChecked == null) throw new NullReferenceException("isChecked was null while toggle button click");
+
+            if ((bool)isChecked)
+            {
+                hint.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                hint.Visibility = Visibility.Collapsed;
+            }
+        }
     }
 }

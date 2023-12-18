@@ -32,13 +32,13 @@ namespace Password_Manager.MVVM.Model
         //Проверяет название БД
         public static bool Validate_DB_Name(string name)
         {
-            throw new NotImplementedException();
+            return !string.IsNullOrWhiteSpace(name) && !string.IsNullOrEmpty(name);
         }
 
         //Проверяет введённые пользователем пароли на корректность и совпадение
         public static bool ValidatePassword(string masterPassword, string masterPasswordConfirm)
         {
-            throw new NotImplementedException();
+            return masterPassword.Equals(masterPasswordConfirm);
         }
 
         //Удаляет БД из системы
@@ -68,18 +68,6 @@ namespace Password_Manager.MVVM.Model
 
         //Проверяет корректность описания записи
         public static bool ValidateEntryDescription(string description)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Проверяет корректность пароля записи
-        public static bool ValidateEntryPassword(Tuple<string, string> password)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Проверяет корректность имени папки/записи
-        public static bool ValidateFileName(string name)
         {
             throw new NotImplementedException();
         }
@@ -116,6 +104,16 @@ namespace Password_Manager.MVVM.Model
         internal static void UpdateDescription(DBDescriptionVM description)
         {
             DbManager.UpdateObservableDescriptions(description);
+        }
+
+        internal static bool CheckPassword(string masterPassword)
+        {
+            return !string.IsNullOrEmpty(masterPassword) && masterPassword.Length < 64 && !string.IsNullOrWhiteSpace(masterPassword);
+        }
+
+        internal static bool CheckName(string name)
+        {
+            return !string.IsNullOrEmpty(name) && name.Length < 64 && !string.IsNullOrWhiteSpace(name);
         }
     }
 }
