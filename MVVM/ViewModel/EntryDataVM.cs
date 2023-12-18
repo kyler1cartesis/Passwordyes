@@ -25,6 +25,20 @@ namespace Password_Manager.MVVM.ViewModel
         public ICommand DeleteEntryCommand { get; set; }
         public ICommand ChangeEntry { get; set; }
         public ICommand CopyPasswordCommand { get; set; }
+        public ICommand ShowPwdCommand { get; set; }
+
+        private bool _isHide = true;
+        public bool IsHide
+        {
+            get => _isHide;
+            set { _isHide = value; OnPropertyChanged(nameof(IsHide)); }
+        }
+        public string _passwordToShow = string.Empty;
+        public string PasswordToShow
+        {
+            get => _passwordToShow;
+            set { _passwordToShow = value; OnPropertyChanged(nameof(PasswordToShow)); _passwordToShow = string.Empty; }
+        }
         public string Password
         {
             set
@@ -47,12 +61,15 @@ namespace Password_Manager.MVVM.ViewModel
             Login = login;
             Description = description;
             URL = url;
+            IsHide = true;
+            PasswordToShow = string.Empty;
 
             Password = ModelAPI.DecryptEntryPassword(_encryptedPassword);
 
             DeleteEntryCommand = new RelayCommand(DeleteEntry, CanDeleteEntry);
             ChangeEntry = new RelayCommand(ShowChangeEntryForm, CanShowChangeEntryForm);
             CopyPasswordCommand = new RelayCommand(CopyPassword);
+            ShowPwdCommand = new RelayCommand(SwitchPasswordVisibility);
         }
 
 		private bool CanDeleteEntry(object obj)
@@ -102,6 +119,14 @@ namespace Password_Manager.MVVM.ViewModel
         private void CopyPassword(object obj)
         {
             ModelAPI.CopyPasswordToClipBoard(_encryptedPassword);
+        }
+
+        private void SwitchPasswordVisibility(object obj)
+        {
+            if (IsHide)
+                PasswordToShow = ModelAPI.DecryptEntryPassword(_encryptedPassword);
+            else
+                PasswordToShow = string.Empty;
         }
     }
 }

@@ -32,9 +32,9 @@
                 x:Name="Border"
                 MouseDown="Window_MouseDown">
             <Grid>
-            <StackPanel Orientation="Horizontal"
+                <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Button Height="25"  
+                    <Button Height="25"  
                         Command="{Binding CollapseWindowCommand}"
                         CommandParameter="{Binding ElementName=Window}"
                         Width="25"  
@@ -44,8 +44,8 @@
                         BorderBrush="#E0E0E0"
                         Style="{StaticResource BarButton}"
                         local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/min_window.png">
-                </Button>
-                <Button Height="25"  
+                    </Button>
+                    <Button Height="25"  
                         Width="25"  
                         Command="{Binding CloseWindowCommand}"
                         CommandParameter="{Binding ElementName=Window}"
@@ -56,86 +56,87 @@
                         BorderBrush="#E0E0E0"
                         Style="{StaticResource CloseButton}"
                         local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/close_window.png"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <Image Source="pack://siteoforigin:,,,/GuiSources/Images/whirlwind (1).png"
                            Width="15" Height="15"
                            Margin="7,0,0,0">
-                        
+
                     </Image>
                     <TextBlock Text="Password Storm"
                                Foreground="White"
                                VerticalAlignment="Center"
                                Margin="7,0,0,0"
                                FontSize="13"/>
-            </StackPanel>
+                </StackPanel>
             </Grid>
         </Border>
-      <Border Background="#413f54"
+        <Border Background="#413f54"
             CornerRadius="0"
             Grid.Row="1">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="517*"/>
+                    <ColumnDefinition Width="183*"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-            <!--Название приложения-->  
-            <TextBlock Text="Password Storm"
+                <!--Название приложения-->
+                <TextBlock Text="Password Storm"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Margin="20,0,0,0"
                        Foreground="FloralWhite"
                        FontSize="22"/>
 
-            <Rectangle Grid.Column="0"
+                <Rectangle Grid.Column="0"
                Grid.Row="1"  
                Stroke="#5F5AA2"
                Fill="#353340"
                StrokeThickness="3"/>
 
-            <!--Кнопки главного меню-->
-            <StackPanel Grid.Row="1"
+                <!--Кнопки главного меню-->
+                <StackPanel Grid.Row="1"
                         Margin="0,30,0,0">
-                <!--Команды привязаны к своим ViewModel
+                    <!--Команды привязаны к своим ViewModel
                     Стиль из файла MenuButtonTheme-->
-                <RadioButton Content="Главная"
+                    <RadioButton Content="Главная"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"/>
-                <RadioButton Content="Базы данных"
+                    <RadioButton Content="Базы данных"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding DataBasesViewCommand}"/>
-                <RadioButton Content="Настройки"
+                    <RadioButton Content="Настройки"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SettingsViewCommand}"/>
 
-            </StackPanel>
+                </StackPanel>
 
-            <!--Место для отображения основаных данных-->
-            <ContentControl Margin="10"
+                <!--Место для отображения основаных данных-->
+                <ContentControl Margin="10,10,10,10"
                             x:Name="viewPage"
                             Grid.Column="1"
                             Grid.Row="1"
-                            Content="{Binding CurrentView}"/>
+                            Content="{Binding CurrentView}" Grid.ColumnSpan="2"/>
 
-        </Grid>
-        
-    </Border>
+            </Grid>
+
+        </Border>
     </Grid>
-    
+
 </Window>

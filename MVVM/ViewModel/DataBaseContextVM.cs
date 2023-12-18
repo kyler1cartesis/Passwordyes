@@ -29,6 +29,8 @@ namespace Password_Manager.MVVM.ViewModel
         public ICommand NewFolder { get; set; }
         public ICommand ExitDB { get; set; }
         public ICommand DeleteFolderCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
+        public ICommand CollapseWindowCommand { get; set; }
 
 
         private ObservableCollection<FileVM> _currentSubFiles;
@@ -130,6 +132,8 @@ namespace Password_Manager.MVVM.ViewModel
             NewFolder = new RelayCommand(ShowCreateFolderForm, CanShowCreateFolderForm);
             ExitDB = new RelayCommand(Exit, CanExit);
             DeleteFolderCommand = new RelayCommand(DeleteFolder, CanDeleteFolder);
+            CloseWindowCommand = new RelayCommand(CloseWindow);
+            CollapseWindowCommand = new RelayCommand(CollapseWindow);
         }
 
         private bool CanSelect(object obj)
@@ -281,6 +285,18 @@ namespace Password_Manager.MVVM.ViewModel
             currentFolder.RemoveFileByName<FolderVM>(folderToDelete.Name);
 
             ClosePage();
+        }
+
+        private void CloseWindow(object obj)
+        {
+            Window window = (Window)obj;
+            window.Close();
+        }
+
+        private void CollapseWindow(object obj)
+        {
+            Window window = (Window)obj;
+            window.WindowState = WindowState.Minimized;
         }
     }
 }

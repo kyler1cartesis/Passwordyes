@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -40,6 +41,18 @@ namespace Password_Manager.MVVM.View
         public void SetPassword(string password)
         {
             passwordBox.Password = password;
+        }
+
+        private void hide_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleButton btn = (ToggleButton)sender;
+            bool? isChecked = btn.IsChecked;
+            if (isChecked == null) throw new NullReferenceException("isChecked was null while toggle button click");
+
+            if((bool)isChecked)
+                passwordBox.Visibility = Visibility.Collapsed;
+            else
+                passwordBox.Visibility = Visibility.Visible;
         }
     }
 }
