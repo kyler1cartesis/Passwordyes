@@ -15,8 +15,9 @@ namespace Password_Manager.MVVM.ViewModel
     public class AddEntryFormVM : FilesEditFormVM
     {
         private IUnityContainer _container;
-        private byte[] _ecnryptPassword;
         public ICommand CreateEntryCommand { get; set; }
+        public ICommand GeneratePasswordCommand { get; set; }
+        private byte[] _ecnryptPassword;
         public string? Description { get; set; }
         public string? URL { get; set; }
         public string? Login { get; set; }
@@ -40,6 +41,7 @@ namespace Password_Manager.MVVM.ViewModel
             _ecnryptPassword = [];
 
             CreateEntryCommand = new RelayCommand(AddEntry);
+            GeneratePasswordCommand = new RelayCommand(GeneratePassword);
         }
 
         private void AddEntry(object obj)
@@ -64,6 +66,18 @@ namespace Password_Manager.MVVM.ViewModel
             {
                 Password = PasswordToShow;
                 PasswordToShow = string.Empty;
+            }
+        }
+
+        private void GeneratePassword(object obj)
+        {
+            if (IsShown)
+            {
+                PasswordToShow = GetRandomString();
+            }
+            else
+            {
+                Password = GetRandomString();
             }
         }
     }

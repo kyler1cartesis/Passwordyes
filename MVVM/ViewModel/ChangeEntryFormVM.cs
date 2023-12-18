@@ -22,6 +22,7 @@ namespace Password_Manager.MVVM.ViewModel
         public EntryDataView EntryDataForm { get; set; }
         public ICommand ChangeEntryCommand { get; set; }
         public ICommand CancelEditCommand { get; set; }
+        public ICommand GeneratePasswordCommand { get; set; }
         public string? Description { get; set; }
         public string? URL { get; set; }
         public string? Login { get; set; }
@@ -57,6 +58,7 @@ namespace Password_Manager.MVVM.ViewModel
 
             ChangeEntryCommand = new RelayCommand(ChangeEntry);
             CancelEditCommand = new RelayCommand(CancelEdit);
+            GeneratePasswordCommand = new RelayCommand(GeneratePassword);
         }
 
         private void ChangeEntry(object obj)
@@ -103,6 +105,18 @@ namespace Password_Manager.MVVM.ViewModel
             {
                 Password = PasswordToShow;
                 PasswordToShow = string.Empty;
+            }
+        }
+
+        private void GeneratePassword(object obj)
+        {
+            if (IsShown)
+            {
+                PasswordToShow = GetRandomString();
+            }
+            else
+            {
+                Password = GetRandomString();
             }
         }
     }

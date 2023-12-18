@@ -54,7 +54,7 @@
                     </StackPanel>
                     <StackPanel Margin="30,0,0,0"
                     Grid.Row="1"
-                    Width="480"
+                    Width="490"
                         HorizontalAlignment="Left">
                         <Label Content="Пароль" 
                    VerticalAlignment="Top" 
@@ -105,6 +105,19 @@
                                         BorderThickness="1" 
                                         BorderBrush="#E0E0E0" 
                                         Style="{StaticResource HideButton}"/>
+                            <Button Height="35"
+                                    Command="{Binding GeneratePasswordCommand}" 
+                                    Grid.Column="0"
+                                    Width="35" 
+                                    VerticalContentAlignment="Center" 
+                                    Padding="5" Margin="0,0,0,0" 
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Left" 
+                                    BorderThickness="1" 
+                                    BorderBrush="#E0E0E0" 
+                                    Background="Transparent"
+                                    Style="{StaticResource ButtonWithImage}"
+                                    local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/random.png"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Width="480"
