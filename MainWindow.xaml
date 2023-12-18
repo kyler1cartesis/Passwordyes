@@ -92,7 +92,8 @@
                        HorizontalAlignment="Left"
                        Margin="20,0,0,0"
                        Foreground="FloralWhite"
-                       FontSize="22"/>
+                       FontSize="22"
+                       FontFamily="Microsoft JhengHei"/>
 
                 <Rectangle Grid.Column="0"
                Grid.Row="1"  

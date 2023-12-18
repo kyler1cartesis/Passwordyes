@@ -87,7 +87,8 @@
                        HorizontalAlignment="Center"
                        Margin="0,0,0,0"
                        Foreground="FloralWhite"
-                       FontSize="22"/>
+                       FontSize="22"
+                       FontFamily="pack://siteoforigin:,,,/GuiSources/Fonts/menu.ttf"/>
 
                 <StackPanel Grid.Column="1"
                         Grid.Row="0"
