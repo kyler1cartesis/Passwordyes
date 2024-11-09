@@ -12,21 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Password_Manager.MVVM.ViewModel;
 
-namespace Password_Manager;
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace Password_Manager.MVVM.View
 {
-    
-    public MainWindow () {
-        InitializeComponent();
-    }
-
-    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+    /// <summary>
+    /// Логика взаимодействия для DataBasesView.xaml
+    /// </summary>
+    public partial class DataBasesView : UserControl
     {
-        if (e.ChangedButton == MouseButton.Left)
-            this.DragMove();
+        public DataBasesView()
+        {
+            InitializeComponent();
+        }
     }
 }

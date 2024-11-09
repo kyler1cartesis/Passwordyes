@@ -2,8 +2,62 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Password_Manager"
+             xmlns:viewModel="clr-namespace:Password_Manager.MVVM.ViewModel"
+             xmlns:view="clr-namespace:Password_Manager.MVVM.View"
              StartupUri="MainWindow.xaml">
+            
     <Application.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="GuiSources/Styles/Page.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/Button.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/Text.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/Image.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/DataBaseCard.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/FormField.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/FolderCard.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/AddDBButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/DeleteDBButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/EnterDBButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/ButtonWithImage.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/RadioButtonWithImage.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/PasswordField.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/ModernTextArea.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/BarButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/CloseButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/HideButton.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/CustomComboBox.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/CustomComboBoxItem.xaml"/>
+                <ResourceDictionary Source="GuiSources/Styles/HintButton.xaml"/>
+                
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeVM}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:DataBasesVM}">
+                <view:DataBasesView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:SettingsVM}">
+                <view:SettingsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:DBSettingsVM}">
+                <view:DBSettingsView/>
+            </DataTemplate>
+
+            <!--<DataTemplate DataType="{x:Type viewModel:CreateEntryVM}">
+                <view:CreateEntryForm/>
+            </DataTemplate>-->
+
+        </ResourceDictionary>
          
     </Application.Resources>
 </Application>

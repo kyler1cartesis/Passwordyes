@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="Password_Manager.MVVM.View.DataBasesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:Password_Manager.MVVM.ViewModel"
+             mc:Ignorable="d"
+             d:DesignHeight="480" d:DesignWidth="670"
+             x:Name="mainwindow">
+
+    <UserControl.DataContext>
+        <viewModel:DataBasesVM/>
+    </UserControl.DataContext>
+
+    <Grid Background="#413f54">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="257*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#413f54"
+              Grid.Row="0" 
+              Margin="5,0,5,0" >
+            <TextBlock Text="Базы Данных"
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="0,2,0,0"
+                   Grid.Column="0">
+
+            </TextBlock>
+        </Grid>
+        <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Left" 
+                        Grid.Row="1" 
+                        Margin="10,0,0,0">
+            <TextBox Width="130"
+                         Height="40"
+                         VerticalAlignment="Top" 
+                         HorizontalAlignment="Center" 
+                         Margin="0,10,20,0"
+                         Style="{StaticResource ModernTextBox}"/>
+            <Button Height="40" 
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" 
+                    Command="{Binding ShowAddDbWindowCommand}"
+                    Width="120"
+                    VerticalContentAlignment="Center" 
+                    Padding="0" 
+                    Margin="0,10,20,0" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right" 
+                    BorderBrush="#413f54"
+                    Focusable="False"
+                    Content="Добавить"
+                    Style="{StaticResource AddDBButton}">
+            </Button>
+            <Button Height="40" 
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" 
+                    Command="{Binding ShowSignInDbWindowCommand}"
+                    Width="120"
+                    VerticalContentAlignment="Center" 
+                    Padding="5" 
+                    Margin="0,10,20,0" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right" 
+                    BorderThickness="1" 
+                    BorderBrush="#413f54"
+                    Focusable="False"
+                    Content="Войти"
+                    Style="{StaticResource EnterDBButton}"/>
+            <Button Height="40" 
+                    Command="{Binding DeleteDBCommand}"
+                    Width="120"
+                    VerticalContentAlignment="Center" 
+                    Padding="5" 
+                    Margin="0,10,20,0" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right" 
+                    BorderThickness="1" 
+                    BorderBrush="#413f54"
+                    Focusable="False"
+                    Content="Удалить"
+                    Style="{StaticResource DeleteDBButton}"/>
+            <!--Поле поиск-->
+        </StackPanel>
+        <ListView Name="UserList" 
+                      ItemsSource="{Binding DBDescriptions}" 
+                      Margin="5,0,5,5" 
+                      Padding="0"
+                      Background="#413f54"
+                      Foreground="Cornsilk"
+                      SelectedItem="{Binding SelectedDB}"
+                      ItemContainerStyle="{StaticResource DataBaseCard}"
+                      BorderBrush="Transparent"
+                      BorderThickness="5" Grid.ColumnSpan="2"
+                      Grid.Row="2"
+                          IsSynchronizedWithCurrentItem="True">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical">
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+    </Grid>
+</UserControl>

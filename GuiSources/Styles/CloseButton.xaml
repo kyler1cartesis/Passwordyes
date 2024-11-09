@@ -1,0 +1,46 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Password_Manager.MVVM.View.ViewUtilities">
+
+    <Style x:Key="CloseButton"
+       TargetType="{x:Type Button}">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="4"
+                            BorderThickness="0"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}">
+                            <Image Source="{Binding (local:ButtonWithImageExtension.Image), RelativeSource={RelativeSource TemplatedParent}}"
+                               MaxWidth="25"
+                               MaxHeight="25"
+                               Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="5">
+
+                            </Image>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Style.Setters>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Style.Setters>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Red"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style.Setters>
+    </Style>
+
+</ResourceDictionary>

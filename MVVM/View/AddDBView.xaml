@@ -1,0 +1,256 @@
+﻿<UserControl x:Class="Password_Manager.MVVM.View.AddDBView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:viewmodel="clr-namespace:Password_Manager.MVVM.ViewModel"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Password_Manager.MVVM.View.ViewUtilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="600">
+    
+   
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border Background="#413f54"
+                CornerRadius="15"
+                Grid.Row="1">
+            
+            <Border Background="#4E5166"
+                    CornerRadius="25"
+                    Width="540"
+                    Height="470">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontSize="20"
+                               Text="Создание новой базы данных"
+                               Grid.Row="0"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center">
+
+                    </TextBlock>
+                    <StackPanel Width="auto"
+                                Margin="30,0,0,0"
+                                Grid.Row="1">
+                        <Label Content="Название"
+                               Margin="0,0,0,0" 
+                               VerticalAlignment="Top" 
+                               HorizontalAlignment="left"
+                               Foreground="Wheat"/>
+                        <TextBox Height="35" 
+                                 Width="360" Background="#353340"
+                                 Margin="0,0,0,0" 
+                                 Text="{Binding Name}"
+                                 VerticalAlignment="Top" 
+                                 HorizontalAlignment="Left" 
+                                 BorderThickness="1" 
+                                 HorizontalContentAlignment="Left"
+                                 Style="{StaticResource ModernFormField}"
+                                 FontSize="17"/>
+                    </StackPanel>
+                    <StackPanel Margin="30,0,0,0"
+                                Grid.Row="2"
+                                Width="auto">
+                        <Label Content="Мастер Пароль" 
+                               VerticalAlignment="Top" 
+                               HorizontalAlignment="left"
+                               Foreground="Wheat"/>
+						<!--PASSWORD BOX-->
+                        <StackPanel Orientation="Horizontal">
+                            <Border CornerRadius="10"
+                                Background="#353340"
+                                Width="360"
+                                Height="35"
+                                HorizontalAlignment="Left">
+
+                                <Grid>
+                                    <Rectangle StrokeThickness="1"/>
+
+                                    <PasswordBox Margin="1"
+                                             x:Name="firstBox"
+                                             Background="Transparent"
+                                             Foreground="#CECECE"
+                                             BorderThickness="0"
+                                             VerticalContentAlignment="Center"
+                                             HorizontalContentAlignment="Left"
+                                             Padding="5"
+                                             FontSize="17"/>
+                                    <TextBox Margin="1"
+                                         x:Name="textBox"
+                                        Text="{Binding PasswordToShow}"
+                                        Background="Transparent"
+                                        Foreground="#CECECE"
+                                        BorderThickness="0"
+                                        VerticalContentAlignment="Center"
+                                        HorizontalContentAlignment="Left"
+                                        Padding="5"
+                                        FontSize="17"
+                                        Visibility="Collapsed"/>
+                                </Grid>
+                            </Border>
+                            <ToggleButton x:Name="hide" Height="35" 
+                                          Width="35"
+                                          Click="hide_Click"
+                                          IsChecked="{Binding IsShown, Mode=OneWayToSource}"
+                                          Command="{Binding ShowPwdCommand}"
+                                          VerticalContentAlignment="Center" 
+                                          Padding="5" Margin="6,0,5,0" 
+                                          VerticalAlignment="Bottom" 
+                                          HorizontalAlignment="Right" 
+                                          BorderThickness="1" 
+                                          BorderBrush="#E0E0E0" 
+                                          Style="{StaticResource HideButton}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Margin="30,0,0,0"
+                                Grid.Row="3"
+                                Width="auto">
+                        <Label Content="Подтвердите Пароль" 
+                               VerticalAlignment="Top" 
+                               HorizontalAlignment="left"
+                               Foreground="Wheat"/>
+                        <!--PASSWORD BOX-->
+                        <Border CornerRadius="10"
+                                Background="#353340"
+                                Width="360"
+                                Height="35"
+                                HorizontalAlignment="Left">
+
+                            <Grid>
+                                <Rectangle StrokeThickness="1"/>
+
+                                <PasswordBox Margin="1"
+                                             x:Name="secondBox"
+                                             Background="Transparent"
+                                             Foreground="#CECECE"
+                                             BorderThickness="0"
+                                             VerticalContentAlignment="Center"
+                                             HorizontalContentAlignment="Left"
+                                             Padding="5"
+                                             FontSize="17"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Width="auto"
+                                Margin="30,0,0,0"
+                                Grid.Row="4">
+                        <Label Content="Подсказка"
+                                Margin="0,0,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="left"
+                                Foreground="Wheat"/>
+                        <TextBox Height="35" 
+                                 Width="360" Background="#353340"
+                                 Margin="0,0,0,0" 
+                                 Text="{Binding Hint}"
+                                 VerticalAlignment="Top" 
+                                 HorizontalAlignment="Left" 
+                                 BorderThickness="1" 
+                                 HorizontalContentAlignment="Left"
+                                 Style="{StaticResource ModernFormField}"
+                                 FontSize="17"/>
+                    </StackPanel>
+                    <StackPanel Width="auto"
+                                Margin="30,0,0,0"
+                                Grid.Row="5">
+                        <Label Content="Расположение Базы Данных"
+                                Margin="0,0,0,0" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="left"
+                                Foreground="Wheat"/>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Height="35" 
+                                    Width="360" Background="#353340"
+                                    Margin="0,0,0,0" 
+                                    Text="{Binding Path}"
+                                    VerticalAlignment="Top" 
+                                    HorizontalAlignment="Left" 
+                                    BorderThickness="1" IsReadOnly="True"
+                                    HorizontalContentAlignment="Left"
+                                    Style="{StaticResource ModernFormField}"
+                                    FontSize="17"/>
+
+                            <Button Height="35" 
+                                    Command="{Binding RunFileManagerCommand}" 
+                                    Width="35"  
+                                    VerticalContentAlignment="Center" 
+                                    Margin="5,0,5,0"  Padding="10"
+                                    VerticalAlignment="Bottom" 
+                                    HorizontalAlignment="Right" 
+                                    BorderThickness="1" 
+                                    BorderBrush="#E0E0E0" 
+                                    Opacity="0.7"
+                                    Style="{StaticResource ButtonWithImage}"
+                                    local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/brows.png"/>
+                        </StackPanel>
+ 
+                    </StackPanel>
+
+
+                    <Grid VerticalAlignment="Bottom"
+                          HorizontalAlignment="Left"
+                          Grid.Row="6"
+                          Margin="25,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Height="35" 
+                                Command="{Binding AddDBCommand}" 
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                Content="Создать" 
+                                Grid.Column="1"
+                                Width="100"  
+                                VerticalContentAlignment="Center" 
+                                Padding="5" Margin="0,0,5,0" 
+                                VerticalAlignment="Bottom" 
+                                HorizontalAlignment="Right" 
+                                BorderThickness="1" 
+                                BorderBrush="#E0E0E0" 
+                                Style="{StaticResource ButtonWithImage}"
+                                local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/OK.png"/>
+                        <Button Height="35"
+                                Command="{Binding CloseFormCommand}" 
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                Content="Отмена"
+                                Grid.Column="0"
+                                Width="100"  
+                                VerticalContentAlignment="Center" 
+                                Padding="5" Margin="5,0,0,0" 
+                                VerticalAlignment="Bottom" 
+                                HorizontalAlignment="Left" 
+                                BorderThickness="1" 
+                                BorderBrush="#E0E0E0" 
+                                Style="{StaticResource ButtonWithImage}"
+                                local:ButtonWithImageExtension.Image="pack://siteoforigin:,,,/GuiSources/Images/CANCEL_V2.png"/>
+                        <Label Content="{Binding ErrorMessage, Mode=OneWay}" 
+                                VerticalAlignment="Top" 
+                                HorizontalAlignment="Center"
+                                Foreground="Red"
+                                Grid.Column="3"
+                               Margin="20,0,0,0"
+                                FontSize="17"
+                                FontWeight="Bold"/>
+                    
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>
